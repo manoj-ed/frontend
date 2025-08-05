@@ -65,14 +65,14 @@ const Navbar = () => {
               height={0}
               sizes="100vw"
             />
-            {/* <Image
+            <Image
               src={favorite}
               alt="favorite Icons"
               className="w-[39px] h-auto sm:w-[20px] md:w-[39px] cursor-pointer"
               width={0}
               height={0}
               sizes="100vw"
-            /> */}
+            />
             {/* <Image
               src={cart}
               alt="Cart Icons"
