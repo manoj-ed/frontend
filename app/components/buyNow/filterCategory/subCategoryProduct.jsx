@@ -4,20 +4,19 @@ import React, { useEffect, useState } from "react";
 import Aside from "./aside";
 import ProductCard from "../../common/productCard";
 import { FaCheck } from "react-icons/fa";
-import { getProductDetails, getSubCategoryData } from "@/app/utils/buyNewAPI";
+import { getSubCategoryData } from "@/app/utils/buyNewAPI";
 import { useDispatch } from "react-redux";
 import {
   setBrands,
   setFilterData,
   setAllSubCategoryData,
-  setProductDetails,
 } from "@/app/store/productSlice/product";
 import { useRouter } from "next/navigation";
 
 const CategoryProduct = () => {
+
   const dispatch = useDispatch();
   const router = useRouter();
-
   const searchParams = new URLSearchParams(window.location.search);
   const paramsData = searchParams.get("data");
 
@@ -26,6 +25,7 @@ const CategoryProduct = () => {
   // ON Product Click Handler
   const handleProductClick = async (clickedProduct) => {
 
+      console.log("clicked product hander", clickedProduct)
     try {
       const encodedData = encodeURIComponent(JSON.stringify(clickedProduct));
       router.push(`/buynew/product?data=${encodedData}`);
@@ -51,7 +51,6 @@ const CategoryProduct = () => {
 
     fetchSubCategories();
   }, []);
-
 
   return (
     <div className="w-full p-5 gap-4">
@@ -85,6 +84,7 @@ const CategoryProduct = () => {
           </div>
           <div>
             <ProductCard
+              style={"grid-cols-2 sm:grid-cols-2 md:grid-cols-3 "}
               productData={productData}
               onProductClick={handleProductClick}
             />

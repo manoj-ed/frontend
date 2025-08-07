@@ -54,8 +54,9 @@ const Page = ({ params }) => {
               key={subCategory.id}
             >
               <Image
-                className=" rounded-t-xl border-b-[0.5px] border-orange object-cover  md:w-[350px] h-[150px] "
+                className=" rounded-t-xl border-b-[0.5px] border-orange object-cover w-[250px] md:w-[350px] h-[80px] md:h-[150px]"
                 src={subCategory?.category_image}
+                // src="https://res.cloudinary.com/dqnbzaiu2/image/upload/v1754393580/PV-AP-API-WM_6_HES_qvsniy.webp"
                 alt={`sub Categoy icon`}
                 width={0}
                 height={0}
@@ -69,8 +70,8 @@ const Page = ({ params }) => {
                 height={0}
                 sizes="100vw"
               /> */}
-              <div className="flex items-center justify-center py-[2px] w-full">
-                <p className="normal-case p-3">
+              <div className="flex items-center justify-center  w-full">
+                <p className="normal-case p-1 md:p-2 font-semibold">
                   {subCategory.sub_category_name}
                 </p>
               </div>

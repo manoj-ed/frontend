@@ -17,6 +17,7 @@ export async function getCategoryData() {
 
 // Fetch Subcategories based on Category ID
 export async function getSubCategoryData(categoryData) {
+  console.log("data Object", categoryData);
   try {
     // Parse the incoming JSON string if it's a string
     const dataObj =
@@ -27,9 +28,12 @@ export async function getSubCategoryData(categoryData) {
     // Destructure with fallback values
     const {
       category_id = 1,
-      sub_category_id = 2,
+      sub_category_id = 1,
       sub_category_name = "Excavators",
     } = dataObj || {};
+    
+        console.log("category Id" , sub_category_name);
+
 
     const response = await AxiosPublic({
       ...SummaryApi.getSubCategoryData,
@@ -53,6 +57,7 @@ export async function getSubCategoryData(categoryData) {
 
 // Get Details of a specific Product
 export async function getProductDetails(productData) {
+  console.log("product Data", productData);
   const { equipment_id, category_id, sub_category_id } = productData || {};
 
   try {
@@ -64,7 +69,7 @@ export async function getProductDetails(productData) {
       ...SummaryApi.getEquipmentDetail,
       data: {
         equipment_id,
-        category_id,
+        category_id: 1,
         sub_category_id,
       },
     });
@@ -87,6 +92,29 @@ export async function getProductByCategory(categoryId) {
       ...SummaryApi.getAllSubCategories,
       data: {
         category_id: categoryId,
+      },
+    });
+
+    if (!response || !response.data) {
+      throw new Error("No data received from the server");
+    }
+    return response.data;
+  } catch (error) {
+    console.error("Product by category fetch failed:", error.message);
+    return null;
+  }
+}
+
+// get Related product based on category id and subcategory for equipments info page
+export async function getRelatedEquipments(data) {
+  console.log("data", data);
+
+  try {
+    const response = await AxiosPublic({
+      ...SummaryApi.getRelatedEquipments,
+      data: {
+        category_id: data.category_id,
+        sub_category_id: data.sub_category_id,
       },
     });
 

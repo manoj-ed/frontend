@@ -1,93 +1,89 @@
 "use client";
 
-import { getProductDetails } from "@/app/utils/buyNewAPI";
+import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useProductDetails } from "../../../hooks/productDetails";
+
 import { FaRegHeart } from "react-icons/fa";
 import Reviews from "@/app/components/common/reviews/reviews";
-import { useEffect, useState } from "react";
 import Button from "../../components/common/button";
 import Slider from "../../components/common/slider/slider";
-import { useRouter } from "next/navigation";
-import YouTube from "react-youtube";
 import ProductCard from "@/app/components/common/productCard";
+import YouTube from "react-youtube";
 
 const ProductInfo = () => {
-
   const router = useRouter();
-  const [productData, setProductData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const searchParams = useSearchParams();
+
+  const [finalProductData, setFinalProductData] = useState(null);
+  const [finalRelatedProducts, setFinalRelatedProducts] = useState(null);
   const [activeTab, setActiveTab] = useState("tab1");
   const [liked, setLiked] = useState(false);
+  const [clickedProduct, setClickedProduct] = useState(null);
 
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
+  // Custom hook call
+  const { productData, relatedProducts, loading } =
+    useProductDetails(searchParams);
+
+  // Effect to update local state when hook data updates
+  useEffect(() => {
+    if (productData) setFinalProductData(productData);
+    if (relatedProducts) setFinalRelatedProducts(relatedProducts);
+  }, [productData, relatedProducts]);
+
+  // Handles tab switch
+  const handleTabClick = (tab) => setActiveTab(tab);
+
+  // Triggered when user clicks a product
+  const handleProductClick = async (product) => {
+    if (
+      product?.equipment_id &&
+      product?.category_id &&
+      product?.sub_category_id
+    ) {
+      setClickedProduct(product);
+
+      const encoded = encodeURIComponent(JSON.stringify(product));
+      router.push(`/buynew/product?data=${encoded}`);
+    } else {
+      console.warn("Invalid product clicked:", product);
+    }
   };
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const searchParams = new URLSearchParams(window.location.search);
-        const encodedData = searchParams.get("data");
-        if (!encodedData) {
-          console.error("No product data in URL");
-          return;
-        }
+  // Render loading UI
+  if (loading)
+    return <p className="text-center mt-10">Loading product details...</p>;
 
-        const paramsData = JSON.parse(decodeURIComponent(encodedData));
+  // Render if no product found
+  if (!finalProductData)
+    return (
+      <p className="text-center mt-10 text-red-500">No product data found.</p>
+    );
 
-        const response = await getProductDetails(paramsData);
-        if (response?.data) {
-          setProductData(response.data);
-        } else {
-          console.error("No response data found");
-        }
-      } catch (error) {
-        console.error("Error fetching product details:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProduct();
-  }, []);
-
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
-  if (!productData)
-    return <p className="text-center mt-10">No product data found.</p>;
-
-  const data = productData;
-
-  console.log("Product Info page Data", data);
+  const data = finalProductData;
 
   return (
     <div className="flex flex-col w-full h-full px-5 md:px-0">
-      {/* Params Slug */}
-      {/* <div className="text-sm text-gray-500 font-normal pt-6 pb-1">
-        Home / <span>{data?.category_name}</span>
+      <div className="text-sm text-orange font-normal pt-6 pb-1">
+        Home /{" "}
+        <span
+          className="text-orange cursor-pointer"
+          onClick={() => router.push(`/buynew/${data?.category_id}`)}
+        >
+          {data?.category_name}
+        </span>
         {" / "}
-        <span>{data?.sub_category_name}</span>
-      </div> */}
-       <div className="text-sm text-orange font-normal pt-6 pb-1">
-      Home /{" "}
-      <span
-        className="text-orange cursor-pointer"
-        onClick={() =>
-          router.push(`/buynew/${data?.category_id}`)
-        }
-      >
-        {data?.category_name}
-      </span>
-      {" / "}
-      <span
-        className="text-orange cursor-pointer"
-        onClick={() =>
-          router.push(
-            `/buynew/${data?.category_name}/${data?.sub_category_name}`
-          )
-        }
-      >
-        {data?.sub_category_name}
-      </span>
-    </div>
+        <span
+          className="text-orange cursor-pointer"
+          onClick={() =>
+            router.push(
+              `/buynew/${data?.category_name}/${data?.sub_category_name}`
+            )
+          }
+        >
+          {data?.sub_category_name}
+        </span>
+      </div>
 
       {/* Image box and content */}
       <div className="flex flex-col md:flex-row w-full h-auto items-start justify-between gap-6 ">
@@ -107,10 +103,10 @@ const ProductInfo = () => {
                 {/* Brand name and Model Name */}
                 <div className="flex gap-2">
                   <span className="text-2xl tracking-tight font-semibold">
-                    {data.brand_name}
+                    {data?.brand_name}
                   </span>
                   <span className="text-2xl tracking-tight font-semibold">
-                    {data.model_name}
+                    {data?.model_name}
                   </span>
                 </div>
                 {/* <button className="bg-black rounded-full p-2 text-white hover:bg-gray-800 transition-colors">
@@ -130,7 +126,7 @@ const ProductInfo = () => {
 
               {/* Price Range */}
               <span className=" bg-[#F5F5F5] w-fit text-orange text-md font-bold px-4 py-1 rounded-md ">
-                {data.price_range}
+                {data?.price_range}
               </span>
 
               {/* Key Specification */}
@@ -140,13 +136,13 @@ const ProductInfo = () => {
                   <div className="text-sm font-semibold">
                     Brand:
                     <span className="pl-1 font-normal text-gray-600">
-                      {data.brand_name}
+                      {data?.brand_name}
                     </span>
                   </div>
                   <div className="text-sm font-semibold">
                     Model:
                     <span className="pl-1 font-normal text-gray-600">
-                      {data.model_name}
+                      {data?.model_name}
                     </span>
                   </div>
                   <div className="text-sm font-semibold">
@@ -160,11 +156,11 @@ const ProductInfo = () => {
                     )}
                   </div>
                   <div className="text-sm font-semibold">
-                    {data.engine_power ? (
+                    {data?.engine_power ? (
                       <div>
                         Engine Power:
                         <span className="pl-1 font-normal text-gray-600">
-                          {data.engine_power}
+                          {data?.engine_power}
                         </span>
                       </div>
                     ) : (
@@ -178,7 +174,7 @@ const ProductInfo = () => {
               <div className="">
                 <div className="text-lg font-semibold">Description</div>
                 <p className="text-xs text-gray-600 tracking-tight font-normal ">
-                  {data.description}
+                  {data?.description}
                 </p>
               </div>
 
@@ -234,7 +230,7 @@ const ProductInfo = () => {
             {activeTab === "tab1" && (
               <div>
                 <VideoDisplay
-                  videoLinks={[data.video1, data.video2, data.video3]}
+                  videoLinks={[data?.video1, data?.video2, data?.video3]}
                 />
               </div>
             )}
@@ -256,14 +252,17 @@ const ProductInfo = () => {
       {/* Related Product */}
       <div className="my-5">
         <div className="flex space-x-4 border-b border-gray-300 mb-4">
-          <button
+          <div
             className={`px-4 py-2 text-md border-b-2 border-orange text-orange  font-semibold`}
           >
             Related Products
-          </button>
-
-          {/* < ProductCard /> */}
+          </div>
         </div>
+        <ProductCard
+          style={"grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"}
+          productData={relatedProducts}
+          onProductClick={handleProductClick}
+        />
       </div>
     </div>
   );
@@ -294,7 +293,7 @@ const VideoDisplay = ({ videoLinks }) => {
   };
 
   const onReady = (event) => {
-    console.log("YouTube player is ready");
+    // console.log("YouTube player is ready");
   };
 
   const onError = (error) => {

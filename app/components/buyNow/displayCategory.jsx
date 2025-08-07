@@ -5,7 +5,7 @@ import { getCategoryData } from "../../utils/buyNewAPI";
 import Image from "next/image";
 import CategoryProduct from "./filterCategory/subCategoryProduct";
 import { useRouter } from "next/navigation";
-
+import { setCategoryId } from "@/app/store/productSlice/product";
 
 const DisplayCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -29,6 +29,7 @@ const DisplayCategory = () => {
   }
 
   const categorieHandleClick = (id) => {
+    localStorage.setItem("categoryId", id.toString());
     router.push(`/buynew/subcategorydisplay/${id}`);
   };
 
