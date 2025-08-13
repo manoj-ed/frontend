@@ -16,24 +16,20 @@ export async function getCategoryData() {
 }
 
 // Fetch Subcategories based on Category ID
-export async function getSubCategoryData(categoryData) {
-  console.log("data Object", categoryData);
+export async function getSubCategoryData(categoryData, opt) {
+  console.log("opt", opt);
+
   try {
-    // Parse the incoming JSON string if it's a string
     const dataObj =
       typeof categoryData === "string"
         ? JSON.parse(categoryData)
         : categoryData;
 
-    // Destructure with fallback values
     const {
       category_id = 1,
       sub_category_id = 1,
       sub_category_name = "Excavators",
     } = dataObj || {};
-    
-        console.log("category Id" , sub_category_name);
-
 
     const response = await AxiosPublic({
       ...SummaryApi.getSubCategoryData,
@@ -41,8 +37,16 @@ export async function getSubCategoryData(categoryData) {
         category_id,
         sub_category_id,
         sub_category_name,
+        page: 1 || opt.page,
+        ...(opt?.operating_weight
+          ? { operating_weight: opt.operating_weight }
+          : {}),
+        ...(opt?.brand_name ? { brand_name: opt.brand_name } : {}),
+        ...(opt?.sort_price ? { sort_price: opt.sort_price } : {}),
       },
     });
+
+    console.log("fillter rsponse", response);
 
     if (!response || !response.data) {
       throw new Error("No data received from the server");

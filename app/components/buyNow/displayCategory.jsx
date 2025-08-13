@@ -28,6 +28,8 @@ const DisplayCategory = () => {
     );
   }
 
+  console.log("categories", categories)
+
   const categorieHandleClick = (id) => {
     localStorage.setItem("categoryId", id.toString());
     router.push(`/buynew/subcategorydisplay/${id}`);
@@ -42,99 +44,42 @@ const DisplayCategory = () => {
             onClick={() => {
               categorieHandleClick(categorie.id);
             }}
-            className="flex cursor-pointer items-center justify-center flex-col bg-lightblue md:bg-white rounded-xl"
             key={categorie.id}
+            className="group relative flex cursor-pointer flex-col items-center justify-center rounded-xl border border-orange bg-gradient-to-b from-orange-50 to-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:shadow-xl overflow-hidden"
           >
-            <Image
-              className="rounded-xl w-[180px] md:h-[180px] h-[110px] object-fill sm:w-[170px] md:w-[228px]"
-              src={categorie?.category_image}
-              // src={categoryimage}
-              alt="Menu Icon"
-              width={0}
-              height={0}
-              sizes="100vw"
-            />
-            <div className="flex items-center justify-center py-[2px] w-full">
-              <p className="normal-case px-3">{categorie.category_name}</p>
+            {/* Glow overlay */}
+            <span className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+
+            {/* Image with shimmer sweep */}
+            <div className="relative">
+              <Image
+                className="rounded-[10, 10, 0, 0] w-[180px] md:h-[180px] h-[110px] sm:w-[170px] md:w-[228px] object-fill transition-transform duration-500 group-hover:scale-105"
+                src={categorie?.category_image}
+                alt="Menu Icon"
+                width={0}
+                height={0}
+                sizes="100vw"
+              />
+
+              {/* Shimmer light */}
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out"></span>
+            </div>
+
+            {/* Title */}
+            <div className="flex items-center justify-center py-[2px] w-full relative">
+              <p className="normal-case px-3 py-1 font-semibold text-gray-800 transition-colors duration-300 group-hover:text-orange-600">
+                {categorie.category_name}
+              </p>
+
+              {/* Underline expanding from center */}
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-4/5"></span>
             </div>
           </div>
         ))}
       </div>
-      {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 items-center justify-center gap-4 w-full px-5 md:px-0 ">
-        <div className="flex cursor-pointer items-center justify-center flex-col bg-lightblue md:bg-white rounded-xl">
-          <Image
-            className="rounded-xl w-[180px] md:h-[180px] h-[110px] object-fill sm:w-[170px] md:w-[228px]"
-            // src={categorie?.category_image}
-            src={categoryimage1}
-            alt="Menu Icon"
-            width={0}
-            height={0}
-            sizes="100vw"
-          />
-          <div className="flex items-center justify-center py-[2px] w-full">
-            <p className="normal-case px-3">Category Name</p>
-          </div>
-        </div>
-        <div className="flex cursor-pointer items-center justify-center flex-col bg-lightblue md:bg-white rounded-xl">
-          <Image
-            className="rounded-xl w-[180px] md:h-[180px] h-[110px] object-fill sm:w-[170px] md:w-[228px]"
-            // src={categorie?.category_image}
-            src={categoryimage2}
-            alt="Menu Icon"
-            width={0}
-            height={0}
-            sizes="100vw"
-          />
-          <div className="flex items-center justify-center py-[2px] w-full">
-            <p className="normal-case px-3">Category Name</p>
-          </div>
-        </div>
-        <div className="flex cursor-pointer items-center justify-center flex-col bg-lightblue md:bg-white rounded-xl">
-          <Image
-            className="rounded-xl w-[180px] md:h-[180px] h-[110px] object-fill sm:w-[170px] md:w-[228px]"
-            // src={categorie?.category_image}
-            src={categoryimage3}
-            alt="Menu Icon"
-            width={0}
-            height={0}
-            sizes="100vw"
-          />
-          <div className="flex items-center justify-center py-[2px] w-full">
-            <p className="normal-case px-3">Category Name</p>
-          </div>
-        </div>
-        <div className="flex cursor-pointer items-center justify-center flex-col bg-lightblue md:bg-white rounded-xl">
-          <Image
-            className="rounded-xl w-[180px] md:h-[180px] h-[110px] object-fill sm:w-[170px] md:w-[228px]"
-            // src={categorie?.category_image}
-            src={categoryimage4}
-            alt="Menu Icon"
-            width={0}
-            height={0}
-            sizes="100vw"
-          />
-          <div className="flex items-center justify-center py-[2px] w-full">
-            <p className="normal-case px-3">Category Name</p>
-          </div>
-        </div>
-        <div className="flex cursor-pointer items-center justify-center flex-col bg-lightblue md:bg-white rounded-xl">
-          <Image
-            className="rounded-xl w-[180px] md:h-[180px] h-[110px] object-cover sm:w-[170px] md:w-[228px]"
-            // src={categorie?.category_image}
-            src={categoryimage5}
-            alt="Menu Icon"
-            width={0}
-            height={0}
-            sizes="100vw"
-          />
-          <div className="flex items-center justify-center py-[2px] w-full">
-            <p className="normal-case px-3">Category Name</p>
-          </div>
-        </div>
-      </div> */}
 
       {/* Display Products and filters */}
-      <div className="w-full max-w-7xl mx-auto py-5">
+      <div className="w-full max-w-7xl mx-auto ">
         <CategoryProduct />
       </div>
     </div>

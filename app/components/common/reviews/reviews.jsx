@@ -45,7 +45,9 @@ const reviews = [
 const Reviews = () => {
   return (
     <div className="bg-[#e5e1e164] p-5 rounded-md border border-[#B3B3B3]">
-      <h2 className="text-lg font-semibold text-orange-500 mb-6">Latest Reviews</h2>
+      <h2 className="text-lg font-semibold text-orange-500 mb-6">
+        Latest Reviews
+      </h2>
 
       <Swiper
         spaceBetween={20}
@@ -65,14 +67,16 @@ const Reviews = () => {
       >
         {reviews.map((review, index) => (
           <SwiperSlide key={index}>
-            <div className="bg-white w-full p-4 rounded-md border border-orange-400 flex flex-col items-start h-full">
+            <div className="bg-white w-full p-4 rounded-md border border-orange-400 flex flex-col items-start h-full transform transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-lg animate-fadeUp">
               <div className="flex mb-2">
                 <div className="flex gap-1">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <FaStar
                       key={star}
                       className={`w-5 h-5 ${
-                        review.rating >= star ? "text-orange-500" : "text-gray-300"
+                        review.rating >= star
+                          ? "text-orange-500"
+                          : "text-gray-300"
                       }`}
                     />
                   ))}
@@ -82,7 +86,7 @@ const Reviews = () => {
               <p className="text-gray-600 text-sm mb-4">{review.body}</p>
 
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 ">
+                <div className="w-8 h-8">
                   <img
                     src={review.image}
                     alt={review.name}
@@ -90,7 +94,9 @@ const Reviews = () => {
                   />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-black">{review.name}</p>
+                  <p className="text-sm font-medium text-black">
+                    {review.name}
+                  </p>
                   <p className="text-xs text-gray-400">{review.date}</p>
                 </div>
               </div>

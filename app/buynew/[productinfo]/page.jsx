@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useProductDetails } from "../../../hooks/productDetails";
-
 import { FaRegHeart } from "react-icons/fa";
 import Reviews from "@/app/components/common/reviews/reviews";
 import Button from "../../components/common/button";
@@ -18,8 +17,10 @@ const ProductInfo = () => {
   const [finalProductData, setFinalProductData] = useState(null);
   const [finalRelatedProducts, setFinalRelatedProducts] = useState(null);
   const [activeTab, setActiveTab] = useState("tab1");
-  const [liked, setLiked] = useState(false);
   const [clickedProduct, setClickedProduct] = useState(null);
+  const [liked, setLiked] = useState(false);
+  const [pulse, setPulse] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   // Custom hook call
   const { productData, relatedProducts, loading } =
@@ -61,6 +62,14 @@ const ProductInfo = () => {
     );
 
   const data = finalProductData;
+
+  const handleClick = () => {
+    setLiked(!liked);
+    setPulse(true);
+    setTimeout(() => setPulse(false), 600); // match animation duration
+  };
+
+  console.log("page info data", data);
 
   return (
     <div className="flex flex-col w-full h-full px-5 md:px-0">
@@ -113,11 +122,13 @@ const ProductInfo = () => {
                   <FaRegHeart />
                 </button> */}
                 <button
-                  onClick={() => setLiked(!liked)}
-                  className={`rounded-full p-2 transition-colors ${
+                  onClick={handleClick}
+                  className={`relative rounded-full p-2 transition-all duration-300  ${
                     liked
-                      ? "bg-orange text-white"
-                      : "bg-black text-white hover:bg-orange "
+                      ? "bg-orange text-white shadow-[0_0_0_4px_rgba(255,165,0,0.5)]"
+                      : "bg-gray-200 text-orange hover:bg-orange hover:text-white animate-pulse"
+                  } hover:shadow-[0_0_0_4px_rgba(255,165,0,0.5)]${
+                    pulse ? "pulse-once " : ""
                   }`}
                 >
                   <FaRegHeart />
@@ -126,61 +137,257 @@ const ProductInfo = () => {
 
               {/* Price Range */}
               <span className=" bg-[#F5F5F5] w-fit text-orange text-md font-bold px-4 py-1 rounded-md ">
-                {data?.price_range}
+                ₹ {data?.price_range}
               </span>
 
               {/* Key Specification */}
               <div className="text-lg font-semibold">
-                <div>Key Specification</div>
-                <div className="grid grid-cols-2  grid-rows-2">
-                  <div className="text-sm font-semibold">
-                    Brand:
-                    <span className="pl-1 font-normal text-gray-600">
-                      {data?.brand_name}
-                    </span>
-                  </div>
-                  <div className="text-sm font-semibold">
-                    Model:
-                    <span className="pl-1 font-normal text-gray-600">
-                      {data?.model_name}
-                    </span>
-                  </div>
-                  <div className="text-sm font-semibold">
-                    {data?.operating_weight && (
-                      <p>
+                <div className="mb-1 text-gray-800">Key Specification</div>
+
+                <div className="flex flex-wrap bg-white rounded-xl shadow-sm border border-gray-200 p-1">
+                  {/* {data?.brand_name && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Brand:
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.brand_name}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.model_name && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Model:
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.model_name}
+                      </span>
+                    </div>
+                  )} */}
+
+                  {data?.operating_weight && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
                         Operating Wt:
-                        <span className="pl-1 font-normal text-gray-600">
-                          {data.operating_weight}
-                        </span>
-                      </p>
-                    )}
-                  </div>
-                  <div className="text-sm font-semibold">
-                    {data?.engine_power ? (
-                      <div>
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.operating_weight}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.engine_power && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
                         Engine Power:
-                        <span className="pl-1 font-normal text-gray-600">
-                          {data?.engine_power}
-                        </span>
-                      </div>
-                    ) : (
-                      ""
-                    )}
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.engine_power}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.drive_type && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Drive Type:
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.drive_type}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.bucket_capacity && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Bucket Capacity (Front):
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.bucket_capacity}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.dipper_bucket_capacity && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Dipper/Bucket Capacity (Back):
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.dipper_bucket_capacity}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.blade_type && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Blade Type:
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.blade_type}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.transmission_type && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Transmission Type:
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.transmission_type}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.rated_operating_capacity && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Rated Operating Capacity:
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.rated_operating_capacity}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.blade_width && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Blade Width:
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.blade_width}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.trencher_type && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Trencher Type:
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.trencher_type}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.trenching_depth && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Trenching Depth:
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.trenching_depth}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.trenching_width && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Trenching Width:
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.trenching_width}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.scraper_type && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Scraper Type:
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.scraper_type}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.capacity && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Capacity:
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.capacity}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.attachments && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                        Attachments:
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                        {data.attachments}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Attachments */}
+              {/* {data?.attachments ? (
+                <div className="">
+                  <div className="text-lg font-semibold">Attachments</div>
+                  <p className="text-xs text-gray-600 tracking-tight font-normal ">
+                    {data?.attachments}
+                  </p>
+                </div>
+              ) : (
+                <></>
+              )} */}
+              <div className="">
+                <div className="text-lg font-semibold">Description</div>
+                <div>
+                  <p
+                    onClick={() => setExpanded(!expanded)}
+                    className={`text-xs text-gray-600 tracking-tight font-normal cursor-pointer transition-all duration-300 ${
+                      expanded ? "" : "line-clamp-1"
+                    }`}
+                    title="Click to expand"
+                  >
+                    {data?.description}
+                  </p>
+
+                  {/* Optional "View More / View Less" indicator */}
+                  <div
+                    onClick={() => setExpanded(!expanded)}
+                    className="text-orange-500 text-xs cursor-pointer mt-1 select-none font-medium"
+                  >
+                    {expanded ? "View Less" : "View More"}
                   </div>
                 </div>
               </div>
 
-              {/* Subtext */}
-              <div className="">
-                <div className="text-lg font-semibold">Description</div>
-                <p className="text-xs text-gray-600 tracking-tight font-normal ">
-                  {data?.description}
-                </p>
-              </div>
-
               {/* Button */}
               <Button
-                style={`text-[18px] font-semibold px-5 py-2 rounded-md hover:bg-orange-400`}
+                style={`text-[18px] font-semibold px-5 py-2 rounded-sm hover:bg-orange-400`}
                 text={`Get a Quote`}
               />
             </div>
@@ -208,7 +415,7 @@ const ProductInfo = () => {
               className={`px-4 py-2 font-medium ${
                 activeTab === "tab2"
                   ? "border-b-2 border-orange text-orange  font-semibold"
-                  : "text-gray-500"
+                  : "text-gray-500  hover:text-orange  font-semibold"
               }`}
             >
               Pros & Cons
@@ -226,7 +433,7 @@ const ProductInfo = () => {
           </div>
 
           {/* Tab Content */}
-          <div className="">
+          <div className="w-full">
             {activeTab === "tab1" && (
               <div>
                 <VideoDisplay
@@ -304,21 +511,20 @@ const VideoDisplay = ({ videoLinks }) => {
     <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-5">
       {videoLinks.map((link, index) => {
         const videoId = getYouTubeVideoId(link);
+        if (!videoId) return null;
+
         return (
-          <div key={index}>
-            {videoId ? (
-              <div className="rounded-md border-[0.5px] border-orange-500 bg-[#f5f5f5] p-5">
-                <YouTube
-                  videoId={videoId}
-                  opts={opts}
-                  onReady={onReady}
-                  onError={onError}
-                  className="w-full"
-                />
-              </div>
-            ) : (
-              ""
-            )}
+          <div
+            key={index}
+            className="w-full rounded-sm border-[0.5px] border-orange-500 bg-[#f5f5f5] p-5"
+          >
+            <YouTube
+              videoId={videoId}
+              opts={opts}
+              onReady={onReady}
+              onError={onError}
+              className="w-full"
+            />
           </div>
         );
       })}

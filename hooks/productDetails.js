@@ -23,8 +23,6 @@ export function useProductDetails(searchParams = null) {
 
       try {
 
-
-
         const finalData = extractParamsFromSearchParams(searchParams);
 
         if (!finalData) return;
