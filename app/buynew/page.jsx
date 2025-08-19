@@ -9,6 +9,7 @@ const page = () => {
     <div className="overflow-x-hidden ">
 
       <DisplayCategory />
+      
     </div>
   );
 };

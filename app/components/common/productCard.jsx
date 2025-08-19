@@ -17,22 +17,20 @@ const ProductCard = ({ productData, onProductClick, style }) => {
         <div
           key={sc.id}
           style={{ animationDelay: `${index * 0.1}s` }} // staggered animation
-          onClick={() =>
-            onProductClick({
-              equipment_id: sc.product_id,
-              category_id: id,
-              sub_category_id: sc.sub_category_id,
-            })
-          }
-          className="card-animate w-full flex flex-col gap-1 items-start justify-center p-4 border border-orange rounded-lg shadow-md 
-                 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl hover:border-orange-500 group"
+          className="card-animate w-full flex flex-col gap-1 items-start justify-center p-4 border border-orange rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl hover:border-orange-500 group"
         >
           <div className="overflow-hidden rounded-md">
             <Image
+              onClick={() =>
+                onProductClick({
+                  equipment_id: sc.product_id,
+                  category_id: id,
+                  sub_category_id: sc.sub_category_id,
+                })
+              }
               src={sc?.image1}
               alt="favorite Icons"
-              className="w-[170px] h-[106px] lg:w-[270px] lg:h-[170px] cursor-pointer rounded-md object-cover 
-                     transition-transform duration-500 group-hover:scale-110"
+              className="w-[170px] h-[106px] lg:w-[270px] lg:h-[170px] cursor-pointer rounded-md object-cover transition-transform duration-500 group-hover:scale-110"
               width={0}
               height={0}
               sizes="100vw"
@@ -44,12 +42,21 @@ const ProductCard = ({ productData, onProductClick, style }) => {
             <p className="text-[12px] font-normal leading-4 tracking-normal text-gray-500 line-clamp-2">
               {sc?.description}
             </p>
-            <Button
-              text={"Get a Quote"}
-              style={
-                "px-2 py-1 text-sm font-normal group-hover:bg-orange group-hover:text-white transition-colors duration-300"
-              }
-            />
+            <div className="w-full flex gap-2 justify-between md:gap-3">
+              <Button
+                text={"Get a Quote"}
+                style={
+                  "py-1 text-xs font-normal group-hover:bg-orange group-hover:text-white transition-colors duration-300"
+                }
+              />
+              {/* Compare Button */}
+              <Button
+                text={"Compare"}
+                style={
+                  "py-1 text-xs font-normal group-hover:bg-orange group-hover:text-white transition-colors duration-300"
+                }
+              />
+            </div>
           </div>
         </div>
       ))}

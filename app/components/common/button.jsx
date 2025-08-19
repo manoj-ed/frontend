@@ -4,8 +4,7 @@ const Button = ({ style, text }) => {
   return (
     <div>
       <button
-        className={`${style} cursor-pointer rounded px-6 py-2 relative overflow-hidden group transition-all duration-300 
-  bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:scale-[1.03] shadow-md hover:shadow-lg`}
+        className={`${style} w-full cursor-pointer rounded px-2 md:px-4 py-2 relative overflow-hidden group transition-all duration-300 bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:scale-[1.03] shadow-md hover:shadow-lg`}
       >
         {/* Text */}
         <span className="relative font-semibold tracking-wide transition-colors duration-300 group-hover:text-white">
