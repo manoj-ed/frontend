@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaPhoneAlt, FaUser, FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const SignUp = ({ setModalVisible }) => {
   const [formData, setFormData] = useState({

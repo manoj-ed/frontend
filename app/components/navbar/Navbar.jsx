@@ -1,11 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import cart from "@/public/cart.svg";
 import favorite from "@/public/favorite.svg";
 import user from "@/public/user.svg";
-import menu from "@/public/menu.svg";
 import logo from "@/public/logo.png";
 import Link from "next/link";
+import SideBar from "../common/navbar/sideBar";
 
 const Navbar = () => {
   return (
@@ -14,14 +13,7 @@ const Navbar = () => {
         {/* Menu */}
 
         <div className="w-auto md:w-full block md:hidden cursor-pointer">
-          <Image
-            src={menu}
-            alt="Menu Icon"
-            className="w-[40px] cursor-pointer"
-            width={0}
-            height={0}
-            sizes="100vw"
-          />
+          <SideBar />
         </div>
 
         {/* Logo */}
@@ -58,14 +50,6 @@ const Navbar = () => {
         <div className="w-auto md:w-full flex items-center justify-end gap-4">
           <div className="flex gap-2 items-center justify-center">
             <Image
-              src={user}
-              alt="User Icon"
-              className="w-[39px] h-auto sm:w-[20px] md:w-[39px] cursor-pointer"
-              width={0}
-              height={0}
-              sizes="100vw"
-            />
-            <Image
               src={favorite}
               alt="favorite Icons"
               className="w-[39px] h-auto sm:w-[20px] md:w-[39px] cursor-pointer"
@@ -73,14 +57,16 @@ const Navbar = () => {
               height={0}
               sizes="100vw"
             />
-            {/* <Image
-              src={cart}
-              alt="Cart Icons"
+
+            <Image
+              src={user}
+              alt="User Icon"
               className="w-[39px] h-auto sm:w-[20px] md:w-[39px] cursor-pointer"
               width={0}
               height={0}
               sizes="100vw"
-            /> */}
+            />
+            
           </div>
         </div>
       </div>

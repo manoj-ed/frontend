@@ -41,7 +41,6 @@
   animation: fadeUp 0.6s ease-out forwards;
 }
 
-
 @keyframes fadeUpCard {
   0% {
     opacity: 0;
@@ -56,8 +55,6 @@
 .card-animate {
   animation: fadeUpCard 0.5s ease-out forwards;
 }
-
-
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -173,4 +170,13 @@
   /* body {
     @apply bg-background text-foreground;
   } */
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
