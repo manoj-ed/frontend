@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import Footer from "./components/footer/Footer";
 import Providers from "./store/providers.js";
 // import "antd/dist/reset.css";
+import toast, { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Equipments Dekho",
@@ -20,8 +21,31 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
       <body className="px-0 md:px-20 ">
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          gutter={8}
+          containerClassName=""
+          containerStyle={{}}
+          toasterId="default"
+          toastOptions={{
+            duration: 5000,
+            removeDelay: 1000,
+            style: {
+              background: "#363636",
+              color: "#fff",
+            },
+            success: {
+              duration: 3000,
+              iconTheme: {
+                primary: "green",
+                secondary: "black",
+              },
+            },
+          }}
+        />
         <Nav />
-        <Menu/>
+        <Menu />
         <Providers>
           <main className="flex-grow">{children}</main>
         </Providers>

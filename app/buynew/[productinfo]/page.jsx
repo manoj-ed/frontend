@@ -9,6 +9,7 @@ import Button from "../../components/common/button";
 import Slider from "../../components/common/slider/slider";
 import ProductCard from "@/app/components/common/productCard";
 import YouTube from "react-youtube";
+import SignUp from "@/app/components/common/auth/signUp";
 
 const ProductInfo = () => {
   const router = useRouter();
@@ -21,6 +22,7 @@ const ProductInfo = () => {
   const [liked, setLiked] = useState(false);
   const [pulse, setPulse] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   // Custom hook call
   const { productData, relatedProducts, loading } =
@@ -70,6 +72,17 @@ const ProductInfo = () => {
   };
 
   console.log("page info data", data);
+
+  const handleButton = () => {
+    console.log("Quote button clicked");
+    // setClickedProduct(product);
+    setModalVisible(true);
+  };
+
+  const modal = () => {
+    console.log("Got data from child:");
+    setModalVisible(false);
+  };
 
   return (
     <div className="flex flex-col w-full h-full px-5 md:px-0">
@@ -172,10 +185,10 @@ const ProductInfo = () => {
                   {data?.operating_weight && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Operating Wt:
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
                         {data.operating_weight}
                       </span>
                     </div>
@@ -184,10 +197,10 @@ const ProductInfo = () => {
                   {data?.engine_power && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Engine Power:
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
                         {data.engine_power}
                       </span>
                     </div>
@@ -196,10 +209,10 @@ const ProductInfo = () => {
                   {data?.drive_type && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Drive Type:
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
                         {data.drive_type}
                       </span>
                     </div>
@@ -208,10 +221,10 @@ const ProductInfo = () => {
                   {data?.bucket_capacity && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Bucket Capacity (Front):
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
                         {data.bucket_capacity}
                       </span>
                     </div>
@@ -220,10 +233,10 @@ const ProductInfo = () => {
                   {data?.dipper_bucket_capacity && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Dipper/Bucket Capacity (Back):
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
                         {data.dipper_bucket_capacity}
                       </span>
                     </div>
@@ -232,10 +245,10 @@ const ProductInfo = () => {
                   {data?.blade_type && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Blade Type:
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
                         {data.blade_type}
                       </span>
                     </div>
@@ -244,10 +257,10 @@ const ProductInfo = () => {
                   {data?.transmission_type && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Transmission Type:
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
                         {data.transmission_type}
                       </span>
                     </div>
@@ -256,11 +269,23 @@ const ProductInfo = () => {
                   {data?.rated_operating_capacity && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Rated Operating Capacity:
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
                         {data.rated_operating_capacity}
+                      </span>
+                    </div>
+                  )}
+
+                  {data?.track_type && (
+                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
+                        Track Type:
+                      </span>
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
+                        {data.track_type}
                       </span>
                     </div>
                   )}
@@ -268,10 +293,10 @@ const ProductInfo = () => {
                   {data?.blade_width && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Blade Width:
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
                         {data.blade_width}
                       </span>
                     </div>
@@ -280,10 +305,10 @@ const ProductInfo = () => {
                   {data?.trencher_type && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Trencher Type:
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
                         {data.trencher_type}
                       </span>
                     </div>
@@ -292,10 +317,10 @@ const ProductInfo = () => {
                   {data?.trenching_depth && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Trenching Depth:
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
                         {data.trenching_depth}
                       </span>
                     </div>
@@ -304,10 +329,10 @@ const ProductInfo = () => {
                   {data?.trenching_width && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Trenching Width:
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
                         {data.trenching_width}
                       </span>
                     </div>
@@ -316,10 +341,10 @@ const ProductInfo = () => {
                   {data?.scraper_type && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Scraper Type:
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
                         {data.scraper_type}
                       </span>
                     </div>
@@ -328,40 +353,29 @@ const ProductInfo = () => {
                   {data?.capacity && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Capacity:
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
+                      <span className="pl-1 text-xs font-normal text-gray-600  group-hover:text-orange-500">
                         {data.capacity}
                       </span>
                     </div>
                   )}
 
-                  {data?.attachments && (
+                  {(data?.attachments || data?.attachment_included) && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
+                      <span className="text-xs font-semibold text-gray-700 group-hover:text-orange-500">
                         Attachments:
                       </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
-                        {data.attachments}
+                      <span className="pl-1 text-xs font-normal text-gray-600 group-hover:text-orange-500">
+                        {data.attachments || data.attachment_included}
                       </span>
                     </div>
                   )}
                 </div>
               </div>
 
-              {/* Attachments */}
-              {/* {data?.attachments ? (
-                <div className="">
-                  <div className="text-lg font-semibold">Attachments</div>
-                  <p className="text-xs text-gray-600 tracking-tight font-normal ">
-                    {data?.attachments}
-                  </p>
-                </div>
-              ) : (
-                <></>
-              )} */}
               <div className="">
                 <div className="text-lg font-semibold">Description</div>
                 <div>
@@ -375,7 +389,6 @@ const ProductInfo = () => {
                     {data?.description}
                   </p>
 
-                  {/* Optional "View More / View Less" indicator */}
                   <div
                     onClick={() => setExpanded(!expanded)}
                     className="text-orange-500 text-xs cursor-pointer mt-1 select-none font-medium"
@@ -386,10 +399,13 @@ const ProductInfo = () => {
               </div>
 
               {/* Button */}
-              <Button
-                style={`text-[18px] font-semibold px-5 py-2 rounded-sm hover:bg-orange-400`}
-                text={`Get a Quote`}
-              />
+              <div onClick={handleButton}>
+                <Button
+                  style={`text-[18px] font-semibold px-5 py-2 rounded-sm hover:bg-orange-400`}
+                  text={`Get a Quote`}
+                />
+              </div>
+              {modalVisible && <SignUp setModalVisible={modal} />}
             </div>
           </div>
         </div>

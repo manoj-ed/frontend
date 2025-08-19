@@ -55,7 +55,7 @@ const DisplayCategory = () => {
               <Image
                 className="rounded-[10, 10, 0, 0] w-[180px] md:h-[180px] h-[110px] sm:w-[170px] md:w-[228px] object-fill transition-transform duration-500 group-hover:scale-105"
                 src={categorie?.category_image}
-                alt="Menu Icon"
+                alt="Category Image"
                 width={0}
                 height={0}
                 sizes="100vw"
