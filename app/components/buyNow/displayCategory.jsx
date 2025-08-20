@@ -72,7 +72,7 @@ const DisplayCategory = () => {
               </p>
 
               {/* Underline expanding from center */}
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-4/5"></span>
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-4/5"></span>
             </div>
           </div>
         ))}

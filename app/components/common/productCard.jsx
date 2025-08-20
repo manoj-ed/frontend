@@ -42,18 +42,18 @@ const ProductCard = ({ productData, onProductClick, style }) => {
             <p className="text-[12px] font-normal leading-4 tracking-normal text-gray-500 line-clamp-2">
               {sc?.description}
             </p>
-            <div className="w-full flex gap-2 justify-between md:gap-3">
+            <div className="w-full  flex gap-2 justify-between md:gap-3">
               <Button
                 text={"Get a Quote"}
                 style={
-                  "py-1 text-xs font-normal group-hover:bg-orange group-hover:text-white transition-colors duration-300"
+                  "py-1 px-[5px] md:px-4 text-xs font-normal group-hover:bg-orange group-hover:text-white transition-colors duration-300"
                 }
               />
               {/* Compare Button */}
               <Button
                 text={"Compare"}
                 style={
-                  "py-1 text-xs font-normal group-hover:bg-orange group-hover:text-white transition-colors duration-300"
+                  "py-1 px-[5px] md:px-4 text-xs font-normal group-hover:bg-orange group-hover:text-white transition-colors duration-300"
                 }
               />
             </div>

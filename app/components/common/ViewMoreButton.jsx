@@ -11,7 +11,7 @@ return (
       <span className="relative z-10">{text}</span>
 
       {/* Animated underline effect */}
-      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover:w-4/5"></span>
+      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-4/5"></span>
 
       {/* Pulse / Glow on hover */}
       <span className="absolute inset-0 bg-white/10 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"></span>

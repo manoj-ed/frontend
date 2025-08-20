@@ -49,7 +49,7 @@ const SignUp = ({ setModalVisible }) => {
               {/* Bar */}
               <div className="h-2 bg-orange-100 rounded-full overflow-hidden shadow-inner">
                 <div
-                  className={`h-full bg-orange-500 rounded-full transition-all duration-300 ${
+                  className={`h-full bg-orange rounded-full transition-all duration-300 ${
                     step === 1 ? "w-1/2" : "w-full"
                   }`}
                 ></div>
@@ -132,7 +132,7 @@ const SignUp = ({ setModalVisible }) => {
                         // alert("Please fill all required fields");
                       }
                     }}
-                    className="bg-orange-500 text-white w-full py-2.5 rounded-md font-semibold hover:bg-orange-600 transition"
+                    className="bg-orange text-white w-full py-2.5 rounded-md font-semibold hover:bg-orange-600 transition"
                   >
                     Send OTP
                   </button>
@@ -187,7 +187,7 @@ const SignUp = ({ setModalVisible }) => {
 
                     <button
                       onClick={handleFormSubmit}
-                      className="bg-orange-500 text-white px-6 py-2.5 rounded-md font-semibold hover:bg-orange-600 transition"
+                      className="bg-orange text-white px-6 py-2.5 rounded-md font-semibold hover:bg-orange-600 transition"
                     >
                       Submit
                     </button>
@@ -207,7 +207,7 @@ const SignUp = ({ setModalVisible }) => {
             </p>
             <button
               onClick={handleClick}
-              className="mt-5 bg-orange-500 text-white px-6 py-2.5 rounded-md font-semibold hover:bg-orange-600 transition"
+              className="mt-5 bg-orange text-white px-6 py-2.5 rounded-md font-semibold hover:bg-orange-600 transition"
             >
               Close
             </button>

@@ -36,7 +36,7 @@ const Menu = () => {
             Buy New
           </Link>
           <span
-            className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange-500 transition-all duration-300 ${
+            className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange transition-all duration-300 ${
               isActive("/buynew") ? "w-4/5" : "group-hover:w-4/5 w-0"
             }`}
           ></span>
@@ -53,7 +53,7 @@ const Menu = () => {
             Rent
           </Link>
           <span
-            className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange-500 transition-all duration-300 ${
+            className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange transition-all duration-300 ${
               isActive("/rent") ? "w-4/5" : "group-hover:w-4/5 w-0"
             }`}
           ></span>
@@ -75,7 +75,7 @@ const Menu = () => {
             Buy Used
           </Link>
           <span
-            className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange-500 transition-all duration-300 ${
+            className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange transition-all duration-300 ${
               isActive("/buy-used") ? "w-4/5" : "group-hover:w-4/5 w-0"
             }`}
           ></span>
@@ -92,7 +92,7 @@ const Menu = () => {
             Newsroom
           </Link>
           <span
-            className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange-500 transition-all duration-300 ${
+            className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange transition-all duration-300 ${
               isActive("/newsroom") ? "w-4/5" : "group-hover:w-4/5 w-0"
             }`}
           ></span>
@@ -109,7 +109,7 @@ const Menu = () => {
             Contact Us
           </Link>
           <span
-            className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange-500 transition-all duration-300 ${
+            className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange transition-all duration-300 ${
               isActive("/contact-us") ? "w-4/5" : "group-hover:w-4/5 w-0"
             }`}
           ></span>
@@ -126,7 +126,7 @@ const Menu = () => {
             Services
           </Link>
           <span
-            className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange-500 transition-all duration-300 ${
+            className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange transition-all duration-300 ${
               isActive("/services") ? "w-4/5" : "group-hover:w-4/5 w-0"
             }`}
           ></span>

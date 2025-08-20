@@ -23,7 +23,7 @@ export default function SideBar() {
     fetchCategories();
   }, []);
 
-  console.log("categories", categories);
+//   console.log("categories", categories);
 
   const categorieHandleClick = (id) => {
     router.push(`/buynew/subcategorydisplay/${id}`);

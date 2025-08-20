@@ -124,7 +124,7 @@ const CategoryProduct = () => {
                     className={`group relative cursor-pointer flex items-center gap-1 justify-center text-xs lg:text-sm py-1 px-3 rounded-md transition-all duration-300
                 ${
                   isActive
-                    ? "bg-orange-500 text-white shadow-md scale-[1.03]"
+                    ? "bg-orange text-white shadow-md scale-[1.03]"
                     : "bg-[#f5f5f5] text-[#757575] hover:bg-gradient-to-r hover:from-orange-100 hover:to-orange-50 hover:text-orange-700 hover:shadow-md"
                 }
               `}

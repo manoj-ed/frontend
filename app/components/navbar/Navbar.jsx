@@ -1,12 +1,60 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import favorite from "@/public/favorite.svg";
 import user from "@/public/user.svg";
 import logo from "@/public/logo.png";
 import Link from "next/link";
 import SideBar from "../common/navbar/sideBar";
+import { CiSearch } from "react-icons/ci";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
+
+  const [placeholder, setPlaceholder] = useState("");
+  const phrases = ["Search equipment", "Search products", "Search tools"];
+
+  useEffect(() => {
+    let pIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    // Type Writer
+    const typeWriter = () => {
+      const currentPhrase = phrases[pIndex];
+      if (!isDeleting) {
+        setPlaceholder(currentPhrase.slice(0, charIndex + 1));
+        charIndex++;
+        if (charIndex === currentPhrase.length) {
+          isDeleting = true;
+          setTimeout(typeWriter, 900);
+          return;
+        }
+      } else {
+        setPlaceholder(currentPhrase.slice(0, charIndex - 1));
+        charIndex--;
+        if (charIndex === 0) {
+          isDeleting = false;
+          pIndex = (pIndex + 1) % phrases.length;
+        }
+      }
+      setTimeout(typeWriter, isDeleting ? 50 : 120);
+    };
+
+    typeWriter();
+  }, []);
+
+  const goToProfile = () => {
+    router.push("/buynew/profile");
+  };
+
+
+  const goToFavorite = () => {
+    router.push("/buynew/favorite");
+  };
+
   return (
     <div className="z-50 w-full sticky top-0 bg-white flex flex-col items-center justify-between overflow-x-hidden ">
       <div className="py-5 px-5 flex items-center justify-between w-full">
@@ -37,11 +85,12 @@ const Navbar = () => {
           <div className="flex items-center justify-between w-full max-w-md bg-white border border-offWhite rounded-full px-1 py-1">
             <input
               type="text"
-              placeholder="Search"
-              className="px-2 placehoder-black outline-none bg-transparent "
+              placeholder={placeholder + "|"}
+              className="px-2 placehoder-black outline-none bg-transparent text-sm text-gray-600"
             />
-            <button className="w-7 h-7 bg-orange rounded-full flex items-center justify-center cursor-pointer">
+            <button className="w-7 h-7 bg-orange rounded-full flex text-white font-bold items-center justify-center cursor-pointer">
               {/* <svg className=" text-white" fill="currentColor" /> */}
+              <CiSearch />
             </button>
           </div>
         </div>
@@ -56,6 +105,7 @@ const Navbar = () => {
               width={0}
               height={0}
               sizes="100vw"
+              onClick={goToFavorite}
             />
 
             <Image
@@ -65,8 +115,8 @@ const Navbar = () => {
               width={0}
               height={0}
               sizes="100vw"
+              onClick={goToProfile}
             />
-            
           </div>
         </div>
       </div>

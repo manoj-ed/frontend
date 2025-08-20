@@ -25,7 +25,7 @@ const DropDown = ({ categories }) => {
             </div>
 
             <span
-              className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange-500 transition-all duration-300 ${
+              className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange transition-all duration-300 ${
                 isActive("/buynew") ? "w-4/5" : "w-0 group-hover:w-4/5"
               }`}
             ></span>
@@ -50,7 +50,7 @@ const DropDown = ({ categories }) => {
                   </div>
 
                   {/* Underline always on hover */}
-                  <span className="block w-0 h-[2px] bg-orange-500 transition-all duration-300 group-hover/item:w-full mt-1"></span>
+                  <span className="block w-0 h-[2px] bg-orange transition-all duration-300 group-hover/item:w-full mt-1"></span>
                 </div>
               ))}
             </div>
