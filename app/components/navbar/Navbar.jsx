@@ -11,10 +11,11 @@ import { CiSearch } from "react-icons/ci";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  
   const router = useRouter();
 
   const [placeholder, setPlaceholder] = useState("");
-  const phrases = ["Search equipment", "Search products", "Search tools"];
+  const phrases = ["Equipment", "Products", "Tools"];
 
   useEffect(() => {
     let pIndex = 0;
@@ -23,7 +24,7 @@ const Navbar = () => {
 
     // Type Writer
     const typeWriter = () => {
-      const currentPhrase = phrases[pIndex];
+      const currentPhrase = `Search ${phrases[pIndex]}`;
       if (!isDeleting) {
         setPlaceholder(currentPhrase.slice(0, charIndex + 1));
         charIndex++;
@@ -46,11 +47,12 @@ const Navbar = () => {
     typeWriter();
   }, []);
 
+  // On Click Profile Page Redirect 
   const goToProfile = () => {
     router.push("/buynew/profile");
   };
 
-
+  // On Click Favorite Page Redirect
   const goToFavorite = () => {
     router.push("/buynew/favorite");
   };

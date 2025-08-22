@@ -116,7 +116,7 @@ const Menu = () => {
         </div>
 
         {/* Services */}
-        <div className="relative group cursor-pointer">
+        {/* <div className="relative group cursor-pointer">
           <Link
             href="/services"
             className={`transition-colors duration-300 ${
@@ -128,6 +128,23 @@ const Menu = () => {
           <span
             className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange transition-all duration-300 ${
               isActive("/services") ? "w-4/5" : "group-hover:w-4/5 w-0"
+            }`}
+          ></span>
+        </div> */}
+
+        {/* Brands */}
+        <div className="relative group cursor-pointer">
+          <Link
+            href="/buynew/brands"
+            className={`transition-colors duration-300 ${
+              isActive("/buynew/brands") ? "text-orange-600" : ""
+            }`}
+          >
+            Brands
+          </Link>
+          <span
+            className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange transition-all duration-300 ${
+              isActive("/buynew/brands") ? "w-4/5" : "group-hover:w-4/5 w-0"
             }`}
           ></span>
         </div>
