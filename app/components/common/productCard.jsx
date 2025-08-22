@@ -11,13 +11,12 @@ const ProductCard = ({ productData, onProductClick, style }) => {
   const router = useRouter();
 
   return (
-    // <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
     <div className={`${style} grid gap-4`}>
       {productData.map((sc, index) => (
         <div
           key={sc.id}
           style={{ animationDelay: `${index * 0.1}s` }} // staggered animation
-          className="card-animate w-full flex flex-col gap-1 items-start justify-center p-4 border border-orange rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl hover:border-orange-500 group"
+          className="card-animate w-full flex flex-col gap-1 items-start justify-center p-3 md:p-4 border border-orange rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl hover:border-orange-500 group"
         >
           <div className="overflow-hidden rounded-md">
             <Image
