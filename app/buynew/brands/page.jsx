@@ -7,67 +7,311 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "../../../public/logo.png";
 
 const brands = [
-  { id: 1, name: "Adidas", logo: "/brand1.png" },
-  { id: 2, name: "Apple", logo: "/brand2.png" },
-  { id: 3, name: "Amazon", logo: "/brand3.png" },
-  { id: 4, name: "Bata", logo: "/brand4.png" },
-  { id: 5, name: "Canon", logo: "/brand5.png" },
-  { id: 6, name: "Coca-Cola", logo: "/brand6.png" },
-  { id: 7, name: "Dell", logo: "/brand7.png" },
-  { id: 8, name: "Disney", logo: "/brand8.png" },
-  { id: 9, name: "Gucci", logo: "/brand9.png" },
-  { id: 10, name: "H&M", logo: "/brand10.png" },
-  { id: 11, name: "Honda", logo: "/brand11.png" },
-  { id: 12, name: "IKEA", logo: "/brand12.png" },
-  { id: 13, name: "Intel", logo: "/brand13.png" },
-  { id: 14, name: "LG", logo: "/brand14.png" },
-  { id: 15, name: "Louis Vuitton", logo: "/brand15.png" },
-  { id: 16, name: "Mercedes-Benz", logo: "/brand16.png" },
-  { id: 17, name: "Microsoft", logo: "/brand17.png" },
-  { id: 18, name: "Nestle", logo: "/brand18.png" },
-  { id: 19, name: "Nike", logo: "/brand19.png" },
-  { id: 20, name: "Nintendo", logo: "/brand20.png" },
-  { id: 21, name: "Panasonic", logo: "/brand21.png" },
-  { id: 22, name: "Pepsi", logo: "/brand22.png" },
-  { id: 23, name: "Puma", logo: "/brand23.png" },
-  { id: 24, name: "Reebok", logo: "/brand24.png" },
-  { id: 25, name: "Rolex", logo: "/brand25.png" },
-  { id: 26, name: "Samsung", logo: "/brand26.png" },
-  { id: 27, name: "Sony", logo: "/brand27.png" },
-  { id: 28, name: "Starbucks", logo: "/brand28.png" },
-  { id: 29, name: "Tesla", logo: "/brand29.png" },
-  { id: 30, name: "Toyota", logo: "/brand30.png" },
-  { id: 31, name: "Under Armour", logo: "/brand31.png" },
-  { id: 32, name: "Uniqlo", logo: "/brand32.png" },
-  { id: 33, name: "Versace", logo: "/brand33.png" },
-  { id: 34, name: "Volkswagen", logo: "/brand34.png" },
-  { id: 35, name: "Xiaomi", logo: "/brand35.png" },
-  { id: 36, name: "Zara", logo: "/brand36.png" },
-  { id: 37, name: "Lenovo", logo: "/brand37.png" },
-  { id: 38, name: "Philips", logo: "/brand38.png" },
-  { id: 39, name: "Oppo", logo: "/brand39.png" },
-  { id: 40, name: "Vivo", logo: "/brand40.png" },
-  { id: 41, name: "OnePlus", logo: "/brand41.png" },
-  { id: 42, name: "HP", logo: "/brand42.png" },
-  { id: 43, name: "Asus", logo: "/brand43.png" },
-  { id: 44, name: "Acer", logo: "/brand44.png" },
-  { id: 45, name: "Porsche", logo: "/brand45.png" },
-  { id: 46, name: "Jaguar", logo: "/brand46.png" },
-  { id: 47, name: "Ferrari", logo: "/brand47.png" },
-  { id: 48, name: "Lamborghini", logo: "/brand48.png" },
-  { id: 49, name: "Chanel", logo: "/brand49.png" },
-  { id: 50, name: "Prada", logo: "/brand50.png" },
-  { id: 51, name: "Hermès", logo: "/brand51.png" },
-  { id: 52, name: "Burberry", logo: "/brand52.png" },
-  { id: 53, name: "Balenciaga", logo: "/brand53.png" },
-  { id: 54, name: "Ray-Ban", logo: "/brand54.png" },
-  { id: 55, name: "Levi’s", logo: "/brand55.png" },
-  { id: 56, name: "KFC", logo: "/brand56.png" },
-  { id: 57, name: "McDonald’s", logo: "/brand57.png" },
-  { id: 58, name: "Subway", logo: "/brand58.png" },
-  { id: 59, name: "Domino’s", logo: "/brand59.png" },
-  { id: 60, name: "Burger King", logo: "/brand60.png" },
-  { id: 61, name: "Westside", logo: "/brand60.png" },
+  {
+    id: 1,
+    name: "Adidas",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg",
+  },
+  {
+    id: 2,
+    name: "Apple",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
+  },
+  {
+    id: 3,
+    name: "Amazon",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+  },
+  {
+    id: 4,
+    name: "Bata",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/4/41/Bata_Shoe_Logo.svg",
+  },
+  {
+    id: 5,
+    name: "Canon",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/6/6e/Canon_logo.svg",
+  },
+  {
+    id: 6,
+    name: "Coca-Cola",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg",
+  },
+  {
+    id: 7,
+    name: "Dell",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg",
+  },
+  {
+    id: 8,
+    name: "Disney",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/d/df/Walt_Disney_Logo.svg",
+  },
+  {
+    id: 9,
+    name: "Gucci",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/6/6e/Gucci_Logo.svg",
+  },
+  {
+    id: 10,
+    name: "H&M",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/5/53/H%26M-Logo.svg",
+  },
+  {
+    id: 11,
+    name: "Honda",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/7/7d/Honda-logo.svg",
+  },
+  {
+    id: 12,
+    name: "IKEA",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Ikea_logo.svg",
+  },
+  {
+    id: 13,
+    name: "Intel",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/c/c9/Intel-logo.svg",
+  },
+  {
+    id: 14,
+    name: "LG",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/20/LG_symbol.svg",
+  },
+  {
+    id: 15,
+    name: "Louis Vuitton",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/6/6a/Louis_Vuitton_logo_and_wordmark.svg",
+  },
+  {
+    id: 16,
+    name: "Mercedes-Benz",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg",
+  },
+  {
+    id: 17,
+    name: "Microsoft",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg",
+  },
+  {
+    id: 18,
+    name: "Nestle",
+    logo: "https://upload.wikimedia.org/wikipedia/en/5/57/Nestle_textlogo.svg",
+  },
+  {
+    id: 19,
+    name: "Nike",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg",
+  },
+  {
+    id: 20,
+    name: "Nintendo",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Nintendo.svg",
+  },
+  {
+    id: 21,
+    name: "Panasonic",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/1/14/Panasonic_logo.svg",
+  },
+  {
+    id: 22,
+    name: "Pepsi",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Pepsi_logo_2014.svg",
+  },
+  {
+    id: 23,
+    name: "Puma",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Puma_logo.svg",
+  },
+  {
+    id: 24,
+    name: "Reebok",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Reebok_2019_logo.svg",
+  },
+  {
+    id: 25,
+    name: "Rolex",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/6/68/Rolex_logo.svg",
+  },
+  {
+    id: 26,
+    name: "Samsung",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
+  },
+  {
+    id: 27,
+    name: "Sony",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/20/Sony_Logo.svg",
+  },
+  {
+    id: 28,
+    name: "Starbucks",
+    logo: "https://upload.wikimedia.org/wikipedia/sco/d/d3/Starbucks_Coffee_Logo.svg",
+  },
+  {
+    id: 29,
+    name: "Tesla",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg",
+  },
+  {
+    id: 30,
+    name: "Toyota",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Toyota_carlogo.svg",
+  },
+  {
+    id: 31,
+    name: "Under Armour",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Under_armour_logo.svg",
+  },
+  {
+    id: 32,
+    name: "Uniqlo",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/5/53/Uniqlo_logo_Japan.svg",
+  },
+  {
+    id: 33,
+    name: "Versace",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Versace_logo.svg",
+  },
+  {
+    id: 34,
+    name: "Volkswagen",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/6/6d/VW_logo.svg",
+  },
+  {
+    id: 35,
+    name: "Xiaomi",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg",
+  },
+  {
+    id: 36,
+    name: "Zara",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg",
+  },
+  {
+    id: 37,
+    name: "Lenovo",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Lenovo_logo_2015.svg",
+  },
+  {
+    id: 38,
+    name: "Philips",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Philips_logo.svg",
+  },
+  {
+    id: 39,
+    name: "Oppo",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/7/7e/OPPO_Logo_2019.svg",
+  },
+  {
+    id: 40,
+    name: "Vivo",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Vivo_logo.svg",
+  },
+  {
+    id: 41,
+    name: "OnePlus",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/f/f5/OnePlus_logo.svg",
+  },
+  {
+    id: 42,
+    name: "HP",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/3/3a/HP_logo_2012.svg",
+  },
+  {
+    id: 43,
+    name: "Asus",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/0/0c/AsusTek_logo.svg",
+  },
+  {
+    id: 44,
+    name: "Acer",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/6/6a/Acer_logo.svg",
+  },
+  {
+    id: 45,
+    name: "Porsche",
+    logo: "https://upload.wikimedia.org/wikipedia/en/5/5c/Porsche_logo.svg",
+  },
+  {
+    id: 46,
+    name: "Jaguar",
+    logo: "https://upload.wikimedia.org/wikipedia/en/6/6f/Jaguar_logo.svg",
+  },
+  {
+    id: 47,
+    name: "Ferrari",
+    logo: "https://upload.wikimedia.org/wikipedia/en/3/30/Ferrari-Logo.svg",
+  },
+  {
+    id: 48,
+    name: "Lamborghini",
+    logo: "https://upload.wikimedia.org/wikipedia/en/8/8b/Lamborghini_Logo.svg",
+  },
+  {
+    id: 49,
+    name: "Chanel",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Chanel_logo.svg",
+  },
+  {
+    id: 50,
+    name: "Prada",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Prada-Logo.svg",
+  },
+  {
+    id: 51,
+    name: "Hermès",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/0/0f/Hermes.svg",
+  },
+  {
+    id: 52,
+    name: "Burberry",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/b/b6/Burberry_logo.svg",
+  },
+  {
+    id: 53,
+    name: "Balenciaga",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/0/04/Balenciaga_logo.svg",
+  },
+  {
+    id: 54,
+    name: "Ray-Ban",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/28/Ray-Ban_logo.svg",
+  },
+  {
+    id: 55,
+    name: "Levi’s",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/7/76/Levi%27s_logo.svg",
+  },
+  {
+    id: 56,
+    name: "KFC",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/b/bf/KFC_logo.svg",
+  },
+  {
+    id: 57,
+    name: "McDonald’s",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/4/4e/McDonald%27s_Golden_Arches.svg",
+  },
+  {
+    id: 58,
+    name: "Subway",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Subway_2016_logo.svg",
+  },
+  {
+    id: 59,
+    name: "Domino’s",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/7/74/Dominos_pizza_logo.svg",
+  },
+  {
+    id: 60,
+    name: "Burger King",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/c/cc/Burger_King_2020.svg",
+  },
+  {
+    id: 61,
+    name: "Westside",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Trent_Westside_Logo.png",
+  },
 ];
 
 export default function ExploreBrands() {
@@ -98,8 +342,10 @@ export default function ExploreBrands() {
   return (
     <section className="py-10 px-6 md:px-12">
       {/* Title */}
-      <h2 className="relative text-3xl md:text-4xl font-extrabold text-center mb-6 
-        bg-gradient-to-r from-orange-500 to-orange-700 bg-clip-text text-transparent">
+      <h2
+        className="relative text-3xl md:text-4xl font-extrabold text-center mb-6 
+        bg-gradient-to-r from-orange-500 to-orange-700 bg-clip-text text-transparent"
+      >
         Explore Brands
       </h2>
 
@@ -195,13 +441,13 @@ export default function ExploreBrands() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ delay: i * 0.03 }}
                 whileHover={{ scale: 1.05 }}
-                className="group relative bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden cursor-pointer 
+                className="group flex items-center flex-col justify-center relative bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden cursor-pointer 
                   hover:shadow-lg transition-all duration-300"
               >
-                <div className="flex items-center justify-center h-24 p-4 relative">
+                <div className="flex items-center justify-center h-20 w-20 p-4 relative">
                   <Image
-                    src={logo}
-                    alt={brand.name}
+                    src={brand?.logo}
+                    alt={brand?.name}
                     width={100}
                     height={100}
                     className="object-contain group-hover:scale-110 transition-transform duration-500"

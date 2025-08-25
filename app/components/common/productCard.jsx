@@ -41,7 +41,7 @@ const ProductCard = ({ productData, onProductClick, style }) => {
             <p className="text-[12px] font-normal leading-4 tracking-normal text-gray-500 line-clamp-2">
               {sc?.description}
             </p>
-            <div className="w-full  flex gap-2 justify-between md:gap-3">
+            <div className="w-full  flex gap-2 justify-between md:flex-col lg:flex-row md:gap-3">
               <Button
                 text={"Get a Quote"}
                 style={

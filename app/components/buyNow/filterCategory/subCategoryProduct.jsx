@@ -24,6 +24,8 @@ const CategoryProduct = () => {
   const [subCategoryName, setSubCategoryName] = useState([]);
   const [activeFilter, setActiveFilter] = useState("New");
   const [page, setPage] = useState({ page: 1 });
+  const [lastPage, setLastPage] = useState(null);
+  const [isLastPage, setIsLastPage] = useState(false);
 
   const filters = ["New", "Low - High", "High - Low", "Rating"];
 
@@ -41,6 +43,13 @@ const CategoryProduct = () => {
   // Handle Filter Data onclick Filter aside
   const handleFilterData = (filterData) => {
     setProductData(filterData.data);
+    setLastPage(filterData.last_page);
+    if (filterData.last_page === 1) {
+      setIsLastPage(true);
+    } else {
+      setIsLastPage(false);
+    }
+    // setPage({ page: 1 }); // Reset to first page on new filter
     console.log("data from fillter", filterData);
   };
 
@@ -65,23 +74,25 @@ const CategoryProduct = () => {
     const nextPage = { page: page.page + 1 };
 
     const response = await getSubCategoryData(paramsData, nextPage);
-    console.log("pagination response", response?.data);
     if (!response) return;
-    setPage(nextPage);
-    // setProductData((prev) => [...prev, ...response.data]);
 
-    setProductData(response.data);
-    console.log("Current Page:", nextPage.page);
+    setPage(nextPage);
+    setProductData((prev) => [...prev, ...response.data]);
+
+    // Check if this is the last page
+    if (nextPage.page >= lastPage) {
+      setIsLastPage(true); // last page reached
+    }
   };
 
   useEffect(() => {
     async function fetchSubCategories() {
       const response = await getSubCategoryData(paramsData);
-
       if (!response) return;
       console.log("respone", response);
 
       setSubCategoryName(response?.sub_category_name);
+      setLastPage(response?.last_page);
 
       const { data, brands, operating_weight } = response;
 
@@ -96,6 +107,7 @@ const CategoryProduct = () => {
   }, []);
 
   console.log("productData", productData);
+  console.log("last page", lastPage);
 
   return (
     <div className="w-full p-5 gap-4">
@@ -160,10 +172,9 @@ const CategoryProduct = () => {
                 />
 
                 {/* View More button */}
-                {productData && productData.length > 0 ? (
+                {/* {productData && productData.length > 0 ? ( */}
+                {!isLastPage && (
                   <ViewMoreButton text="View More" onClick={pagination} />
-                ) : (
-                  ""
                 )}
               </div>
             ) : (

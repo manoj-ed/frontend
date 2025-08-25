@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-// import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSelector } from "react-redux";
 import { getSubCategoryData } from "@/app/utils/buyNewAPI";
@@ -9,21 +8,22 @@ import { Slider, ConfigProvider } from "antd";
 
 const Aside = ({ paramsData, filtterData }) => {
   console.log("params data", paramsData);
-  const [price, setPrice] = useState(200);
 
   const { brands, filterData } = useSelector((state) => state.product);
-  const [disabled, setDisabled] = useState(false);
+
+  console.log("filterDAta", filterData)
+  // const [responeData, setResponseData] = useState();
 
   const [filters, setFilters] = useState({
     operating_weight: "",
     brand_name: "",
-    engine_power: null,
-    price: "",
+    engine_power: "",
+    price_range: "",
   });
 
-  const [range, setRange] = useState([200, 800]);
-
-  const [priceRange, setPriceRange] = useState([200, 500]); // start with two values
+  // Single state for price range - this will control the slider
+  const [priceRange, setPriceRange] = useState([0, 1000000]);
+  const [initialPriceRange, setInitialPriceRange] = useState([0, 1000000]);
 
   // OnClick Handle CheckBox Filter
   const handleCheckbox = async (opt) => {
@@ -42,9 +42,6 @@ const Aside = ({ paramsData, filtterData }) => {
         if (opt.key === "engine_power") {
           updated.engine_power = opt.value || null;
         }
-        if (opt.key === "price") {
-          updated.price = opt.value || null;
-        }
 
         if (!opt.value) {
           updated[opt.key] = null;
@@ -57,61 +54,92 @@ const Aside = ({ paramsData, filtterData }) => {
     }
   };
 
-  // OnSlide Handle Price Slider Filter
-  const handlePrice = async (val) => {
-    console.log("new Price", val);
-    const newPrice = val.toString();
-    setPrice(newPrice);
-
-    const updatedFilters = { ...filters, price: newPrice };
+  // Handle price range changes from slider
+  const handlePriceRangeChange = async (value) => {
+    console.log("Price range changed:", value);
+    
+    // Ensure proper range validation
+    let [min, max] = value;
+    
+    // Prevent min from being greater than max
+    if (min > max) {
+      min = max;
+    }
+    
+    // Prevent max from being less than min
+    if (max < min) {
+      max = min;
+    }
+    
+    // Ensure values stay within bounds
+    min = Math.max(min, initialPriceRange[0]);
+    max = Math.min(max, initialPriceRange[1]);
+    
+    const validatedRange = [min, max];
+    
+    // Update the price range state with validated values
+    setPriceRange(validatedRange);
+    
+    // Update filters with new price range
+    const priceFilter = `${validatedRange[0]}-${validatedRange[1]}`;
+    const updatedFilters = { ...filters, price_range: priceFilter };
     setFilters(updatedFilters);
 
-    const response = await getSubCategoryData(paramsData, updatedFilters);
-    filtterData(response);
+    // Make API call with updated filters
+    try {
+      const response = await getSubCategoryData(paramsData, updatedFilters);
+      console.log("response after price change", response);
+
+      filtterData(response);
+      // setResponseData(response);
+
+    } catch (error) {
+      console.error("Error updating price filter:", error);
+    }
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getSubCategoryData(paramsData, filters);
+        // setResponseData(response);
+
+        // Set initial price range only once when component mounts
+        if (
+          initialPriceRange[0] === 0 && 
+          initialPriceRange[1] === 1000000 &&
+          response?.min_price &&
+          response?.max_price
+        ) {
+          const minPrice = Number(response.min_price.replace("₹", "").trim());
+          const maxPrice = Number(response.max_price.replace("₹", "").trim());
+          
+          setInitialPriceRange([minPrice, maxPrice]);
+          setPriceRange([minPrice, maxPrice]);
+        }
+
         filtterData(response);
-        console.log("API Response:", response);
       } catch (err) {
         console.error("API error:", err);
       }
     };
     fetchData();
-  }, [filters]);
+  }, [filters.operating_weight, filters.brand_name, filters.engine_power]); // Remove price from dependencies to avoid infinite loop
 
-  console.log("Final object:", filters);
-
-  const handleChange = (value) => {
-    let [min, max] = value;
-
-    console.log("min", min);
-    console.log("max", max);
-
-    // Prevent min from going above max
-
-    //  if (min == max) {
-    //   disabled = true
-    // }
-
-    if (min > max) min = max;
-    // Prevent max from going below min
-    if (max < min) max = min;
-
-    setRange([min, max]);
-  };
+  // console.log("response data", responeData);
+  console.log("Final filters object:", filters);
+  console.log("Current priceRange:", priceRange);
 
   return (
-    <div className="w-full flex py-5 flex-col gap-2 items-start justify-center p-4 border border-gray-300 rounded-md  hover:shadow-lg transition-shadow duration-300">
+    <div className="w-full flex py-5 flex-col gap-2 items-start justify-center p-4 border border-gray-300 rounded-md hover:shadow-lg transition-shadow duration-300">
       <div className="w-full z-10">
         <div className="flex pb-3 gap-2 items-start justify-between">
           <h3 className="text-sm font-semibold">Price (In Lakhs)</h3>
-          <h3 className="text-sm font-semibold">₹{price}</h3>
+          <h3 className="text-sm font-semibold">
+            ₹{priceRange[0].toLocaleString()} - ₹{priceRange[1].toLocaleString()}
+          </h3>
         </div>
-        {/* <Slider range defaultValue={[20, 50]} disabled={disabled} /> */}
+        
         <ConfigProvider
           theme={{
             components: {
@@ -131,31 +159,26 @@ const Aside = ({ paramsData, filtterData }) => {
           <div>
             <Slider
               range
-              min={100}
-              max={1000}
-              step={100}
+              min={initialPriceRange[0]}
+              max={initialPriceRange[1]}
+              step={1000}
               value={priceRange}
-              onChange={(value) => {
-                setPriceRange(value);
-                handleChange(value);
-              }}
+              onChange={handlePriceRangeChange}
+              onAfterChange={handlePriceRangeChange}
+              allowCross={false} // This prevents handles from crossing over
+              pushable={1000} // Minimum distance between handles
             />
-            <p>
-              ₹{priceRange[0]} - ₹{priceRange[1]}
-            </p>
+            <div className="flex justify-between mt-2 text-xs text-gray-600">
+              <span>₹{initialPriceRange[0].toLocaleString()}</span>
+              <span>₹{initialPriceRange[1].toLocaleString()}</span>
+            </div>
           </div>
         </ConfigProvider>
-        {/* <PriceRange /> */}
-        {/* <Slider
-          onValueChange={(val) => handlePrice(val[0])}
-          defaultValue={[33]}
-          max={1000}
-          step={100}
-        /> */}
       </div>
+
       <div className="flex flex-col gap-2 items-start justify-center">
         <h3 className="text-sm font-normal my-1">
-          Operating Weight  (Ton Class)
+          Operating Weight (Ton Class)
         </h3>
         {filterData?.map((opt) => (
           <div key={opt.key} className="flex items-center space-x-2">
@@ -166,7 +189,7 @@ const Aside = ({ paramsData, filtterData }) => {
             />
             <label
               htmlFor={opt.key}
-              className="text-sm text-black"
+              className="text-sm text-black cursor-pointer"
               onClick={() => handleCheckbox(opt)}
             >
               {opt.value}
@@ -187,7 +210,7 @@ const Aside = ({ paramsData, filtterData }) => {
             <label
               htmlFor={opt.id}
               onClick={() => handleCheckbox(opt)}
-              className="text-sm text-black"
+              className="text-sm text-black cursor-pointer"
             >
               {opt.brand_name}
             </label>

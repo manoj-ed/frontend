@@ -37,12 +37,13 @@ export async function getSubCategoryData(categoryData, opt) {
         category_id,
         sub_category_id,
         sub_category_name,
-        page: 1 || opt.page,
+        page: opt?.page ?? 1,
         ...(opt?.operating_weight
           ? { operating_weight: opt.operating_weight }
           : {}),
         ...(opt?.brand_name ? { brand_name: opt.brand_name } : {}),
         ...(opt?.sort_price ? { sort_price: opt.sort_price } : {}),
+        ...(opt?.price_range ? { price_range: opt.price_range } : {}),
       },
     });
 
