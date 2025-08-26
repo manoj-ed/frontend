@@ -1,14 +1,27 @@
 import Image from "next/image";
-import React from "react";
-import favorite from "../../../public/test.webp";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "./button";
+import Signup from "@/app/components/common/auth/signUp";
+import CompareModal from "./compare/compareModal";
 
 const ProductCard = ({ productData, onProductClick, style }) => {
   console.log("product DAta", productData);
 
   const id = localStorage.getItem("categoryId");
   const router = useRouter();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleButton = () => {
+    console.log("Quote button clicked");
+    // setClickedProduct(product);
+    setModalVisible(true);
+  };
+  const modal = () => {
+    console.log("Got data from child:");
+    setModalVisible(false);
+  };
 
   return (
     <div className={`${style} grid gap-4`}>
@@ -42,23 +55,39 @@ const ProductCard = ({ productData, onProductClick, style }) => {
               {sc?.description}
             </p>
             <div className="w-full  flex gap-2 justify-between md:flex-col lg:flex-row md:gap-3">
-              <Button
-                text={"Get a Quote"}
-                style={
-                  "py-1 px-[5px] md:px-4 text-xs font-normal group-hover:bg-orange group-hover:text-white transition-colors duration-300"
-                }
-              />
+              <div onClick={handleButton}>
+                <Button
+                  text={"Get a Quote"}
+                  style={
+                    "py-1 px-[5px] md:px-4 text-xs font-normal group-hover:bg-orange group-hover:text-white transition-colors duration-300"
+                  }
+                />
+              </div>
               {/* Compare Button */}
-              <Button
-                text={"Compare"}
-                style={
-                  "py-1 px-[5px] md:px-4 text-xs font-normal group-hover:bg-orange group-hover:text-white transition-colors duration-300"
-                }
-              />
+              {/* <div onClick={() => router.push(`/buynew/compare/${sc.product_id}`)}> */}
+              <div
+                onClick={() => {
+                  // router.push(`/buynew/compare`);
+                  setOpenModal(true);
+                }}
+              >
+                <Button
+                  text={"Compare"}
+                  style={
+                    "py-1 px-[5px] md:px-4 text-xs font-normal group-hover:bg-orange group-hover:text-white transition-colors duration-300"
+                  }
+                />
+              </div>
             </div>
           </div>
         </div>
       ))}
+
+      {/* Showing Signup Modal whenever user click Get a Quote button on product Card */}
+      {modalVisible && <Signup setModalVisible={modal} />}
+
+      {/* Reusable Modal */}
+      <CompareModal open={openModal} onClose={() => setOpenModal(false)} />
     </div>
   );
 };

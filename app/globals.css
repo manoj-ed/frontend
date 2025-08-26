@@ -66,6 +66,33 @@
   animation: fadeUpCard 0.5s ease-out forwards;
 }
 
+
+/* Scroll Bar Styling  */
+/* hide scroll bar using class css */
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px; /* thin */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f26322; /* gray-300 */
+  border-radius: 9999px; /* rounded-full */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f26322; /* gray-400 */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
