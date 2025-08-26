@@ -157,7 +157,7 @@ const ProductInfo = () => {
               <div className="text-lg font-semibold">
                 <div className="mb-1 text-gray-800">Key Specification</div>
 
-                <div className="flex flex-wrap bg-white rounded-xl shadow-sm border border-gray-200 p-1">
+                <div className="flex flex-wrap bg-white rounded-xl shadow-sm border border-gray-200 p-1 ">
                   {/* {data?.brand_name && (
                     <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
@@ -183,7 +183,7 @@ const ProductInfo = () => {
                   )} */}
 
                   {data?.operating_weight && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 pl-2 p-1 leading-[1] group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Operating Wt:
@@ -195,7 +195,7 @@ const ProductInfo = () => {
                   )}
 
                   {data?.engine_power && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 leading-[1] pl-2 p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Engine Power:
@@ -207,7 +207,7 @@ const ProductInfo = () => {
                   )}
 
                   {data?.drive_type && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 pl-2 leading-[1] p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Drive Type:
@@ -219,7 +219,7 @@ const ProductInfo = () => {
                   )}
 
                   {data?.bucket_capacity && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 leading-[1] pl-2 p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Bucket Capacity (Front):
@@ -231,7 +231,7 @@ const ProductInfo = () => {
                   )}
 
                   {data?.dipper_bucket_capacity && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 pl-2 leading-[1] p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Dipper/Bucket Capacity (Back):
@@ -243,7 +243,7 @@ const ProductInfo = () => {
                   )}
 
                   {data?.blade_type && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 pl-2 leading-[1] p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Blade Type:
@@ -255,7 +255,7 @@ const ProductInfo = () => {
                   )}
 
                   {data?.transmission_type && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 pl-2 leading-[1] p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Transmission Type:
@@ -267,7 +267,7 @@ const ProductInfo = () => {
                   )}
 
                   {data?.rated_operating_capacity && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 pl-2 leading-[1] p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Rated Operating Capacity:
@@ -279,7 +279,7 @@ const ProductInfo = () => {
                   )}
 
                   {data?.track_type && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 pl-2 leading-[1] p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Track Type:
@@ -291,7 +291,7 @@ const ProductInfo = () => {
                   )}
 
                   {data?.blade_width && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 pl-2 leading-[1] p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Blade Width:
@@ -303,7 +303,7 @@ const ProductInfo = () => {
                   )}
 
                   {data?.trencher_type && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 pl-2 leading-[1] p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Trencher Type:
@@ -315,7 +315,7 @@ const ProductInfo = () => {
                   )}
 
                   {data?.trenching_depth && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 pl-2 leading-[1] p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Trenching Depth:
@@ -327,7 +327,7 @@ const ProductInfo = () => {
                   )}
 
                   {data?.trenching_width && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 pl-2 leading-[1] p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Trenching Width:
@@ -339,7 +339,7 @@ const ProductInfo = () => {
                   )}
 
                   {data?.scraper_type && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 pl-2 leading-[1] p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Scraper Type:
@@ -351,7 +351,7 @@ const ProductInfo = () => {
                   )}
 
                   {data?.capacity && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 pl-2 leading-[1] p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700  group-hover:text-orange-500">
                         Capacity:
@@ -363,7 +363,7 @@ const ProductInfo = () => {
                   )}
 
                   {(data?.attachments || data?.attachment_included) && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
+                    <div className="w-1/2 pl-2 leading-[1] p-1 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
                       <span className="text-xs font-semibold text-gray-700 group-hover:text-orange-500">
                         Attachments:
@@ -554,11 +554,11 @@ const ProCons = ({ pros, cons }) => {
   return (
     <div className=" w-full">
       <div className="flex w-full flex-col md:flex-row gap-5 leading-5 tracking-normal justify-between">
-        <div>
-          <p className="text-[#177A08] font-semibold text-lg">Pros</p>
+        <div className="w-full md:w-1/2">
+          <p className="text-[#177A08]  font-semibold text-lg">Pros</p>
           <li className="pl-3">{pros}</li>
         </div>
-        <div>
+        <div className="w-full md:w-1/2">
           <p className="text-[#F22222] font-semibold text-lg">Cons</p>
           <li className="pl-3">{cons}</li>
         </div>

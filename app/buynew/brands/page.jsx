@@ -441,7 +441,7 @@ export default function ExploreBrands() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ delay: i * 0.03 }}
                 whileHover={{ scale: 1.05 }}
-                className="group flex items-center flex-col justify-center relative bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden cursor-pointer 
+                className="group flex items-center flex-col justify-evenly relative bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden cursor-pointer 
                   hover:shadow-lg transition-all duration-300"
               >
                 <div className="flex items-center justify-center h-20 w-20 p-4 relative">

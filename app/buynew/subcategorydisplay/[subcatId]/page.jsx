@@ -49,10 +49,7 @@ const Page = ({ params }) => {
                 categorieHandleClick(subCategory.id, subCategory);
               }}
               key={subCategory.id}
-              className="group relative flex flex-col items-center justify-center w-full rounded-2xl
-        border border-orange-300/40 bg-white/30 backdrop-blur-md overflow-hidden
-        shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer
-        [transform-style:preserve-3d] hover:[transform:rotateX(4deg)_rotateY(-4deg)]"
+              className="group relative flex flex-col items-center justify-center w-full rounded-2xl border border-orange-300/40 bg-white/30 backdrop-blur-md overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer [transform-style:preserve-3d] hover:[transform:rotateX(4deg)_rotateY(-4deg)]"
             >
               {/* Image Section with Zoom & Gradient Overlay */}
               <div className="relative w-full overflow-hidden">
