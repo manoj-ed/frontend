@@ -148,7 +148,7 @@ const CategoryProduct = () => {
                       </span>
                     )}
 
-                    <span className="tracking-wide">{filter}</span>
+                    <button className="tracking-wide cursor-pointer">{filter}</button>
 
                     {/* Hover/Active underline */}
                     <span

@@ -59,7 +59,7 @@ export default function CompareModal({ open, onClose }) {
       <div className="bg-white h-full w-full max-w-sm shadow-2xl flex flex-col p-6 relative animate-slideIn rounded-l-2xl">
         {/* Close */}
         <button
-          className="absolute top-5 right-5 text-gray-400 hover:text-black transition"
+          className="absolute cursor-pointer top-5 right-5 text-gray-400 hover:text-black transition"
           onClick={onClose}
         >
           <X size={22} />
@@ -126,7 +126,7 @@ export default function CompareModal({ open, onClose }) {
                               {item.name}
                             </span>
                           </div>
-                          <button className="text-red-400 hover:text-red-600 transition">
+                          <button className="text-red-400 hover:text-red-600 transition cursor-pointer">
                             <Trash2 size={18} />
                           </button>
                         </div>
@@ -145,10 +145,11 @@ export default function CompareModal({ open, onClose }) {
 
         {/* Actions */}
         <div className="mt-auto pt-5 space-y-3">
-          <button className="w-full py-2 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium shadow-md hover:shadow-lg hover:scale-[1.02] transition">
+            <Button text={"Compare"} style={"w-full rounded-md"}/>
+          {/* <button className="w-full py-2 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium shadow-md hover:shadow-lg hover:scale-[1.02] transition">
             Compare
-          </button>
-          <button className="w-full py-2 rounded-xl border border-red-400 text-red-500 font-medium hover:bg-red-50 transition">
+          </button> */}
+          <button className="w-full py-2 rounded-md border border-red-400 text-red-500 font-medium hover:bg-red-50 transition">
             Clear
           </button>
           <p className="text-xs text-gray-400 text-center">

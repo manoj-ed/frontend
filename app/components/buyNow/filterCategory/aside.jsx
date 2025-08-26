@@ -153,7 +153,7 @@ const Aside = ({ paramsData, filtterData }) => {
             <span className="text-lg font-bold">
               <IoIosClose />
             </span>
-            <span>Clear All</span>
+            <button className="cursor-pointer">Clear All</button>
           </div>
         </div>
 
