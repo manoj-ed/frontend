@@ -119,7 +119,7 @@ export async function getRelatedEquipments(data) {
       ...SummaryApi.getRelatedEquipments,
       data: {
         category_id: data.category_id,
-        sub_category_id: data.sub_category_id,
+        // sub_category_id: data.sub_category_id,
       },
     });
 

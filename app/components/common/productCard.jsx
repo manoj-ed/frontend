@@ -49,7 +49,9 @@ const ProductCard = ({ productData, onProductClick, style }) => {
             />
           </div>
           <div className="flex gap-1 flex-col justify-between items-start">
-            <h3 className="text-[16px] font-normal">{sc?.model_name}</h3>
+            <h3 className="text-[16px] font-normal">
+              {sc?.brand_name} {sc?.model_name}
+            </h3>
             <p className="text-[14px] font-semibold ">₹{sc?.price_range}</p>
             <p className="text-[12px] font-normal leading-4 tracking-normal text-gray-500 line-clamp-2">
               {sc?.description}

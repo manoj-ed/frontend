@@ -172,7 +172,6 @@ const CategoryProduct = () => {
                 />
 
                 {/* View More button */}
-                {/* {productData && productData.length > 0 ? ( */}
                 {!isLastPage && (
                   <ViewMoreButton text="View More" onClick={pagination} />
                 )}

@@ -194,6 +194,7 @@ const Aside = ({ paramsData, filtterData }) => {
             </div>
           </div>
         </ConfigProvider>
+        
       </div>
 
       <div className="flex flex-col gap-2 items-start justify-center">

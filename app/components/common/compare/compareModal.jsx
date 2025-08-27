@@ -2,8 +2,10 @@
 import { useState } from "react";
 import { X, Trash2, ChevronDown, ChevronRight } from "lucide-react";
 import Button from "../button";
+import { useRouter } from "next/navigation";
 
 export default function CompareModal({ open, onClose }) {
+  const router = useRouter();
   // category collapse/expand track karne ke liye
   const [openCats, setOpenCats] = useState({});
 
@@ -14,6 +16,11 @@ export default function CompareModal({ open, onClose }) {
       products: [
         {
           name: "Sany SY210C-9",
+          image:
+            "https://res.cloudinary.com/dqnbzaiu2/image/upload/v1753850284/Equipments%20Dekho/Earthmoving/Excavator/Manitou/EM-SS-MNT-1700R_1.webp.webp",
+        },
+        {
+          name: "CAT 320D3",
           image:
             "https://res.cloudinary.com/dqnbzaiu2/image/upload/v1753850284/Equipments%20Dekho/Earthmoving/Excavator/Manitou/EM-SS-MNT-1700R_1.webp.webp",
         },
@@ -145,7 +152,9 @@ export default function CompareModal({ open, onClose }) {
 
         {/* Actions */}
         <div className="mt-auto pt-5 space-y-3">
-            <Button text={"Compare"} style={"w-full rounded-md"}/>
+          <div onClick={() => router.push("/buynew/compare")}>
+            <Button text={"Compare"} style={"w-full rounded-md"} />
+          </div>
           {/* <button className="w-full py-2 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium shadow-md hover:shadow-lg hover:scale-[1.02] transition">
             Compare
           </button> */}

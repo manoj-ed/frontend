@@ -4,7 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import { FiSearch } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "../../../public/logo.png";
+import { useRouter } from "next/navigation";
+
 
 const brands = [
   {
@@ -315,6 +316,9 @@ const brands = [
 ];
 
 export default function ExploreBrands() {
+
+const router = useRouter();
+
   const [selectedLetter, setSelectedLetter] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(24);
@@ -323,7 +327,7 @@ export default function ExploreBrands() {
   const handleSearch = (value) => {
     setSearchQuery(value);
     if (value) {
-      setSelectedLetter(null); // reset alphabet filter when searching
+      setSelectedLetter(null); 
     }
   };
 
@@ -381,7 +385,7 @@ export default function ExploreBrands() {
         </motion.div>
       </div>
 
-      {/* 🔠 Alphabet Filter - only show if no search query */}
+      {/* Alphabet Filter - only show if no search query */}
       {!searchQuery && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -443,6 +447,7 @@ export default function ExploreBrands() {
                 whileHover={{ scale: 1.05 }}
                 className="group flex items-center flex-col justify-evenly relative bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden cursor-pointer 
                   hover:shadow-lg transition-all duration-300"
+                  onClick={() => router.push(`/buynew/brands/id/?brand=${brand.name}`)}
               >
                 <div className="flex items-center justify-center h-20 w-20 p-4 relative">
                   <Image
