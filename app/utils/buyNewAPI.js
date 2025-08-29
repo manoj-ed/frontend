@@ -132,3 +132,26 @@ export async function getRelatedEquipments(data) {
     return null;
   }
 }
+
+// Get Ratings on Specific Product
+export async function getProductsRatings(id) {
+  try {
+    const response = await AxiosPublic({
+      ...SummaryApi.getProductRatings,
+      data: {
+        product_id: id,
+      },
+    });
+
+    if (!response || !response.data) {
+      throw new Error("No data received from the server");
+    }
+
+
+    return response.data;
+    
+  } catch (error) {
+    console.log("Ratings Fetch Failed", error.message);
+    return null;
+  }
+}

@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { getProductDetails, getRelatedEquipments } from "@/app/utils/buyNewAPI";
+import {
+  getProductDetails,
+  getRelatedEquipments,
+  getProductsRatings,
+} from "@/app/utils/buyNewAPI";
 import { extractParamsFromSearchParams } from "../app/utils/searchParams";
 import {
   setProductDetails,
@@ -13,23 +17,24 @@ export function useProductDetails(searchParams = null) {
   const [loading, setLoading] = useState(true);
   const [productData, setProductData] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
-
+  const [relatedRatings, setRelatedReatings] = useState([]);
 
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
 
-      console.log("search params", extractParamsFromSearchParams(searchParams))
+      console.log("search params", extractParamsFromSearchParams(searchParams));
 
       try {
-
         const finalData = extractParamsFromSearchParams(searchParams);
+        console.log("fintal data", finalData);
 
         if (!finalData) return;
 
-        const [productRes, relatedRes] = await Promise.all([
+        const [productRes, relatedRes, relatedRatings] = await Promise.all([
           getProductDetails(finalData),
           getRelatedEquipments(finalData),
+          getProductsRatings(finalData.equipment_id),
         ]);
 
         dispatch(setProductDetails(productRes?.data));
@@ -37,6 +42,7 @@ export function useProductDetails(searchParams = null) {
 
         setProductData(productRes?.data || null);
         setRelatedProducts(relatedRes?.data || []);
+        setRelatedReatings(relatedRatings?.data || []);
       } catch (err) {
         console.error("Failed to fetch product info:", err);
       } finally {
@@ -47,9 +53,8 @@ export function useProductDetails(searchParams = null) {
     fetch();
   }, [searchParams]);
 
-  return { productData, relatedProducts, loading };
+  return { productData, relatedProducts, relatedRatings, loading };
 }
-
 
 // export function useProductDetails(searchParams, clickedProduct = null) {
 //   const dispatch = useDispatch();

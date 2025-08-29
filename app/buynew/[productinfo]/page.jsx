@@ -17,6 +17,7 @@ const ProductInfo = () => {
 
   const [finalProductData, setFinalProductData] = useState(null);
   const [finalRelatedProducts, setFinalRelatedProducts] = useState(null);
+  const [relatedRating, setRelatedRating] = useState(null);
   const [activeTab, setActiveTab] = useState("tab1");
   const [clickedProduct, setClickedProduct] = useState(null);
   const [liked, setLiked] = useState(false);
@@ -25,14 +26,15 @@ const ProductInfo = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   // Custom hook call
-  const { productData, relatedProducts, loading } =
+  const { productData, relatedProducts, relatedRatings, loading } =
     useProductDetails(searchParams);
 
   // Effect to update local state when hook data updates
   useEffect(() => {
     if (productData) setFinalProductData(productData);
     if (relatedProducts) setFinalRelatedProducts(relatedProducts);
-  }, [productData, relatedProducts]);
+    if (relatedRatings) setRelatedRating(relatedRatings);
+  }, [productData, relatedProducts, relatedRatings]);
 
   // Handles tab switch
   const handleTabClick = (tab) => setActiveTab(tab);
@@ -83,6 +85,8 @@ const ProductInfo = () => {
     console.log("Got data from child:");
     setModalVisible(false);
   };
+
+  console.log("relatedRatings", relatedRatings);
 
   return (
     <div className="flex flex-col w-full h-full px-5 md:px-0">
@@ -470,7 +474,7 @@ const ProductInfo = () => {
 
       {/* Rating and Review */}
       <div className="my-5">
-        <Reviews />
+        <Reviews relatedRatings={relatedRatings}/>
       </div>
 
       {/* Related Product */}

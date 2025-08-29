@@ -6,7 +6,6 @@ import { FiSearch } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-
 const brands = [
   {
     id: 1,
@@ -316,8 +315,7 @@ const brands = [
 ];
 
 export default function ExploreBrands() {
-
-const router = useRouter();
+  const router = useRouter();
 
   const [selectedLetter, setSelectedLetter] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -327,7 +325,7 @@ const router = useRouter();
   const handleSearch = (value) => {
     setSearchQuery(value);
     if (value) {
-      setSelectedLetter(null); 
+      setSelectedLetter(null);
     }
   };
 
@@ -447,7 +445,9 @@ const router = useRouter();
                 whileHover={{ scale: 1.05 }}
                 className="group flex items-center flex-col justify-evenly relative bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden cursor-pointer 
                   hover:shadow-lg transition-all duration-300"
-                  onClick={() => router.push(`/buynew/brands/id/?brand=${brand.name}`)}
+                onClick={() =>
+                  router.push(`/buynew/brands/id/?brand=${brand.name}`)
+                }
               >
                 <div className="flex items-center justify-center h-20 w-20 p-4 relative">
                   <Image

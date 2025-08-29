@@ -25,6 +25,10 @@ const SummaryApi = {
     url: "get-related-equipments",
     method: "post",
   },
+  getProductRatings: {
+    url: "get-equipments-review",
+    method: "post",
+  },
 };
 
 export default SummaryApi;
