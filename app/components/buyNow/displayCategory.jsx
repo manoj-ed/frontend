@@ -6,6 +6,7 @@ import Image from "next/image";
 import CategoryProduct from "./filterCategory/subCategoryProduct";
 import { useRouter } from "next/navigation";
 import { setCategoryId } from "@/app/store/productSlice/product";
+import test from "../../../public/test.png";
 
 const DisplayCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -28,7 +29,7 @@ const DisplayCategory = () => {
     );
   }
 
-  console.log("categories", categories)
+  console.log("categories", categories);
 
   const categorieHandleClick = (id) => {
     localStorage.setItem("categoryId", id.toString());
@@ -38,7 +39,8 @@ const DisplayCategory = () => {
   return (
     <div className="flex flex-col items-center justify-center py-7 gap-4 w-full ">
       {/* Display Categories Box*/}
-      <div className="flex items-center justify-center gap-4 w-full px-5 md:px-20 lg:px-40">
+      {/* <div className="flex items-center justify-center gap-4 w-full px-5 md:px-20 lg:px-40"> */}
+      <div className="max-w-5xl grid grid-cols-2 md:grid-cols-5 items-center justify-center gap-4 w-full px-5 md:px-0">
         {categories?.map((categorie) => (
           <div
             onClick={() => {
@@ -53,7 +55,7 @@ const DisplayCategory = () => {
             {/* Image with shimmer sweep */}
             <div className="relative">
               <Image
-                className="rounded-[10, 10, 0, 0] w-[180px] md:h-[180px] h-[110px] sm:w-[170px] md:w-[228px] object-fill transition-transform duration-500 group-hover:scale-105"
+                className="rounded-[10, 10, 0, 0] w-[180px] md:h-[110px] lg:h-[150px] h-[140px] sm:w-[170px] md:w-[228px] object-contain transition-transform duration-500 group-hover:scale-105"
                 src={categorie?.category_image}
                 alt="Category Image"
                 width={0}
@@ -76,6 +78,7 @@ const DisplayCategory = () => {
             </div>
           </div>
         ))}
+
       </div>
 
       {/* Display Products and filters */}

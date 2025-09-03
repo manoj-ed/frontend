@@ -31,9 +31,9 @@ export default function App({ image }) {
           <Image
             src={img}
             alt={`Product Image ${key + 1}`}
-            className="w-[550px] h-auto object-contain "
+            className="w-[228px] h-[180px]"
             width={550}
-            height={400}
+            height={180}
           />
         </SwiperSlide>
       ))}

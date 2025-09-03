@@ -5,17 +5,19 @@ import Image from "next/image";
 import { FiSearch } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
+import cat from "../../../public/CAT.png";
+import jcb from "../../../public/JCB.png";
 
 const brands = [
   {
     id: 1,
-    name: "Adidas",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg",
+    name: "Cat",
+    logo: cat,
   },
   {
     id: 2,
-    name: "Apple",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
+    name: "JCB  ",
+    logo: jcb,
   },
   {
     id: 3,
@@ -351,7 +353,6 @@ export default function ExploreBrands() {
         Explore Brands
       </h2>
 
-      {/* 🔍 Search Bar */}
       <div className="flex justify-center mb-8">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -443,22 +444,23 @@ export default function ExploreBrands() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ delay: i * 0.03 }}
                 whileHover={{ scale: 1.05 }}
-                className="group flex items-center flex-col justify-evenly relative bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden cursor-pointer 
+                className="group flex items-center py-2 flex-col justify-evenly relative bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden cursor-pointer 
                   hover:shadow-lg transition-all duration-300"
                 onClick={() =>
                   router.push(`/buynew/brands/id/?brand=${brand.name}`)
                 }
               >
-                <div className="flex items-center justify-center h-20 w-20 p-4 relative">
+                <div className="flex items-center justify-center h-20 w-20 relative">
                   <Image
                     src={brand?.logo}
-                    alt={brand?.name}
+                    // src={jcb}
+                    alt={brand.name}
                     width={100}
                     height={100}
                     className="object-contain group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
-                <div className="p-2 text-center">
+                <div className="text-center">
                   <p className="text-sm font-medium text-gray-700 group-hover:text-orange-600 transition">
                     {brand.name}
                   </p>
