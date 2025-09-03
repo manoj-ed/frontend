@@ -13,7 +13,6 @@ const Aside = ({ paramsData, filtterData }) => {
   const { brands, filterData } = useSelector((state) => state.product);
 
   console.log("filterDAta", filterData);
-  // const [responeData, setResponseData] = useState();
 
   const [filters, setFilters] = useState({
     operating_weight: "",
@@ -98,6 +97,10 @@ const Aside = ({ paramsData, filtterData }) => {
     }
   };
 
+  // useEffect(() => {
+  //   handlePriceRangeChange()
+  // }, [priceRange])
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -157,6 +160,7 @@ const Aside = ({ paramsData, filtterData }) => {
           </div>
         </div>
 
+        {/* Price Range Slider */}
         <ConfigProvider
           theme={{
             components: {
@@ -194,7 +198,6 @@ const Aside = ({ paramsData, filtterData }) => {
             </div>
           </div>
         </ConfigProvider>
-        
       </div>
 
       <div className="flex flex-col gap-2 items-start justify-center">

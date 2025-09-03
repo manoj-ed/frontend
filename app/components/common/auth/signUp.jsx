@@ -88,7 +88,7 @@ const SignUp = ({ setModalVisible }) => {
                         name="location"
                         value={formData.location}
                         onChange={handleChange}
-                        placeholder="City / State"
+                        placeholder="City / Pincode"
                         className="w-full bg-gray-100 py-2 outline-none"
                         required
                       />

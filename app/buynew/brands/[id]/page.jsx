@@ -5,8 +5,14 @@ import { useSearchParams } from "next/navigation";
 import { FaChevronDown } from "react-icons/fa";
 import ProductCard from "@/app/components/common/productCard";
 import Filteraside from "@/app/components/common/brands/filteraside";
+import { useRouter } from "next/navigation";
+
 
 const Page = () => {
+
+  const router = useRouter();
+
+
   const searchParams = useSearchParams();
   const brand = searchParams.get("brand");
 
@@ -159,6 +165,15 @@ const Page = () => {
     },
   ];
 
+  const handleProductClick = (clickedProduct) => {
+    try {
+      const encodedData = encodeURIComponent(JSON.stringify(clickedProduct));
+      router.push(`/buynew/product?data=${encodedData}`);
+    } catch (err) {
+      console.log("Error on product click:", err);
+    }
+  };
+
   return (
     <div className="flex flex-col md:flex-row gap-6 py-5 px-3">
       {/* Sticky Sidebar */}
@@ -218,7 +233,11 @@ const Page = () => {
         </section>
 
         {/* Product Card */}
-        <ProductCard productData={data} style={"grid-cols-2 lg:grid-cols-3"} />
+        <ProductCard
+          onProductClick={handleProductClick}
+          productData={data}
+          style={"grid-cols-2 lg:grid-cols-3"}
+        />
 
         {/* <section className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-orange-500">
           <h2 className="text-lg font-semibold text-gray-800 mb-3">
