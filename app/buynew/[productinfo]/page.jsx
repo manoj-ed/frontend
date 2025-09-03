@@ -114,16 +114,40 @@ const ProductInfo = () => {
       {/* Image box and content */}
       <div className="flex flex-col md:flex-row w-full h-auto items-start justify-between gap-6 ">
         {/* Image */}
-        <div className="w-full md:w-1/2">
+        <div className="w-full md:w-1/2 flex flex-col gap-2">
           <Slider image={data?.product_image} />
+          {/* Description */}
+          <div className="md:block hidden">
+            <div className="text-lg font-semibold">Description</div>
+            <div>
+              <p
+                onClick={() => setExpanded(!expanded)}
+                className={`text-xs text-gray-600 tracking-tight font-normal cursor-pointer transition-all duration-300 ${
+                  expanded ? "" : "line-clamp-1"
+                }`}
+                title="Click to expand"
+              >
+                {data?.description}
+              </p>
+
+              <div
+                onClick={() => setExpanded(!expanded)}
+                className="text-orange-500 text-xs cursor-pointer mt-1 select-none font-medium"
+              >
+                {expanded ? "View Less" : "View More"}
+              </div>
+            </div>
+          </div>
         </div>
         {/* line */}
-        <div className="broder-[0.5] bg-orange w-[0.5px] h-[320px] hidden md:block"></div>
-        {/* content */}
+        
+        <div className="broder-[0.5] bg-orange w-[0.5px] h-[290px] hidden md:block"></div>
+        
+        {/* Right Side content */}
         <div className="w-full md:w-1/2">
           {/* Product Details  */}
           <div className="flex flex-col items-start justify-center">
-            <div className="flex flex-col mx-auto gap-3">
+            <div className="flex flex-col mx-auto gap-3 w-full">
               {/* Heading */}
               <div className="flex justify-between items-start">
                 {/* Brand name and Model Name */}
@@ -381,7 +405,7 @@ const ProductInfo = () => {
               </div>
 
               {/* Description */}
-              <div className="">
+              <div className="block md:hidden">
                 <div className="text-lg font-semibold">Description</div>
                 <div>
                   <p
@@ -404,7 +428,7 @@ const ProductInfo = () => {
               </div>
 
               {/* Button */}
-              <div onClick={handleButton}>
+              <div onClick={handleButton} className="w-fit">
                 <Button
                   style={`text-[18px] font-semibold px-5 py-2 rounded-sm hover:bg-orange-400`}
                   text={`Get a Quote`}
@@ -474,7 +498,7 @@ const ProductInfo = () => {
 
       {/* Rating and Review */}
       <div className="my-5">
-        <Reviews relatedRatings={relatedRatings}/>
+        <Reviews relatedRatings={relatedRatings} />
       </div>
 
       {/* Related Product */}

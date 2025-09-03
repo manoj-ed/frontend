@@ -55,7 +55,7 @@ const DisplayCategory = () => {
             {/* Image with shimmer sweep */}
             <div className="relative">
               <Image
-                className="rounded-[10, 10, 0, 0] w-[180px] md:h-[110px] lg:h-[150px] h-[140px] sm:w-[170px] md:w-[228px] object-contain transition-transform duration-500 group-hover:scale-105"
+                className="rounded-[10, 10, 0, 0] w-[180px] md:h-[110px] lg:h-[150px] h-[120px] sm:w-[170px] md:w-[228px] object-cover transition-transform duration-500 group-hover:scale-105"
                 src={categorie?.category_image}
                 alt="Category Image"
                 width={0}
