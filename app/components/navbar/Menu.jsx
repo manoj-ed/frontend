@@ -23,7 +23,7 @@ const Menu = () => {
   }, []);
 
   return (
-    <div className="hidden md:block">
+    <div className="hidden md:block bg-white">
       <div className="flex items-center justify-center gap-10 pt-1">
         {/* Buy New */}
         <div className="relative group cursor-pointer">

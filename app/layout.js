@@ -20,7 +20,7 @@ const inter = Inter({
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="px-0 md:px-20 ">
+      <body className="px-0 md:px-20 max-w-7xl 2xl:px-20 mx-auto flex flex-col min-h-screen 2xl:bg-[#f5f5f5]">
         <Toaster
           position="top-center"
           reverseOrder={false}
@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
         <Nav />
         <Menu />
         <Providers>
-            <main className="flex-grow">{children}</main>
+            <main className="flex-grow bg-white">{children}</main>
         </Providers>
         <Footer />
       </body>

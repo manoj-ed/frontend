@@ -7,14 +7,14 @@ import ProductCard from "@/app/components/common/productCard";
 import Filteraside from "@/app/components/common/brands/filteraside";
 import { useRouter } from "next/navigation";
 
-
 const Page = () => {
-
   const router = useRouter();
 
-
   const searchParams = useSearchParams();
+  const id = searchParams.get("id");
   const brand = searchParams.get("brand");
+
+  console.log("brand id", id);
 
   const [activeTab, setActiveTab] = useState("insurance");
   const [openItem, setOpenItem] = useState(null); // renamed from openFaq

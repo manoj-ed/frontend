@@ -344,7 +344,7 @@ export default function ExploreBrands() {
   const visibleBrands = filteredBrands.slice(0, visibleCount);
 
   return (
-    <section className="py-10 px-6 md:px-12">
+    <section className="py-10 px-6 md:px-12 ">
       {/* Title */}
       <h2
         className="relative text-3xl md:text-4xl font-extrabold text-center mb-6 
@@ -447,7 +447,7 @@ export default function ExploreBrands() {
                 className="group flex items-center py-2 flex-col justify-evenly relative bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden cursor-pointer 
                   hover:shadow-lg transition-all duration-300"
                 onClick={() =>
-                  router.push(`/buynew/brands/id/?brand=${brand.name}`)
+                  router.push(`/buynew/brands/id=${brand.id}/?brand=${brand.name}`)
                 }
               >
                 <div className="flex items-center justify-center h-20 w-20 relative">

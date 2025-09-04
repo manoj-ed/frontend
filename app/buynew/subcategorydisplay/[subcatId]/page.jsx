@@ -41,7 +41,7 @@ const Page = ({ params }) => {
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-center py-7 gap-4 w-full max-w-6xl mx-auto">
+      <div className="flex flex-col items-center justify-center lg:px-10 py-7 gap-4 w-full max-w-6xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 px-5 md:px-0 gap-4 md:gap-6 w-full">
           {subCategoryData?.map((subCategory) => (
             <div
@@ -54,7 +54,8 @@ const Page = ({ params }) => {
               {/* Image Section with Zoom & Gradient Overlay */}
               <div className="relative w-full overflow-hidden">
                 <Image
-                  className="rounded-t-2xl object-cover w-[200px] md:w-[360px] h-[80px] md:h-[160px] transform group-hover:scale-110 transition-transform duration-500"
+                  // className="rounded-t-2xl object-contain w-[200px] md:w-[360px] h-[80px] md:h-[160px] transform group-hover:scale-110 transition-transform duration-500"
+                  className="rounded-t-2xl object-contain w-[200px] md:w-[360px] transform group-hover:scale-110 transition-transform duration-500"
                   src={subCategory?.category_image}
                   alt={`sub Categoy icon`}
                   width={0}
