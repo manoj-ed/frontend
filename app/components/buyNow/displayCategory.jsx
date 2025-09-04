@@ -7,6 +7,7 @@ import CategoryProduct from "./filterCategory/subCategoryProduct";
 import { useRouter } from "next/navigation";
 import { setCategoryId } from "@/app/store/productSlice/product";
 import test from "../../../public/test.png";
+import Description from "../common/description";
 
 const DisplayCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -84,54 +85,10 @@ const DisplayCategory = () => {
 
       {/* Category Description */}
       <div className="">
-        <section className="bg-white w-full rounded-lg shadow-sm p-3 md:p-4 flex flex-col md:flex-row items-start md:gap-4 border-l-4 border-orange-500">
-          <div className="flex items-center gap-4 md:gap-6">
-            <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
-              <span className="text-gray-400 text-xs">Logo</span>
-            </div>
-            <h1 className="text-xl font-semibold text-gray-800 md:hidden">
-              {"Category Name"}
-            </h1>
-          </div>
-          <div>
-            <h1 className="hidden md:block text-xl font-semibold text-gray-800">
-              {"Sub Category Name"}
-            </h1>
-            <p className="text-gray-600 text-sm mt-2 leading-relaxed">
-              {showFullDesc ? (
-                <>
-                  {"This Sub Category"} is known for durable and reliable equipment
-                  trusted by businesses worldwide. With a legacy of quality, the
-                  company delivers products that combine innovation,
-                  functionality, and long-lasting performance. Customers across
-                  industries prefer this brand because of its consistency and
-                  customer-first approach. Each product goes through rigorous
-                  testing and quality checks to ensure the highest standards.
-                  <br />
-                  Their commitment to sustainability and innovation makes them a
-                  trusted choice globally.
-                </>
-              ) : (
-                <>
-                  <span className="line-clamp-2">
-                    {"This Sub Category"} is known for durable and reliable equipment
-                    trusted by businesses worldwide. With a legacy of quality,
-                    the company delivers products that combine innovation,
-                    functionality, and long-lasting performance...
-                  </span>
-                </>
-              )}
-            </p>
-            {!showFullDesc && (
-              <button
-                onClick={() => setShowFullDesc(true)}
-                className="mt-3 text-sm bg-orange-500 text-white px-4 py-1.5 rounded-md hover:bg-orange-600 transition"
-              >
-                View More
-              </button>
-            )}
-          </div>
-        </section>
+        <Description
+          name={"Sub Category Name"}
+          description={"this is description"}
+        />
       </div>
 
       {/* Display Products and filters */}

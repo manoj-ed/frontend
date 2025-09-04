@@ -6,6 +6,7 @@ import { FaChevronDown } from "react-icons/fa";
 import ProductCard from "@/app/components/common/productCard";
 import Filteraside from "@/app/components/common/brands/filteraside";
 import { useRouter } from "next/navigation";
+import Description from "@/app/components/common/description";
 
 const Page = () => {
   const router = useRouter();
@@ -184,53 +185,13 @@ const Page = () => {
       {/* Main Content */}
       <main className="w-full md:w-5/6 flex flex-col gap-8">
         {/* Brand Info */}
-        <section className="bg-white rounded-lg shadow-sm p-6 flex flex-col md:flex-row items-start md:gap-4 border-l-4 border-orange-500">
-          <div className="flex items-center gap-4 md:gap-6">
-            <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
-              <span className="text-gray-400 text-xs">Logo</span>
-            </div>
-            <h1 className="text-xl font-semibold text-gray-800 md:hidden">
-              {brand || "Brand Name"}
-            </h1>
-          </div>
-          <div>
-            <h1 className="hidden md:block text-xl font-semibold text-gray-800">
-              {brand || "Brand Name"}
-            </h1>
-            <p className="text-gray-600 text-sm mt-2 leading-relaxed max-w-2xl">
-              {showFullDesc ? (
-                <>
-                  {brand || "This brand"} is known for durable and reliable
-                  equipment trusted by businesses worldwide. With a legacy of
-                  quality, the company delivers products that combine
-                  innovation, functionality, and long-lasting performance.
-                  Customers across industries prefer this brand because of its
-                  consistency and customer-first approach. Each product goes
-                  through rigorous testing and quality checks to ensure the
-                  highest standards.
-                  <br />
-                  Their commitment to sustainability and innovation makes them a
-                  trusted choice globally.
-                </>
-              ) : (
-                <>
-                  {brand || "This brand"} is known for durable and reliable
-                  equipment trusted by businesses worldwide. With a legacy of
-                  quality, the company delivers products that combine
-                  innovation, functionality, and long-lasting performance...
-                </>
-              )}
-            </p>
-            {!showFullDesc && (
-              <button
-                onClick={() => setShowFullDesc(true)}
-                className="mt-3 text-sm bg-orange-500 text-white px-4 py-1.5 rounded-md hover:bg-orange-600 transition"
-              >
-                View More
-              </button>
-            )}
-          </div>
-        </section>
+        <Description
+          logo={"this is logo"}
+          name={"Brand Name"}
+          description={
+            "This brand is known for durable and reliable equipment trusted by businesses worldwide. With a legacy of quality, the company delivers products that combine innovation, functionality, and long-lasting performance."
+          }
+        />
 
         {/* Product Card */}
         <ProductCard
