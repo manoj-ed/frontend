@@ -147,11 +147,29 @@ export async function getProductsRatings(id) {
       throw new Error("No data received from the server");
     }
 
-
     return response.data;
-    
   } catch (error) {
     console.log("Ratings Fetch Failed", error.message);
+    return null;
+  }
+}
+
+//Get All Brands
+export async function getAllBrands() {
+  try {
+    const response = await AxiosPublic({
+      ...SummaryApi.getAllBrands,
+    });
+
+    if (!response || !response.data) {
+      throw new Error("No data received from the server");
+    }
+
+    console.log("brands Data", response.data);
+
+    return response.data;
+  } catch (error) {
+    console.log("Brands Fetch Failed", error.message);
     return null;
   }
 }

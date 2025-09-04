@@ -2,13 +2,35 @@
 
 import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { FaChevronDown } from "react-icons/fa";
 import ProductCard from "@/app/components/common/productCard";
 import Filteraside from "@/app/components/common/brands/filteraside";
 import { useRouter } from "next/navigation";
 import Description from "@/app/components/common/description";
+import TabsDropdown from "@/app/components/common/TabsDropdown";
 
 const Page = () => {
+
+  // Dropown tabs data
+  const tabs = [
+    {
+      name: "insurance",
+      items: [
+        { title: "Insurance Option 1", content: "Details for option 1." },
+        { title: "Insurance Option 2", content: "Details for option 2." },
+        { title: "Insurance Option 3", content: "Details for option 3." },
+      ],
+    },
+    {
+      name: "financing",
+      items: [
+        { title: "Financing Option 1", content: "Flexible EMI plan 1." },
+        { title: "Financing Option 2", content: "Flexible EMI plan 2." },
+        { title: "Financing Option 2", content: "Flexible EMI plan 2." },
+        { title: "Financing Option 2", content: "Flexible EMI plan 2." },
+      ],
+    },
+  ];
+
   const router = useRouter();
 
   const searchParams = useSearchParams();
@@ -17,13 +39,6 @@ const Page = () => {
 
   console.log("brand id", id);
 
-  const [activeTab, setActiveTab] = useState("insurance");
-  const [openItem, setOpenItem] = useState(null); // renamed from openFaq
-  const [showFullDesc, setShowFullDesc] = useState(false);
-
-  const toggleItem = (idx) => {
-    setOpenItem(openItem === idx ? null : idx);
-  };
 
   const data = [
     {
@@ -223,80 +238,9 @@ const Page = () => {
         </section> */}
 
         {/* Tabs Section */}
-        <section className="bg-white rounded-lg shadow-sm p-4">
-          <div className="flex gap-5 border-b pb-2 mb-3 text-sm font-medium text-gray-600">
-            {["financing", "insurance"].map((tab) => (
-              // {["insurance", "financing"].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`pb-2 transition-all duration-200 ${
-                  activeTab === tab
-                    ? "text-orange-600 border-b-2 border-orange-600"
-                    : "hover:text-orange-500"
-                }`}
-              >
-                {tab.toUpperCase()}
-              </button>
-            ))}
-          </div>
-
-          {/* Financing */}
-          {activeTab === "financing" && (
-            <div className="space-y-2">
-              {[1, 2].map((f, idx) => (
-                <div key={idx} className="border rounded-md overflow-hidden">
-                  <button
-                    onClick={() => toggleItem(idx + 10)}
-                    className="flex justify-between items-center w-full px-3 py-2 text-left text-sm text-gray-800 hover:bg-orange-50"
-                  >
-                    Financing Option {f}
-                    <FaChevronDown
-                      className={`transition-transform duration-300 ${
-                        openItem === idx + 10
-                          ? "rotate-180 text-orange-500"
-                          : ""
-                      }`}
-                    />
-                  </button>
-                  {openItem === idx + 10 && (
-                    <div className="px-3 py-2 text-xs text-gray-600 bg-white border-t">
-                      Details about financing option {f}. Flexible plans and
-                      easy EMIs available.
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* Insurance */}
-          {activeTab === "insurance" && (
-            <div className="space-y-2">
-              {[1, 2, 3].map((q, idx) => (
-                <div key={idx} className="border rounded-md overflow-hidden">
-                  <button
-                    onClick={() => toggleItem(idx)}
-                    className="flex justify-between items-center w-full px-3 py-2 text-left text-sm text-gray-800 hover:bg-orange-50"
-                  >
-                    Insurance Option {q}
-                    <FaChevronDown
-                      className={`transition-transform duration-300 ${
-                        openItem === idx ? "rotate-180 text-orange-500" : ""
-                      }`}
-                    />
-                  </button>
-                  {openItem === idx && (
-                    <div className="px-3 py-2 text-xs text-gray-600 bg-white border-t">
-                      This is the detail for Insurance option {q}. Clear
-                      explanation for better understanding.
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-        </section>
+        <div className="w-full">
+          <TabsDropdown tabs={tabs} />
+        </div>
       </main>
     </div>
   );

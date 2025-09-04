@@ -8,12 +8,32 @@ import { useRouter } from "next/navigation";
 import { setCategoryId } from "@/app/store/productSlice/product";
 import test from "../../../public/test.png";
 import Description from "../common/description";
+import TabsDropdown from "../common/TabsDropdown";
+import { Tabs } from "antd";
 
 const DisplayCategory = () => {
   const [categories, setCategories] = useState([]);
   const router = useRouter();
 
-  const [showFullDesc, setShowFullDesc] = useState(false);
+  const tabs = [
+    {
+      name: "insurance",
+      items: [
+        { title: "Insurance Option 1", content: "Details for option 1." },
+        { title: "Insurance Option 2", content: "Details for option 2." },
+        { title: "Insurance Option 3", content: "Details for option 3." },
+      ],
+    },
+    {
+      name: "financing",
+      items: [
+        { title: "Financing Option 1", content: "Flexible EMI plan 1." },
+        { title: "Financing Option 2", content: "Flexible EMI plan 2." },
+        { title: "Financing Option 2", content: "Flexible EMI plan 2." },
+        { title: "Financing Option 2", content: "Flexible EMI plan 2." },
+      ],
+    },
+  ];
 
   useEffect(() => {
     async function fetchCategories() {
@@ -94,6 +114,11 @@ const DisplayCategory = () => {
       {/* Display Products and filters */}
       <div className="w-full max-w-7xl mx-auto ">
         <CategoryProduct />
+      </div>
+
+      {/* FAQs */}
+      <div className="w-full">
+        <TabsDropdown tabs={tabs} />
       </div>
     </div>
   );

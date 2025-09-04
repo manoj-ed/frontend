@@ -6,8 +6,30 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 // import subcategorytest from "../../../../public/subcategorytest.jpg"
 import Description from "@/app/components/common/description";
+import TabsDropdown from "@/app/components/common/TabsDropdown";
+import BlogCards from "@/app/components/common/blogCard";
 
 const Page = ({ params }) => {
+  const tabs = [
+    {
+      name: "insurance",
+      items: [
+        { title: "Insurance Option 1", content: "Details for option 1." },
+        { title: "Insurance Option 2", content: "Details for option 2." },
+        { title: "Insurance Option 3", content: "Details for option 3." },
+      ],
+    },
+    {
+      name: "financing",
+      items: [
+        { title: "Financing Option 1", content: "Flexible EMI plan 1." },
+        { title: "Financing Option 2", content: "Flexible EMI plan 2." },
+        { title: "Financing Option 2", content: "Flexible EMI plan 2." },
+        { title: "Financing Option 2", content: "Flexible EMI plan 2." },
+      ],
+    },
+  ];
+
   const router = useRouter();
   const categoryId = use(params);
 
@@ -42,9 +64,8 @@ const Page = ({ params }) => {
 
   return (
     <div className=" flex flex-col px-5 lg:px-10 py-7 gap-4 w-full max-w-6xl mx-auto">
-
       {/* Category Description */}
-      <Description name={"Category Name"} description={"this is description"}/>
+      <Description name={"Category Name"} description={"this is description"} />
 
       {/* Subcategory List */}
       <div className="flex flex-col items-center justify-center">
@@ -55,13 +76,13 @@ const Page = ({ params }) => {
                 categorieHandleClick(subCategory.id, subCategory);
               }}
               key={subCategory.id}
-              className="group relative flex flex-col items-center justify-center w-full rounded-2xl border border-orange-300/40 bg-white/30 backdrop-blur-md overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer [transform-style:preserve-3d] hover:[transform:rotateX(4deg)_rotateY(-4deg)]"
+              className="group relative flex flex-col items-center justify-center w-full rounded-md border border-orange-300/40 bg-white/30 backdrop-blur-md overflow-hidden shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer [transform-style:preserve-3d] hover:[transform:rotateX(4deg)_rotateY(-4deg)]"
             >
               {/* Image Section with Zoom & Gradient Overlay */}
               <div className="relative w-full overflow-hidden">
                 <Image
                   // className="rounded-t-2xl object-contain w-[200px] md:w-[360px] h-[80px] md:h-[160px] transform group-hover:scale-110 transition-transform duration-500"
-                  className="rounded-t-2xl object-contain w-[200px] md:w-[360px] transform group-hover:scale-110 transition-transform duration-500"
+                  className="rounded-t-md object-contain w-[200px] md:w-[360px] transform group-hover:scale-110 transition-transform duration-500"
                   src={subCategory?.category_image}
                   alt={`sub Categoy icon`}
                   width={0}
@@ -85,6 +106,12 @@ const Page = ({ params }) => {
           ))}
         </div>
       </div>
+
+      {/* Blog Section */}
+      <BlogCards />
+
+      {/* Dropdown */}
+      <TabsDropdown tabs={tabs} />
     </div>
   );
 };
