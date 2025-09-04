@@ -110,7 +110,7 @@ const CategoryProduct = () => {
   console.log("last page", lastPage);
 
   return (
-    <div className="w-full p-5 gap-4">
+    <div className="w-full gap-4">
       <div className="w-full place-items-start place-content-center grid md:grid-cols-4 gap-4 md:gap-10">
         <h2 className="block md:hidden text-2xl py-1 px-3 rounded-md uppercase bg-gradient-to-r from-orange-100 to-orange-50 text-orange-800 font-medium shadow-sm">
           {subCategoryName}
