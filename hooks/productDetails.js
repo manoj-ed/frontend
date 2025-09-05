@@ -3,7 +3,7 @@ import {
   getProductDetails,
   getRelatedEquipments,
   getProductsRatings,
-} from "@/app/utils/buyNewAPI";
+} from "@/app/utils/userAPI";
 import { extractParamsFromSearchParams } from "../app/utils/searchParams";
 import {
   setProductDetails,

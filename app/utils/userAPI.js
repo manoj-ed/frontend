@@ -110,7 +110,7 @@ export async function getProductByCategory(categoryId) {
   }
 }
 
-// get Related product based on category id and subcategory for equipments info page
+// get Related product based on category id for equipments info page
 export async function getRelatedEquipments(data) {
   console.log("data", data);
 
@@ -122,6 +122,8 @@ export async function getRelatedEquipments(data) {
         // sub_category_id: data.sub_category_id,
       },
     });
+
+    console.log("Related Equipments Response", response);
 
     if (!response || !response.data) {
       throw new Error("No data received from the server");

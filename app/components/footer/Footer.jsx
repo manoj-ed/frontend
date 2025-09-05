@@ -65,7 +65,7 @@ const Footer = () => {
               <h4 className="text-lg font-semibold mb-3">Contact</h4>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-2">
-                  <FaPhone /> +91-9876543210
+                  <FaPhone /> +91-9599499272
                 </li>
                 <li className="flex items-center gap-2">
                   <FaEnvelope /> info@equipmentsdekho.com

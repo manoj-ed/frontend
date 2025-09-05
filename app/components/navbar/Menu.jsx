@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { getCategoryData } from "../../utils/buyNewAPI";
+import { getCategoryData } from "../../utils/userAPI";
 import { usePathname } from "next/navigation";
 import DropDown from "../../components/common/navbar/dropDown";
 
@@ -24,7 +24,7 @@ const Menu = () => {
 
   return (
     <div className="hidden md:block bg-white">
-      <div className="flex items-center justify-center gap-10 pt-1">
+      <div className="flex items-center justify-center gap-5 lg:gap-10 pt-1">
         {/* Buy New */}
         <div className="relative group cursor-pointer">
           <Link

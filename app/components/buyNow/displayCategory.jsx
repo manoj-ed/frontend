@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { getCategoryData } from "../../utils/buyNewAPI";
+import { getCategoryData } from "../../utils/userAPI";
 import Image from "next/image";
 import CategoryProduct from "./filterCategory/subCategoryProduct";
 import { useRouter } from "next/navigation";

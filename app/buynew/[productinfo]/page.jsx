@@ -89,7 +89,7 @@ const ProductInfo = () => {
   console.log("relatedRatings", relatedRatings);
 
   return (
-    <div className="flex flex-col w-full h-full px-5 md:px-0">
+    <div className="flex flex-col w-full h-full px-5 md:px-0 2xl:px-5">
       <div className="text-sm text-orange font-normal pt-6 pb-1">
         Home /{" "}
         <span

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Aside from "./aside";
 import ProductCard from "../../common/productCard";
 import { FaCheck } from "react-icons/fa";
-import { getSubCategoryData } from "@/app/utils/buyNewAPI";
+import { getSubCategoryData } from "@/app/utils/userAPI";
 import { useDispatch } from "react-redux";
 import {
   setBrands,

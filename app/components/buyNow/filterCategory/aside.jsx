@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSelector } from "react-redux";
-import { getSubCategoryData } from "@/app/utils/buyNewAPI";
+import { getSubCategoryData } from "@/app/utils/userAPI";
 import { Slider, ConfigProvider } from "antd";
 import { IoIosClose } from "react-icons/io";
 

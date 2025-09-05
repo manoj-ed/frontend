@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import cat from "../../../public/CAT.png";
 import jcb from "../../../public/JCB.png";
-import { getAllBrands } from "../../utils/buyNewAPI";
+import { getAllBrands } from "../../utils/userAPI";
 
 // const brands = [
 //   {

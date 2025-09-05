@@ -9,6 +9,8 @@ const DropDown = ({ categories }) => {
   const isActive = (path) => pathname === path;
 
   const categorieHandleClick = (id) => {
+    console.log("id", id)
+    localStorage.setItem("categoryId", id);
     router.push(`/buynew/subcategorydisplay/${id}`);
   };
 

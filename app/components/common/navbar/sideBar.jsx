@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Home, Settings, LogOut, Menu } from "lucide-react";
 import DropDown from "./dropDown";
-import { getCategoryData } from "@/app/utils/buyNewAPI";
+import { getCategoryData } from "@/app/utils/userAPI";
 import { useRouter } from "next/navigation";
 
 export default function SideBar() {
