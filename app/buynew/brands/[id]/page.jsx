@@ -7,9 +7,9 @@ import Filteraside from "@/app/components/common/brands/filteraside";
 import { useRouter } from "next/navigation";
 import Description from "@/app/components/common/description";
 import TabsDropdown from "@/app/components/common/TabsDropdown";
+import BlogCards from "@/app/components/common/blogCard";
 
 const Page = () => {
-
   // Dropown tabs data
   const tabs = [
     {
@@ -38,7 +38,6 @@ const Page = () => {
   const brand = searchParams.get("brand");
 
   console.log("brand id", id);
-
 
   const data = [
     {
@@ -191,31 +190,32 @@ const Page = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 py-5 px-3">
-      {/* Sticky Sidebar */}
-      <aside className="w-full md:w-3/6 lg:w-2/6 md:sticky top-6 self-start h-fit bg-white shadow-sm rounded-lg ">
-        <Filteraside />
-      </aside>
+    <div className="px-3">
+      <div className="flex flex-col md:flex-row gap-6 py-5 ">
+        {/* Sticky Sidebar */}
+        <aside className="w-full md:w-3/6 lg:w-2/6 md:sticky top-6 self-start h-fit bg-white shadow-sm rounded-lg ">
+          <Filteraside />
+        </aside>
 
-      {/* Main Content */}
-      <main className="w-full md:w-5/6 flex flex-col gap-8">
-        {/* Brand Info */}
-        <Description
-          logo={"this is logo"}
-          name={"Brand Name"}
-          description={
-            "This brand is known for durable and reliable equipment trusted by businesses worldwide. With a legacy of quality, the company delivers products that combine innovation, functionality, and long-lasting performance."
-          }
-        />
+        {/* Main Content */}
+        <main className="w-full md:w-5/6 flex flex-col gap-8">
+          {/* Brand Info */}
+          <Description
+            logo={"this is logo"}
+            name={"Brand Name"}
+            description={
+              "This brand is known for durable and reliable equipment trusted by businesses worldwide. With a legacy of quality, the company delivers products that combine innovation, functionality, and long-lasting performance."
+            }
+          />
 
-        {/* Product Card */}
-        <ProductCard
-          onProductClick={handleProductClick}
-          productData={data}
-          style={"grid-cols-2 lg:grid-cols-3"}
-        />
+          {/* Product Card */}
+          <ProductCard
+            onProductClick={handleProductClick}
+            productData={data}
+            style={"grid-cols-2 lg:grid-cols-3"}
+          />
 
-        {/* <section className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-orange-500">
+          {/* <section className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-orange-500">
           <h2 className="text-lg font-semibold text-gray-800 mb-3">
             About {brand || "Brand Name"}
           </h2>
@@ -237,11 +237,17 @@ const Page = () => {
           </p>
         </section> */}
 
-        {/* Tabs Section */}
-        <div className="w-full">
-          <TabsDropdown tabs={tabs} />
+          {/* Tabs Section */}
+          <div className="w-full">
+            <TabsDropdown tabs={tabs} />
+          </div>
+        </main>
+
+      </div>
+      {/* Blog Section */}
+        <div>
+          <BlogCards />
         </div>
-      </main>
     </div>
   );
 };

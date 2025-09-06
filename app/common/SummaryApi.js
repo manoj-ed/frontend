@@ -33,6 +33,10 @@ const SummaryApi = {
     url: "brands",
     method: "get",
   },
+  getBlog: {
+    url: "getBlog",
+    method: "get",
+  },
 };
 
 export default SummaryApi;

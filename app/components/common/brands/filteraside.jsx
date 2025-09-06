@@ -11,25 +11,28 @@ const FilterAside = () => {
     "₹200,000 - ₹399,999",
     "₹400,000 - ₹699,999",
     "₹700,000 - ₹999,999",
-    "₹1,000,000 - ₹1,499,999",
-    "₹1,500,000 - ₹1,999,999",
+    "₹1,000,000 - ₹1,4999,99",
+    "₹1,500,000 - ₹1,9999,99",
+    "₹1,500,000 - ₹1,9999,99",
+    "₹1,500,000 - ₹1,9999,99",
+    "₹1,500,000 - ₹1,9999,99",
+    "₹1,500,000 - ₹1,9999,99",
   ];
 
   return (
-    <aside className="w-full space-y-6 p-4 border rounded-lg bg-white shadow-sm">
+    <aside className="w-full space-y-6 py-4 pl-2 border rounded-lg bg-white shadow-sm">
       {/* Price Range */}
       <div className="space-y-3">
         <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
           Price Range
         </h3>
         <div className="space-y-3">
-          <h3 className="text-sm font-semibold text-gray-700">Price Range</h3>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1">
             {priceRanges.map((range, idx) => (
               <button
                 key={idx}
                 onClick={() => setSelectedRange(range)}
-                className={`px-3 py-1 border rounded-md text-xs transition-all duration-200
+                className={`px-2 py-1 border rounded-md text-xs transition-all duration-200
               ${
                 selectedRange === range
                   ? "border-orange-500 bg-orange-50 text-orange-600"

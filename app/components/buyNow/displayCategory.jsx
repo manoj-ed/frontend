@@ -9,7 +9,8 @@ import { setCategoryId } from "@/app/store/productSlice/product";
 import test from "../../../public/test.png";
 import Description from "../common/description";
 import TabsDropdown from "../common/TabsDropdown";
-import { Tabs } from "antd";
+// import { Tabs } from "antd";
+import BlogCards from "../common/blogCard";
 
 const DisplayCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -114,6 +115,11 @@ const DisplayCategory = () => {
       {/* Display Products and filters */}
       <div className="w-full max-w-7xl mx-auto ">
         <CategoryProduct />
+      </div>
+
+      <div>
+        {/* Blog Section */}
+        <BlogCards  />
       </div>
 
       {/* FAQs */}

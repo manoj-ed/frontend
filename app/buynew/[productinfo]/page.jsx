@@ -10,6 +10,7 @@ import Slider from "../../components/common/slider/slider";
 import ProductCard from "@/app/components/common/productCard";
 import YouTube from "react-youtube";
 import SignUp from "@/app/components/common/auth/signUp";
+import BlogCards from "@/app/components/common/blogCard";
 
 const ProductInfo = () => {
   const router = useRouter();
@@ -140,9 +141,9 @@ const ProductInfo = () => {
           </div>
         </div>
         {/* line */}
-        
+
         <div className="broder-[0.5] bg-orange w-[0.5px] h-[290px] hidden md:block"></div>
-        
+
         {/* Right Side content */}
         <div className="w-full md:w-1/2">
           {/* Product Details  */}
@@ -516,6 +517,9 @@ const ProductInfo = () => {
           onProductClick={handleProductClick}
         />
       </div>
+
+      {/* Blog Section */}
+      <BlogCards />
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import Description from "@/app/components/common/description";
 import TabsDropdown from "@/app/components/common/TabsDropdown";
 import BlogCards from "@/app/components/common/blogCard";
+import { getBlog } from "@/app/utils/BlogAPI";
 
 const Page = ({ params }) => {
   const tabs = [
@@ -34,14 +35,43 @@ const Page = ({ params }) => {
   const categoryId = use(params);
 
   const [subCategoryData, setSubCategoryData] = useState();
+  const [blogData, setBlogData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+
+    if (!categoryId?.subcatId) {
+      console.error("Invalid categoryId:", categoryId);
+      setError("Invalid category ID");
+      return;
+    }
+
+
     const fetchData = async () => {
-      const { data } = await getProductByCategory(categoryId.subcatId);
-      setSubCategoryData(data);
+      setLoading(true); // start loading
+      setError(null); // reset error
+
+      try {
+        const [{ data }, blogData] = await Promise.all([
+          getProductByCategory(categoryId.subcatId),
+          getBlog(),
+        ]);
+
+        setSubCategoryData(data);
+        setBlogData(blogData.data);
+      } catch (err) {
+        console.error("Error in fetchData:", err);
+        setError("Failed to fetch data"); // save error message
+      } finally {
+        setLoading(false); // stop loading
+      }
     };
+
     fetchData();
   }, [categoryId]);
+
+
 
   const categorieHandleClick = (id, subCategory) => {
     const data = {
@@ -108,7 +138,7 @@ const Page = ({ params }) => {
       </div>
 
       {/* Blog Section */}
-      <BlogCards />
+      <BlogCards blogData={blogData}/>
 
       {/* Dropdown */}
       <TabsDropdown tabs={tabs} />

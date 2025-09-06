@@ -35,7 +35,12 @@ const blogs = [
   },
 ];
 
-const BlogCards = () => {
+const BlogCards = ({ blogData }) => {
+
+  const handleBlogClick = (id) => {
+    console.log("blog card id", id)
+  }
+
   return (
     <section className="py-3 md:py-6 flex flex-col gap-6">
       {/* Header */}
@@ -86,7 +91,9 @@ const BlogCards = () => {
                 {blog.desc}
               </p>
               <button className="py-2 text-sm font-medium text-orange-600 group-hover:text-orange-700 transition-all duration-300 relative w-fit">
-                <span className="relative z-10 cursor-pointer">
+                <span className="relative z-10 cursor-pointer"
+                onClick={() => handleBlogClick(blog.id)}
+                >
                   Read More →
                 </span>
                 <span className="absolute left-1/2 -translate-x-1/2 bottom-0 w-0 group-hover:w-4/5 h-[2px] bg-orange-500 transition-all duration-300 rounded-full"></span>
