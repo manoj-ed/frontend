@@ -115,7 +115,7 @@ export default function EquipmentFinancePage() {
   return (
     <div className="">
       {/* 🔹 Hero Section */}
-      <section className="relative w-full h-[400px] flex items-center justify-between overflow-hidden">
+      <section className="relative w-full h-[450px] flex items-center justify-between overflow-hidden">
         <Image
           src="/finance-bg.jpg"
           alt="Equipment Finance"
@@ -126,7 +126,7 @@ export default function EquipmentFinancePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-[#FF6B00]/50"></div>
 
         {/* Left Content */}
-        <div className="relative  text-white max-w-2xl px-6 md:px-16">
+        <div className="relative text-white max-w-2xl px-6 md:px-16">
           <motion.h1
             className="text-5xl font-bold mb-6 leading-snug"
             initial={{ opacity: 0, y: 20 }}
@@ -155,7 +155,7 @@ export default function EquipmentFinancePage() {
           </motion.button>
         </div>
 
-        {/* Stats */}
+        {/* Stats (Right Content) */}
         <div>
           <motion.div
             className="relative z-10 hidden md:flex mr-16"
@@ -238,7 +238,7 @@ export default function EquipmentFinancePage() {
       </section>
 
       {/* 🔹 Process Steps Section */}
-      <section className="w-full px-10 bg-[#FAFAFA]">
+      <section className="w-full px-5 md:px-10 bg-[#FAFAFA]">
         <div className=" mx-auto">
           <h2 className="text-4xl font-bold text-center py-7 text-[#1A1A1A]">
             How <span className="text-[#FF6B00]">It Works</span>
@@ -315,7 +315,7 @@ export default function EquipmentFinancePage() {
       </section>
 
       {/* 🔹 Breadcrumbs / Intro Section */}
-      <section className="relative w-full py-20 bg-[#FAFAFA]">
+      <section className="relative w-full md:py-10 bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-10 items-start">
           {/* Left: Description */}
           <div>
@@ -631,7 +631,7 @@ export default function EquipmentFinancePage() {
                 ⏰ Business Hours
               </h3>
               <p className="text-sm text-[#4A4A4A] mb-2">Mon - Fri</p>
-              <p className="font-bold text-[#FF6B00]">9:00 AM - 6:00 PM</p>
+              <p className="font-bold text-[#FF6B00]">10:00 AM - 6:00 PM</p>
             </motion.div>
           </div>
         </div>
