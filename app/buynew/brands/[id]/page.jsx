@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useState, useEffect } from "react";
 import ProductCard from "@/app/components/common/productCard";
 import Filteraside from "@/app/components/common/brands/filteraside";
-import { useRouter } from "next/navigation";
+import { useSearchParams, useParams, useRouter } from "next/navigation";
 import Description from "@/app/components/common/description";
 import TabsDropdown from "@/app/components/common/TabsDropdown";
 import BlogCards from "@/app/components/common/blogCard";
+import { getBrandDetails } from "@/app/utils/userAPI";
 
 const Page = () => {
   // Dropown tabs data
@@ -34,10 +34,30 @@ const Page = () => {
   const router = useRouter();
 
   const searchParams = useSearchParams();
-  const id = searchParams.get("id");
-  const brand = searchParams.get("brand");
+  const params = useParams();
 
-  console.log("brand id", id);
+  const brandName = searchParams.get("brand");
+  const brandId = params.id;
+
+  const [brandData, setBrandData] = useState(null);
+
+  console.log("brand id", brandId);
+  console.log("brand", brandName);
+
+  const getBrandData = async () => {
+    try {
+      const data = await getBrandDetails(brandId);
+      console.log("Fetched Brand Data:", data);
+
+      setBrandData(data.data);
+    } catch (err) {
+      console.error("Error fetching brand details:", err);
+    }
+  };
+
+  useEffect(() => {
+    if (brandId) getBrandData();
+  }, [brandId]);
 
   const data = [
     {
@@ -180,6 +200,8 @@ const Page = () => {
     },
   ];
 
+  console.log("brandData", brandData);
+
   const handleProductClick = (clickedProduct) => {
     try {
       const encodedData = encodeURIComponent(JSON.stringify(clickedProduct));
@@ -201,11 +223,9 @@ const Page = () => {
         <main className="w-full md:w-5/6 flex flex-col gap-8">
           {/* Brand Info */}
           <Description
-            logo={"this is logo"}
-            name={"Brand Name"}
-            description={
-              "This brand is known for durable and reliable equipment trusted by businesses worldwide. With a legacy of quality, the company delivers products that combine innovation, functionality, and long-lasting performance."
-            }
+            logo={brandData?.brand_image}
+            name={brandData?.brand_name}
+            description={brandData?.description || "No description available"}
           />
 
           {/* Product Card */}
@@ -242,12 +262,11 @@ const Page = () => {
             <TabsDropdown tabs={tabs} />
           </div>
         </main>
-
       </div>
       {/* Blog Section */}
-        <div>
-          <BlogCards />
-        </div>
+      <div>
+        <BlogCards />
+      </div>
     </div>
   );
 };

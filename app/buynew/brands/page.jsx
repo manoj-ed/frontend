@@ -461,7 +461,7 @@ export default function ExploreBrands() {
                   hover:shadow-lg transition-all duration-300"
                 onClick={() =>
                   router.push(
-                    `/buynew/brands/id=${brand.id}/?brand=${brand.brand_name}`
+                    `/buynew/brands/${brand.id}/?brand=${brand.brand_name}`
                   )
                 }
               >

@@ -14,7 +14,7 @@ import {
 import { useRouter } from "next/navigation";
 import ViewMoreButton from "../../common/ViewMoreButton";
 
-const CategoryProduct = () => {
+const CategoryProduct = ({ categoryData }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const searchParams = new URLSearchParams(window.location.search);
@@ -26,6 +26,10 @@ const CategoryProduct = () => {
   const [page, setPage] = useState({ page: 1 });
   const [lastPage, setLastPage] = useState(null);
   const [isLastPage, setIsLastPage] = useState(false);
+  const [subCategoryData, setSubCategoryData] = useState({
+    description: "",
+    name: "",
+  });
 
   const filters = ["New", "Low - High", "High - Low", "Rating"];
 
@@ -91,6 +95,17 @@ const CategoryProduct = () => {
       if (!response) return;
       console.log("respone", response);
 
+      setSubCategoryData((prev) => ({
+        ...prev,
+        description: response?.sub_category_description,
+        name: response?.sub_category_name,
+      }));
+
+      categoryData({
+        description: response?.sub_category_description,
+        name: response?.sub_category_name,
+      });
+
       setSubCategoryName(response?.sub_category_name);
       setLastPage(response?.last_page);
 
@@ -108,6 +123,7 @@ const CategoryProduct = () => {
 
   console.log("productData", productData);
   console.log("last page", lastPage);
+  console.log("subCategoryData", subCategoryData);
 
   return (
     <div className="w-full gap-4">
@@ -148,7 +164,9 @@ const CategoryProduct = () => {
                       </span>
                     )}
 
-                    <button className="tracking-wide cursor-pointer">{filter}</button>
+                    <button className="tracking-wide cursor-pointer">
+                      {filter}
+                    </button>
 
                     {/* Hover/Active underline */}
                     <span

@@ -49,12 +49,12 @@ const Navbar = () => {
 
   // On Click Profile Page Redirect 
   const goToProfile = () => {
-    router.push("/buynew/profile");
+    router.push("/profile");
   };
 
   // On Click Favorite Page Redirect
   const goToFavorite = () => {
-    router.push("/buynew/favorite");
+    router.push("/favorite");
   };
 
   return (

@@ -5,12 +5,13 @@ import { getCategoryData } from "../../utils/userAPI";
 import Image from "next/image";
 import CategoryProduct from "./filterCategory/subCategoryProduct";
 import { useRouter } from "next/navigation";
-import { setCategoryId } from "@/app/store/productSlice/product";
+// import { setCategoryId } from "@/app/store/productSlice/product";
 import test from "../../../public/test.png";
 import Description from "../common/description";
 import TabsDropdown from "../common/TabsDropdown";
 // import { Tabs } from "antd";
 import BlogCards from "../common/blogCard";
+import Loading from "../../loading";
 
 const DisplayCategory = () => {
   const [categories, setCategories] = useState([]);
@@ -36,6 +37,11 @@ const DisplayCategory = () => {
     },
   ];
 
+  const [descriptionData, setDescriptionData] = useState();
+  const categoryData = (data) => {
+    setDescriptionData(data);
+  };
+
   useEffect(() => {
     async function fetchCategories() {
       const { data } = await getCategoryData();
@@ -48,7 +54,7 @@ const DisplayCategory = () => {
   if (!categories || categories.length === 0) {
     return (
       <div className="flex items-center justify-center py-5">
-        <p className="text-gray-500">Loading...</p>
+        <Loading />
       </div>
     );
   }
@@ -79,7 +85,8 @@ const DisplayCategory = () => {
             {/* Image with shimmer sweep */}
             <div className="relative">
               <Image
-                className="rounded-[10, 10, 0, 0] w-[180px] md:h-[110px] lg:h-[150px] h-[120px] sm:w-[170px] md:w-[228px] object-cover transition-transform duration-500 group-hover:scale-105"
+                // className="rounded-[10, 10, 0, 0] w-[180px] md:h-[110px] lg:h-[150px] h-[120px] sm:w-[170px] md:w-[228px] object-cover transition-transform duration-500 group-hover:scale-105"
+                className="rounded-[10, 10, 0, 0] h-auto w-[180px]  lg:h-[150px]  sm:w-[170px] md:w-[228px] object-cover transition-transform duration-500 group-hover:scale-105"
                 src={categorie?.category_image}
                 alt="Category Image"
                 width={0}
@@ -105,21 +112,21 @@ const DisplayCategory = () => {
       </div>
 
       {/* Category Description */}
-      <div className="">
+      <div className="w-full">
         <Description
-          name={"Sub Category Name"}
-          description={"this is description"}
+          name={descriptionData?.name}
+          description={descriptionData?.description}
         />
       </div>
 
       {/* Display Products and filters */}
       <div className="w-full max-w-7xl mx-auto ">
-        <CategoryProduct />
+        <CategoryProduct categoryData={categoryData} />
       </div>
 
       <div>
         {/* Blog Section */}
-        <BlogCards  />
+        <BlogCards />
       </div>
 
       {/* FAQs */}

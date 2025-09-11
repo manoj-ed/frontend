@@ -3,6 +3,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
 @theme {
   --color-orange: #f26322;
   --color-offWhite: #d9d9d9;
@@ -12,13 +16,16 @@
 
 /* Brands page */
 @keyframes shine {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 .group-hover\:animate-shine {
   animation: shine 1s forwards;
 }
-
 
 @media (max-width: 640px) {
   body {
@@ -66,7 +73,6 @@
   animation: fadeUpCard 0.5s ease-out forwards;
 }
 
-
 /* Scroll Bar Styling  */
 /* hide scroll bar using class css */
 .scroll-hidden::-webkit-scrollbar {
@@ -89,9 +95,6 @@
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
-
-
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

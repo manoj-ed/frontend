@@ -36,17 +36,16 @@ const Page = ({ params }) => {
 
   const [subCategoryData, setSubCategoryData] = useState();
   const [blogData, setBlogData] = useState([]);
+  const [categoryData, setCategoryData] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-
     if (!categoryId?.subcatId) {
       console.error("Invalid categoryId:", categoryId);
       setError("Invalid category ID");
       return;
     }
-
 
     const fetchData = async () => {
       setLoading(true); // start loading
@@ -58,7 +57,10 @@ const Page = ({ params }) => {
           getBlog(),
         ]);
 
-        setSubCategoryData(data);
+        console.log("subcategory data", data);
+
+        setSubCategoryData(data.subcategories);
+        setCategoryData(data.category);
         setBlogData(blogData.data);
       } catch (err) {
         console.error("Error in fetchData:", err);
@@ -71,7 +73,7 @@ const Page = ({ params }) => {
     fetchData();
   }, [categoryId]);
 
-
+  console.log("categoryData", categoryData);
 
   const categorieHandleClick = (id, subCategory) => {
     const data = {
@@ -92,10 +94,12 @@ const Page = ({ params }) => {
     return <div>No subcategory data available</div>;
   }
 
+  console.log("subCategoryData", subCategoryData);
+
   return (
     <div className=" flex flex-col px-5 lg:px-10 py-7 gap-4 w-full max-w-6xl mx-auto">
       {/* Category Description */}
-      <Description name={"Category Name"} description={"this is description"} />
+      <Description name={categoryData?.category_name} description={categoryData?.description} />
 
       {/* Subcategory List */}
       <div className="flex flex-col items-center justify-center">
@@ -125,11 +129,14 @@ const Page = ({ params }) => {
               </div>
 
               {/* Title Section */}
-              <div className="relative flex items-center justify-center w-full py-2 ">
+              <div className="relative flex flex-col items-center justify-center gap-1 w-full py-2 ">
                 <p className="relative font-medium bg-gradient-to-r from-orange-500 to-red-400 bg-clip-text text-transparent text-base tracking-wide group-hover:tracking-wider transition-all duration-300">
                   {subCategory.sub_category_name}
                   {/* Glowing Underline */}
                   <span className="absolute left-1/2 -translate-x-1/2 bottom-[-4px] h-[3px] w-0 rounded-full bg-orange shadow-[0_0_10px_rgba(255,102,0,0.7)] group-hover:w-4/5 transition-all duration-500"></span>
+                </p>
+                <p className="line-clamp-2 leading-[1.1rem] text-gray-600 text-sm text-center px-2 group-hover:text-gray-800 transition-colors duration-300">
+                  {subCategory.description}
                 </p>
               </div>
             </div>
@@ -138,7 +145,7 @@ const Page = ({ params }) => {
       </div>
 
       {/* Blog Section */}
-      <BlogCards blogData={blogData}/>
+      <BlogCards blogData={blogData} />
 
       {/* Dropdown */}
       <TabsDropdown tabs={tabs} />

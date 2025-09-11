@@ -33,6 +33,10 @@ const SummaryApi = {
     url: "brands",
     method: "get",
   },
+  getBrandDetail: {
+    url: "get-brandsById",
+    method: "post",
+  },
   getBlog: {
     url: "getBlog",
     method: "get",

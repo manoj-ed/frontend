@@ -175,3 +175,28 @@ export async function getAllBrands() {
     return null;
   }
 }
+
+// Get Brand Details by ID
+export async function getBrandDetails(id) {
+  console.log("brand id", id);
+  try {
+    const response = await AxiosPublic({
+      ...SummaryApi.getBrandDetail,
+      data: {
+        brand_id: id,
+      },
+    });
+
+    console.log("Fetched Brand Details:", { ...response.data.data });
+
+    if (!response || !response.data) {
+      throw new Error("No data received from the server");
+    }
+
+    return response.data;
+
+  } catch (error) {
+    console.error("Brand details fetch failed:", error.message);
+    return null;
+  }
+}
