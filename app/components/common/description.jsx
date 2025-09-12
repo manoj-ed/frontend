@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import Image from "next/image";
 
-const Description = ({ logo, name, description }) => {
+const Description = ({ logo, name, description, image }) => {
   const [showFullDesc, setShowFullDesc] = useState(false);
 
   console.log("description", description);
@@ -12,7 +13,7 @@ const Description = ({ logo, name, description }) => {
       >
         {/* Logo Section */}
         {logo && (
-          <div className="flex items-center gap-4 md:gap-6 w-full">
+          <div className="flex items-center gap-4 md:gap-6">
             <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
               {/* Render logo if provided, else fallback text */}
               {typeof logo === "string" ? (

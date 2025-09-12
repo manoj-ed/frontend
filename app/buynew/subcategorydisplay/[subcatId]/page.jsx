@@ -9,6 +9,7 @@ import Description from "@/app/components/common/description";
 import TabsDropdown from "@/app/components/common/TabsDropdown";
 import BlogCards from "@/app/components/common/blogCard";
 import { getBlog } from "@/app/utils/BlogAPI";
+import Breadcrumb  from "@/app/components/common/Breadcrumb";
 
 const Page = ({ params }) => {
   const tabs = [
@@ -99,8 +100,11 @@ const Page = ({ params }) => {
   return (
     <div className=" flex flex-col px-5 lg:px-10 py-7 gap-4 w-full max-w-6xl mx-auto">
       {/* Category Description */}
-      <Description name={categoryData?.category_name} description={categoryData?.description} />
-
+      {/* <Description
+        name={categoryData?.category_name}
+        description={categoryData?.description}
+      /> */}
+      <Breadcrumb categoryName={categoryData?.category_name} description={categoryData?.description}/>
       {/* Subcategory List */}
       <div className="flex flex-col items-center justify-center">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-6 w-full">

@@ -8,9 +8,10 @@ const DropDown = ({ categories }) => {
   const pathname = usePathname();
   const isActive = (path) => pathname === path;
 
-  const categorieHandleClick = (id) => {
+  const categorieHandleClick = (id, category_name) => {
     console.log("id", id)
     localStorage.setItem("categoryId", id);
+    localStorage.setItem("categoryName", category_name);
     router.push(`/buynew/subcategorydisplay/${id}`);
   };
 
@@ -39,7 +40,7 @@ const DropDown = ({ categories }) => {
               {categories.map((category, index) => (
                 <div
                   onClick={() => {
-                    categorieHandleClick(category.id);
+                    categorieHandleClick(category.id, category.category_name);
                   }}
                   key={index}
                   className="block px-4 py-2 cursor-pointer hover:bg-orange-50 transition-all duration-300 group/item"
