@@ -49,7 +49,7 @@ const DropDown = ({ categories }) => {
                     <span className="text-gray-700 group-hover/item:text-orange-600 transition-colors duration-300">
                       {category.category_name}
                     </span>
-                    <IoTriangleSharp className="rotate-90 w-[10px] h-[10px] text-gray-500 transition-all duration-300 group-hover/item:rotate-[180deg] group-hover/item:text-orange-500" />
+                    {/* <IoTriangleSharp className="rotate-90 w-[10px] h-[10px] text-gray-500 transition-all duration-300 group-hover/item:rotate-[180deg] group-hover/item:text-orange-500" /> */}
                   </div>
 
                   {/* Underline always on hover */}

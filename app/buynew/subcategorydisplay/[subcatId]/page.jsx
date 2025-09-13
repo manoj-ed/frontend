@@ -16,18 +16,19 @@ const Page = ({ params }) => {
     {
       name: "insurance",
       items: [
-        { title: "Insurance Option 1", content: "Details for option 1." },
-        { title: "Insurance Option 2", content: "Details for option 2." },
-        { title: "Insurance Option 3", content: "Details for option 3." },
+        { title: "1. Does Equipments Dekho provide equipment insurance?", content: "Yes, Equipments Dekho partners with trusted insurance providers to offer comprehensive coverage for both new and used construction equipment." },
+        { title: "2. How can I get an insurance quote on Equipments Dekho?", content: " Simply click the “Get Insurance Quote” button on the product page, submit your equipment details, and our team will connect you with our insurance partners." },
+        { title: "3. What are the benefits of insuring equipment through Equipments Dekho?", content: "With Equipments Dekho, you get customized policies, quick claim processing, and nationwide support, helping protect your machinery and business operations. Protecting your equipment not only reduces financial risk but also ensures continuous project operations without costly downtime. " },
+        { title: "4. Who is eligible for equipment insurance via Equipments Dekho?", content: "Insurance is available for contractors, builders, rental companies, and SMEs across India, subject to standard documentation and approval from the insurer." },
       ],
     },
     {
       name: "financing",
       items: [
-        { title: "Financing Option 1", content: "Flexible EMI plan 1." },
-        { title: "Financing Option 2", content: "Flexible EMI plan 2." },
-        { title: "Financing Option 2", content: "Flexible EMI plan 2." },
-        { title: "Financing Option 2", content: "Flexible EMI plan 2." },
+        { title: "1. Does Equipments Dekho offer equipment financing?", content: "Yes, Equipments Dekho works with trusted financial partners  to provide easy financing options for both new and used equipment." },
+        { title: "2. How can I apply for financing on Equipments Dekho?", content: " Simply click on the “Apply for Financing” button on the product page, fill out the form, and our finance team will guide you through the process." },
+        { title: "3. What are the benefits of financing through Equipments Dekho?", content: "With our finance partners, you get flexible EMI plans, quick approvals, and nationwide support, making it easier to own or upgrade your equipment." },
+        { title: "4. Who is eligible for financing?", content: " Financing is available for contractors, builders, rental companies, and SMEs across India, subject to standard documentation and lender approval." },
       ],
     },
   ];

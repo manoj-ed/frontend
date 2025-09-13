@@ -4,7 +4,6 @@ import Image from "next/image";
 const Description = ({ logo, name, description, image }) => {
   const [showFullDesc, setShowFullDesc] = useState(false);
 
-  console.log("description", description);
 
   return (
     <div className="w-full">

@@ -1,32 +1,46 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Slider, ConfigProvider } from "antd";
 
-const FilterAside = () => {
-  const [selectedRange, setSelectedRange] = useState(null);
+const FilterAside = ({ category, pagination, priceSlider }) => {
+  const [initialPriceRange, setInitialPriceRange] = useState([1000, 100000]);
 
-  const priceRanges = [
-    "₹99,999 - ₹199,999",
-    "₹200,000 - ₹399,999",
-    "₹400,000 - ₹699,999",
-    "₹700,000 - ₹999,999",
-    "₹1,000,000 - ₹1,4999,99",
-    "₹1,500,000 - ₹1,9999,99",
-    "₹1,500,000 - ₹1,9999,99",
-    "₹1,500,000 - ₹1,9999,99",
-    "₹1,500,000 - ₹1,9999,99",
-    "₹1,500,000 - ₹1,9999,99",
-  ];
+  const [priceRange, setPriceRange] = useState(initialPriceRange);
+  const [selected, setSelected] = useState([]);
+
+  const handlePriceRangeChange = (value) => {
+    setPriceRange(value);
+  };
+
+  useEffect(() => {
+    if (Array.isArray(priceSlider) && priceSlider.length === 2) {
+      setInitialPriceRange([Number(priceSlider[0]), Number(priceSlider[1])]);
+      setPriceRange([Number(priceSlider[0]), Number(priceSlider[1])]);
+    }
+  }, [priceSlider]);
+
+  const handleCheckboxChange = (name, id) => {
+    if (selected.includes(id)) {
+      setSelected((prev) => prev.filter((item) => item !== id));
+    } else {
+      setSelected((prev) => [...prev, id]);
+    }
+  };
+
+  // console.log("price range value in filter aside", priceRange);
+  console.log("selected categories", selected);
+  console.log("initialPriceRange", initialPriceRange);
 
   return (
-    <aside className="w-full space-y-6 py-4 pl-2 border rounded-lg bg-white shadow-sm">
+    <aside className=" space-y-6 py-4 px-5 border rounded-lg bg-white shadow-sm">
       {/* Price Range */}
       <div className="space-y-3">
         <h3 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
           Price Range
         </h3>
-        <div className="space-y-3">
+        {/* <div className="space-y-3">
           <div className="flex flex-wrap gap-1">
             {priceRanges.map((range, idx) => (
               <button
@@ -43,7 +57,40 @@ const FilterAside = () => {
               </button>
             ))}
           </div>
-        </div>
+        </div> */}
+        <ConfigProvider
+          theme={{
+            components: {
+              Slider: {
+                railBg: "#d9d9d9",
+                railHoverBg: "#d9d9d9", // corrected key
+                handleColor: "#f26322",
+                handleActiveColor: "#f26322",
+                dotActiveBorderColor: "#f26322",
+                dotBorderColor: "#f26322",
+                trackBg: "#f26322",
+                trackHoverBg: "#f26322",
+              },
+            },
+          }}
+        >
+          <div className="">
+            <Slider
+              range
+              min={initialPriceRange[0]}
+              max={initialPriceRange[1]}
+              step={1000}
+              value={priceRange}
+              onChange={handlePriceRangeChange}
+              allowCross={false}
+              pushable={1000}
+            />
+            <div className="flex justify-between mt-1 text-xs text-gray-600">
+              <span>₹{initialPriceRange[0].toLocaleString()}</span>
+              <span>₹{initialPriceRange[1].toLocaleString()}</span>
+            </div>
+          </div>
+        </ConfigProvider>
       </div>
 
       {/* Example Checkbox Section */}
@@ -52,14 +99,21 @@ const FilterAside = () => {
           Category
         </h3>
         <div className="flex flex-col gap-2">
-          <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-700">
-            <Checkbox className="data-[state=checked]:bg-orange-500 data-[state=checked]:border-orange-500" />
-            Sub Category 1
-          </label>
-          <label className="flex items-center gap-2 cursor-pointer text-sm text-gray-700">
-            <Checkbox className="data-[state=checked]:bg-orange-500 data-[state=checked]:border-orange-500" />
-            Sub Category 2
-          </label>
+          {category.map((subCategory) => (
+            <label
+              key={subCategory.id}
+              onClick={() =>
+                handleCheckboxChange(
+                  subCategory.sub_category_name,
+                  subCategory.id
+                )
+              }
+              className="flex items-center gap-2 cursor-pointer text-sm text-gray-700"
+            >
+              <Checkbox className="data-[state=checked]:bg-orange-500 data-[state=checked]:border-orange-500" />
+              {subCategory.sub_category_name}
+            </label>
+          ))}
         </div>
       </div>
     </aside>

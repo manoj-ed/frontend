@@ -5,6 +5,11 @@ const Breadcrumbs = ({ equipName, categoryName, subCategoryName, description }) 
   const [showFull, setShowFull] = useState(false);
   const [categoryId, setCategoryId] = useState(null);
 
+  console.log("Category Name in breadcrumb", categoryName);
+  console.log("SubCategory Name in breadcrumb", subCategoryName);
+  console.log("Equip Name in breadcrumb", equipName);
+  console.log("Category ID in breadcrumb", categoryId);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       setCategoryId(localStorage.getItem("categoryId"));
@@ -70,7 +75,7 @@ const Breadcrumbs = ({ equipName, categoryName, subCategoryName, description }) 
         {/* Title + Description */}
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">
-            Buy New {equipName || categoryName || "Equipment"}
+            Buy New {subCategoryName || categoryName || "Equipment"}
           </h1>
           <div>
             <p className={`text-sm text-white ${showFull ? "" : "line-clamp-2"}`}>

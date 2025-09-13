@@ -5,9 +5,9 @@ import Image from "next/image";
 import { FiSearch } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
-import cat from "../../../public/CAT.png";
-import jcb from "../../../public/JCB.png";
-import { getAllBrands } from "../../utils/userAPI";
+import cat from "../../public/CAT.png";
+import jcb from "../../public/JCB.png";
+import { getAllBrands } from "../utils/userAPI";
 
 // const brands = [
 //   {
@@ -461,7 +461,7 @@ export default function ExploreBrands() {
                   hover:shadow-lg transition-all duration-300"
                 onClick={() =>
                   router.push(
-                    `/buynew/brands/${brand.id}/?brand=${brand.brand_name}`
+                    `brands/${brand.id}/?brand=${brand.brand_name}`
                   )
                 }
               >

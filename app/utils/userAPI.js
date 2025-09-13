@@ -66,18 +66,21 @@ export async function getProductDetails(productData) {
   const { equipment_id, category_id, sub_category_id } = productData || {};
 
   try {
-    if (!equipment_id || !category_id || !sub_category_id) {
-      throw new Error("Missing required product information");
-    }
+    // if (!equipment_id || !category_id || !sub_category_id) {
+    //   throw new Error("Missing required product information");
+    // }
 
     const response = await AxiosPublic({
       ...SummaryApi.getEquipmentDetail,
       data: {
         equipment_id,
-        category_id: 1,
+        // category_id: 1,
+        category_id,
         sub_category_id,
       },
     });
+
+    console.log("Product Details Response", response);
 
     if (!response || !response.data) {
       throw new Error("No data received from the server");
@@ -145,9 +148,12 @@ export async function getProductsRatings(id) {
       },
     });
 
+    console.log("Ratings Data", response.data);
+
     if (!response || !response.data) {
       throw new Error("No data received from the server");
     }
+    
 
     return response.data;
   } catch (error) {
@@ -184,6 +190,7 @@ export async function getBrandDetails(id) {
       ...SummaryApi.getBrandDetail,
       data: {
         brand_id: id,
+        page: 1
       },
     });
 
