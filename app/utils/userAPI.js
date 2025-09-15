@@ -62,8 +62,10 @@ export async function getSubCategoryData(categoryData, opt) {
 
 // Get Details of a specific Product
 export async function getProductDetails(productData) {
-  console.log("product Data", productData);
   const { equipment_id, category_id, sub_category_id } = productData || {};
+  console.log("equipment_id", equipment_id);
+  console.log("category_id", category_id);
+  console.log("sub_category_id", sub_category_id);
 
   try {
     // if (!equipment_id || !category_id || !sub_category_id) {
@@ -153,7 +155,6 @@ export async function getProductsRatings(id) {
     if (!response || !response.data) {
       throw new Error("No data received from the server");
     }
-    
 
     return response.data;
   } catch (error) {
@@ -183,27 +184,72 @@ export async function getAllBrands() {
 }
 
 // Get Brand Details by ID
-export async function getBrandDetails(id) {
+export async function getBrandDetails(id, page, filterData) {
   console.log("brand id", id);
+  console.log("brand page", page);
+  console.log("FilterData", filterData);
   try {
     const response = await AxiosPublic({
       ...SummaryApi.getBrandDetail,
       data: {
         brand_id: id,
-        page: 1
+        page: 1,
+        // price_range: filterData?.price_range,
+        ...(filterData?.price_range ? { price_range: filterData.price_range } : {}),
+        ...(filterData?.category_ids ? { sub_category_id: filterData.category_ids } : {}),
       },
     });
 
-    console.log("Fetched Brand Details:", { ...response.data.data });
+    console.log("Fetched Brand Details:", response.data);
 
     if (!response || !response.data) {
       throw new Error("No data received from the server");
     }
 
     return response.data;
-
   } catch (error) {
     console.error("Brand details fetch failed:", error.message);
     return null;
   }
 }
+
+// export async function getBrandDetails(id, page = 1, filters = null) {
+//   console.log("brand id", id, "page", page, "filters", filters);
+
+//   try {
+//     // Base data
+//     let requestData = {
+//       brand_id: id,
+//       page: page,
+//     };
+
+//     // Agar filters diye gaye hain to unko merge karo
+//     if (filters) {
+//       if (filters.category?.length > 0) {
+//         // category ko sirf IDs me convert karo
+//         requestData.category = filters.category.map((cat) => cat.id);
+//       }
+
+//       if (filters.price_range) {
+//         requestData.price_range = filters.price_range;
+//       }
+//     }
+
+//     // API call
+//     const response = await AxiosPublic({
+//       ...SummaryApi.getBrandDetail,
+//       data: requestData,
+//     });
+
+//     if (!response || !response.data) {
+//       throw new Error("No data received from the server");
+//     }
+
+//     console.log("Fetched Brand Details:", response.data.data);
+//     return response.data;
+
+//   } catch (error) {
+//     console.error("Brand details fetch failed:", error.message);
+//     return null;
+//   }
+// }

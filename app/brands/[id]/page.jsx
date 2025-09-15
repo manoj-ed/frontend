@@ -85,13 +85,20 @@ const Page = () => {
     lastPage: 0,
   });
   const [priceRange, setPriceRange] = useState([]);
+  const [filterData, setFilterData] = useState(null);
 
   console.log("brand id", brandId);
   console.log("brand", brandName);
 
-  const getBrandData = async () => {
+  const getBrandData = async (filters = null) => {
+    console.log("filterDataaaaaaaaaaaaaaaaaa", filterData);
+
     try {
-      const data = await getBrandDetails(brandId);
+      const data = await getBrandDetails(
+        brandId,
+        pagination.currentPage,
+        filters
+      );
       console.log("Fetched Brand Data:", data);
 
       setBrandDescription(data.brand);
@@ -117,13 +124,20 @@ const Page = () => {
     }
   };
 
-  const filterHandler = async (filterData) => {
-    getBrandData(filterData)
-  }
+  const filterHandler = (filterData) => {
+    console.log("filter data", filterData);
+    setFilterData(filterData);
+  };
 
   useEffect(() => {
-    if (brandId) getBrandData();
-  }, [brandId]);
+    if (brandId) {
+      getBrandData(filterData); // ✅ call API with latest filters
+    }
+  }, [filterData, brandId, pagination.currentPage]);
+
+  // useEffect(() => {
+  //   if (brandId) getBrandData();
+  // }, [brandId]);
 
   console.log("brandDescription", brandDescription);
 
@@ -135,6 +149,16 @@ const Page = () => {
       console.log("Error on product click:", err);
     }
   };
+
+  // const handleFilterChange = (newFilter) => {
+  //   console.log("new filter data", newFilter)
+  //   // getBrandData(newFilter)
+  //   try {
+
+  //   } catch (error) {
+  //     console.log("Error in Apply Filter", error)
+  //   }
+  // }
 
   console.log("productData", productData);
   console.log("priceRange", priceRange);
@@ -148,6 +172,12 @@ const Page = () => {
             category={filterCategoryData}
             pagination={pagination}
             priceSlider={priceRange}
+            onFilterChange={filterHandler} 
+
+            // onFilterChange={handleFilterChange}
+            // onFilterChange={(data) => {
+            //   console.log("Filters Changed:", data);
+            // }}
           />
         </aside>
 

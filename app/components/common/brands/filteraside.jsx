@@ -4,34 +4,78 @@ import React, { useEffect, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider, ConfigProvider } from "antd";
 
-const FilterAside = ({ category, pagination, priceSlider }) => {
+const FilterAside = ({ category, pagination, priceSlider, onFilterChange }) => {
   const [initialPriceRange, setInitialPriceRange] = useState([1000, 100000]);
 
   const [priceRange, setPriceRange] = useState(initialPriceRange);
-  const [selected, setSelected] = useState([]);
+  const [filterData, setFilterData] = useState({});
 
   const handlePriceRangeChange = (value) => {
     setPriceRange(value);
+
+    setFilterData((prev) => ({
+      ...prev,
+      price_range: `${value[0]}-${value[1]}`,
+    }));
   };
+
+  // useEffect(() => {
+  //   if (Array.isArray(priceSlider) && priceSlider.length === 2) {
+  //     setInitialPriceRange([Number(priceSlider[0]), Number(priceSlider[1])]);
+  //     setPriceRange([Number(priceSlider[0]), Number(priceSlider[1])]);
+  //   }
+  // }, [priceSlider]);
 
   useEffect(() => {
     if (Array.isArray(priceSlider) && priceSlider.length === 2) {
-      setInitialPriceRange([Number(priceSlider[0]), Number(priceSlider[1])]);
-      setPriceRange([Number(priceSlider[0]), Number(priceSlider[1])]);
+      const min = Number(priceSlider[0]);
+      const max = Number(priceSlider[1]);
+
+      setInitialPriceRange([min, max]);
+
+      // ✅ Sirf agar priceRange abhi tak change nahi hua hai tabhi set karo
+      setPriceRange((prev) => {
+        if (prev[0] === 1000 && prev[1] === 100000) {
+          return [min, max];
+        }
+        return prev; // user ne change kiya hai to waisa hi rehne do
+      });
     }
   }, [priceSlider]);
 
-  const handleCheckboxChange = (name, id) => {
-    if (selected.includes(id)) {
-      setSelected((prev) => prev.filter((item) => item !== id));
-    } else {
-      setSelected((prev) => [...prev, id]);
+  useEffect(() => {
+    if (onFilterChange) {
+      onFilterChange(filterData);
     }
+  }, [filterData, onFilterChange]);
+
+  const handleCheckboxChange = (name, id) => {
+    setFilterData((prev) => {
+      // Prev categoryIds string ko array me convert karo
+      const prevIds = prev.category_ids ? prev.category_ids.split(",") : [];
+
+      const isSelected = prevIds.includes(String(id));
+
+      let updatedIds;
+      if (isSelected) {
+        // ✅ Agar already selected hai to remove
+        updatedIds = prevIds.filter((item) => item !== String(id));
+      } else {
+        // ✅ Agar nahi hai to add
+        updatedIds = [...prevIds, String(id)];
+      }
+
+      return {
+        ...prev,
+        category_ids: updatedIds.join(","), // ✅ "1,2,3" format
+      };
+    });
   };
 
-  // console.log("price range value in filter aside", priceRange);
-  console.log("selected categories", selected);
+  console.log("price range value in filter aside", priceRange);
+  // console.log("selected categories", selected);
   console.log("initialPriceRange", initialPriceRange);
+  console.log("filter filterData", filterData);
 
   return (
     <aside className=" space-y-6 py-4 px-5 border rounded-lg bg-white shadow-sm">
