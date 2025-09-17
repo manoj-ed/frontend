@@ -41,6 +41,10 @@ const SummaryApi = {
     url: "getBlog",
     method: "get",
   },
+  getFaqs: {
+    url: "get-faqs",
+    method: "post"
+  }
 };
 
 export default SummaryApi;

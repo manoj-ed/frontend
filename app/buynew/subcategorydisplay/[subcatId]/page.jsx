@@ -1,7 +1,7 @@
 "use client";
 
 import React, { use, useEffect, useState } from "react";
-import { getProductByCategory } from "../../../utils/userAPI";
+import { getProductByCategory, getFaqs } from "../../../utils/userAPI";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 // import subcategorytest from "../../../../public/subcategorytest.jpg"
@@ -9,26 +9,61 @@ import Description from "@/app/components/common/description";
 import TabsDropdown from "@/app/components/common/TabsDropdown";
 import BlogCards from "@/app/components/common/blogCard";
 import { getBlog } from "@/app/utils/BlogAPI";
-import Breadcrumb  from "@/app/components/common/Breadcrumb";
+import Breadcrumb from "@/app/components/common/Breadcrumb";
 
 const Page = ({ params }) => {
   const tabs = [
     {
       name: "insurance",
       items: [
-        { title: "1. Does Equipments Dekho provide equipment insurance?", content: "Yes, Equipments Dekho partners with trusted insurance providers to offer comprehensive coverage for both new and used construction equipment." },
-        { title: "2. How can I get an insurance quote on Equipments Dekho?", content: " Simply click the “Get Insurance Quote” button on the product page, submit your equipment details, and our team will connect you with our insurance partners." },
-        { title: "3. What are the benefits of insuring equipment through Equipments Dekho?", content: "With Equipments Dekho, you get customized policies, quick claim processing, and nationwide support, helping protect your machinery and business operations. Protecting your equipment not only reduces financial risk but also ensures continuous project operations without costly downtime. " },
-        { title: "4. Who is eligible for equipment insurance via Equipments Dekho?", content: "Insurance is available for contractors, builders, rental companies, and SMEs across India, subject to standard documentation and approval from the insurer." },
+        {
+          title: "1. Does Equipments Dekho provide equipment insurance?",
+          content:
+            "Yes, Equipments Dekho partners with trusted insurance providers to offer comprehensive coverage for both new and used construction equipment.",
+        },
+        {
+          title: "2. How can I get an insurance quote on Equipments Dekho?",
+          content:
+            " Simply click the “Get Insurance Quote” button on the product page, submit your equipment details, and our team will connect you with our insurance partners.",
+        },
+        {
+          title:
+            "3. What are the benefits of insuring equipment through Equipments Dekho?",
+          content:
+            "With Equipments Dekho, you get customized policies, quick claim processing, and nationwide support, helping protect your machinery and business operations. Protecting your equipment not only reduces financial risk but also ensures continuous project operations without costly downtime. ",
+        },
+        {
+          title:
+            "4. Who is eligible for equipment insurance via Equipments Dekho?",
+          content:
+            "Insurance is available for contractors, builders, rental companies, and SMEs across India, subject to standard documentation and approval from the insurer.",
+        },
       ],
     },
     {
       name: "financing",
       items: [
-        { title: "1. Does Equipments Dekho offer equipment financing?", content: "Yes, Equipments Dekho works with trusted financial partners  to provide easy financing options for both new and used equipment." },
-        { title: "2. How can I apply for financing on Equipments Dekho?", content: " Simply click on the “Apply for Financing” button on the product page, fill out the form, and our finance team will guide you through the process." },
-        { title: "3. What are the benefits of financing through Equipments Dekho?", content: "With our finance partners, you get flexible EMI plans, quick approvals, and nationwide support, making it easier to own or upgrade your equipment." },
-        { title: "4. Who is eligible for financing?", content: " Financing is available for contractors, builders, rental companies, and SMEs across India, subject to standard documentation and lender approval." },
+        {
+          title: "1. Does Equipments Dekho offer equipment financing?",
+          content:
+            "Yes, Equipments Dekho works with trusted financial partners  to provide easy financing options for both new and used equipment.",
+        },
+        {
+          title: "2. How can I apply for financing on Equipments Dekho?",
+          content:
+            " Simply click on the “Apply for Financing” button on the product page, fill out the form, and our finance team will guide you through the process.",
+        },
+        {
+          title:
+            "3. What are the benefits of financing through Equipments Dekho?",
+          content:
+            "With our finance partners, you get flexible EMI plans, quick approvals, and nationwide support, making it easier to own or upgrade your equipment.",
+        },
+        {
+          title: "4. Who is eligible for financing?",
+          content:
+            " Financing is available for contractors, builders, rental companies, and SMEs across India, subject to standard documentation and lender approval.",
+        },
       ],
     },
   ];
@@ -41,6 +76,7 @@ const Page = ({ params }) => {
   const [categoryData, setCategoryData] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [faqs, setFaqs] = useState(null);
 
   useEffect(() => {
     if (!categoryId?.subcatId) {
@@ -54,16 +90,28 @@ const Page = ({ params }) => {
       setError(null); // reset error
 
       try {
-        const [{ data }, blogData] = await Promise.all([
+        const id = categoryId.subcatId;
+        const [{ data }, blogData, Faqs] = await Promise.all([
           getProductByCategory(categoryId.subcatId),
           getBlog(),
+          getFaqs({ category_id: id }),
         ]);
 
         console.log("subcategory data", data);
+        console.log("Faqs Data", Faqs);
 
         setSubCategoryData(data.subcategories);
         setCategoryData(data.category);
         setBlogData(blogData.data);
+        // setFaqs(Faqs.data);
+        setFaqs({
+          name: "faqs",
+          items:
+            Faqs?.data[0]?.faqs?.map((faq, idx) => ({
+              title: `${idx + 1}. ${faq.question}`,
+              content: faq.answer,
+            })) || [],
+        });
       } catch (err) {
         console.error("Error in fetchData:", err);
         setError("Failed to fetch data"); // save error message
@@ -75,7 +123,10 @@ const Page = ({ params }) => {
     fetchData();
   }, [categoryId]);
 
+  const combinedTabs = faqs ? [faqs, ...tabs] : tabs;
+
   console.log("categoryData", categoryData);
+  console.log("faqs", faqs);
 
   const categorieHandleClick = (id, subCategory) => {
     const data = {
@@ -105,7 +156,10 @@ const Page = ({ params }) => {
         name={categoryData?.category_name}
         description={categoryData?.description}
       /> */}
-      <Breadcrumb categoryName={categoryData?.category_name} description={categoryData?.description}/>
+      <Breadcrumb
+        categoryName={categoryData?.category_name}
+        description={categoryData?.description}
+      />
       {/* Subcategory List */}
       <div className="flex flex-col items-center justify-center">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-6 w-full">
@@ -153,7 +207,7 @@ const Page = ({ params }) => {
       <BlogCards blogData={blogData} />
 
       {/* Dropdown */}
-      <TabsDropdown tabs={tabs} />
+      <TabsDropdown tabs={combinedTabs} />
     </div>
   );
 };

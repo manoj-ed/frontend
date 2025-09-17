@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import backgroundImg from "@/public/Breadcrumbs/13.png"
 
 const Breadcrumbs = ({ equipName, categoryName, subCategoryName, description }) => {
   const [showFull, setShowFull] = useState(false);
@@ -23,7 +24,8 @@ const Breadcrumbs = ({ equipName, categoryName, subCategoryName, description }) 
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1350&q=80')",
+            // `url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1350&q=80')`,
+            `url(${backgroundImg.src})`,
         }}
       ></div>
 

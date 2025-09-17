@@ -195,8 +195,12 @@ export async function getBrandDetails(id, page, filterData) {
         brand_id: id,
         page: 1,
         // price_range: filterData?.price_range,
-        ...(filterData?.price_range ? { price_range: filterData.price_range } : {}),
-        ...(filterData?.category_ids ? { sub_category_id: filterData.category_ids } : {}),
+        ...(filterData?.price_range
+          ? { price_range: filterData.price_range }
+          : {}),
+        ...(filterData?.category_ids
+          ? { sub_category_id: filterData.category_ids }
+          : {}),
       },
     });
 
@@ -213,43 +217,24 @@ export async function getBrandDetails(id, page, filterData) {
   }
 }
 
-// export async function getBrandDetails(id, page = 1, filters = null) {
-//   console.log("brand id", id, "page", page, "filters", filters);
+// Fetch FAQs using category Id or sub category id
+export async function getFaqs(data) {
+  console.log("faqs", data);
+  try {
+    const response = await AxiosPublic({
+      ...SummaryApi.getFaqs,
+      data: data,
+    });
 
-//   try {
-//     // Base data
-//     let requestData = {
-//       brand_id: id,
-//       page: page,
-//     };
+    console.log("Fetched Brand Details:", response.data);
 
-//     // Agar filters diye gaye hain to unko merge karo
-//     if (filters) {
-//       if (filters.category?.length > 0) {
-//         // category ko sirf IDs me convert karo
-//         requestData.category = filters.category.map((cat) => cat.id);
-//       }
+    if (!response || !response.data) {
+      throw new Error("No data received from the server");
+    }
+    return response.data;
 
-//       if (filters.price_range) {
-//         requestData.price_range = filters.price_range;
-//       }
-//     }
-
-//     // API call
-//     const response = await AxiosPublic({
-//       ...SummaryApi.getBrandDetail,
-//       data: requestData,
-//     });
-
-//     if (!response || !response.data) {
-//       throw new Error("No data received from the server");
-//     }
-
-//     console.log("Fetched Brand Details:", response.data.data);
-//     return response.data;
-
-//   } catch (error) {
-//     console.error("Brand details fetch failed:", error.message);
-//     return null;
-//   }
-// }
+  } catch (error) {
+    console.log("Error in fetching FAQs");
+    return null;
+  }
+}
