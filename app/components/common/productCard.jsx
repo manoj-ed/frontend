@@ -8,8 +8,8 @@ import CompareModal from "./compare/compareModal";
 const ProductCard = ({ productData, onProductClick, style }) => {
   console.log("product DAta", productData);
 
-  const category_id = localStorage.getItem("categoryId");
-  const router = useRouter();
+  // const categoryId = localStorage.getItem("category_id");
+  // const router = useRouter();
   const [modalVisible, setModalVisible] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
@@ -18,6 +18,7 @@ const ProductCard = ({ productData, onProductClick, style }) => {
     // setClickedProduct(product);
     setModalVisible(true);
   };
+
   const modal = () => {
     console.log("Got data from child:");
     setModalVisible(false);
@@ -26,11 +27,10 @@ const ProductCard = ({ productData, onProductClick, style }) => {
   return (
     <div className={`${style} grid gap-4`}>
       {productData.map(
-        (sc, index) => (
+        (product, index) => (
           (
             <div
-              // key={sc?.category_id || index}
-              key={sc?.category_id ? `${sc.category_id}-${index}` : `index-${index}`}
+              key={product?.category_id ? `${product.category_id}-${index}` : `index-${index}`}
               style={{ animationDelay: `${index * 0.1}s` }} // staggered animation
               className="card-animate w-full flex flex-col gap-1 items-start justify-center p-3 md:p-4 border border-orange rounded-lg shadow-md transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl hover:border-orange-500 group"
             >
@@ -38,13 +38,13 @@ const ProductCard = ({ productData, onProductClick, style }) => {
                 <Image
                   onClick={() =>
                     onProductClick({
-                      equipment_id: sc.product_id,
-                      category_id: category_id,
-                      sub_category_id: sc.sub_category_id,
+                      equipment_id: product.product_id,
+                      category_id: product.category_id,
+                      sub_category_id: product.sub_category_id,
                     })
                   }
-                  src={sc?.image1}
-                  alt={sc?.model_name || "Product Image"}
+                  src={product?.image1}
+                  alt={product?.model_name || "Product Image"}
                   className="w-[170px] h-[106px] lg:w-[270px] lg:h-[170px] cursor-pointer rounded-md object-cover transition-transform duration-500 group-hover:scale-110"
                   width={0}
                   height={0}
@@ -53,11 +53,11 @@ const ProductCard = ({ productData, onProductClick, style }) => {
               </div>
               <div className="flex gap-1 flex-col justify-between items-start">
                 <h3 className="text-[16px] font-normal">
-                  {sc?.brand_name} {sc?.model_name}
+                  {product?.brand_name} {product?.model_name}
                 </h3>
-                <p className="text-[14px] font-semibold ">₹{sc?.price_range}</p>
+                <p className="text-[14px] font-semibold ">₹{product?.price_range}</p>
                 <p className="text-[12px] font-normal leading-4 tracking-normal text-gray-500 line-clamp-2">
-                  {sc?.description}
+                  {product?.description}
                 </p>
                 <div className="w-full  flex gap-2 justify-between md:flex-col lg:flex-row md:gap-3">
                   <div onClick={handleButton}>
@@ -69,7 +69,7 @@ const ProductCard = ({ productData, onProductClick, style }) => {
                     />
                   </div>
                   {/* Compare Button */}
-                  {/* <div onClick={() => router.push(`/buynew/compare/${sc.product_id}`)}> */}
+                  {/* <div onClick={() => router.push(`/buynew/compare/${product.product_id}`)}> */}
                   <div
                     onClick={() => {
                       // router.push(`/buynew/compare`);

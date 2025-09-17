@@ -72,9 +72,7 @@ const FilterAside = ({ category, pagination, priceSlider, onFilterChange }) => {
     });
   };
 
-  console.log("price range value in filter aside", priceRange);
-  // console.log("selected categories", selected);
-  console.log("initialPriceRange", initialPriceRange);
+
   console.log("filter filterData", filterData);
 
   return (

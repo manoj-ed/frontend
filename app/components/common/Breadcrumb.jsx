@@ -13,7 +13,7 @@ const Breadcrumbs = ({ equipName, categoryName, subCategoryName, description }) 
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setCategoryId(localStorage.getItem("categoryId"));
+      setCategoryId(localStorage.getItem("category_id"));
     }
   }, []);
 

@@ -185,15 +185,13 @@ export async function getAllBrands() {
 
 // Get Brand Details by ID
 export async function getBrandDetails(id, page, filterData) {
-  console.log("brand id", id);
-  console.log("brand page", page);
-  console.log("FilterData", filterData);
+
   try {
     const response = await AxiosPublic({
       ...SummaryApi.getBrandDetail,
       data: {
         brand_id: id,
-        page: 1,
+        page: page,
         // price_range: filterData?.price_range,
         ...(filterData?.price_range
           ? { price_range: filterData.price_range }

@@ -10,7 +10,7 @@ const DropDown = ({ categories }) => {
 
   const categorieHandleClick = (id, category_name) => {
     console.log("id", id)
-    localStorage.setItem("categoryId", id);
+    localStorage.setItem("category_id", id);
     localStorage.setItem("categoryName", category_name);
     router.push(`/buynew/subcategorydisplay/${id}`);
   };

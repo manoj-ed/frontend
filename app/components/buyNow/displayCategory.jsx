@@ -134,7 +134,7 @@ const DisplayCategory = () => {
   console.log("categories", categories);
 
   const categorieHandleClick = (id, category_name) => {
-    localStorage.setItem("categoryId", id.toString());
+    localStorage.setItem("category_id", id.toString());
     localStorage.setItem("categoryName", category_name);
     router.push(`/buynew/subcategorydisplay/${id}`);
   };

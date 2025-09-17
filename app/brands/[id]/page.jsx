@@ -8,9 +8,9 @@ import Description from "@/app/components/common/description";
 import TabsDropdown from "@/app/components/common/TabsDropdown";
 import BlogCards from "@/app/components/common/blogCard";
 import { getBrandDetails } from "@/app/utils/userAPI";
+import ViewMoreButton from "@/app/components/common/ViewMoreButton";
 
 const Page = () => {
-  // Dropown tabs data
   const tabs = [
     {
       name: "insurance",
@@ -68,11 +68,7 @@ const Page = () => {
   ];
 
   const router = useRouter();
-
-  const searchParams = useSearchParams();
   const params = useParams();
-
-  const brandName = searchParams.get("brand");
   const brandId = params.id;
 
   const [brandDescription, setBrandDescription] = useState(null);
@@ -86,19 +82,11 @@ const Page = () => {
   });
   const [priceRange, setPriceRange] = useState([]);
   const [filterData, setFilterData] = useState(null);
-
-  console.log("brand id", brandId);
-  console.log("brand", brandName);
+  const [page, setPage] = useState(1);
 
   const getBrandData = async (filters = null) => {
-    console.log("filterDataaaaaaaaaaaaaaaaaa", filterData);
-
     try {
-      const data = await getBrandDetails(
-        brandId,
-        pagination.currentPage,
-        filters
-      );
+      const data = await getBrandDetails(brandId, page, filters);
       console.log("Fetched Brand Data:", data);
 
       setBrandDescription(data.brand);
@@ -129,19 +117,9 @@ const Page = () => {
     setFilterData(filterData);
   };
 
-  useEffect(() => {
-    if (brandId) {
-      getBrandData(filterData); // ✅ call API with latest filters
-    }
-  }, [filterData, brandId, pagination.currentPage]);
-
-  // useEffect(() => {
-  //   if (brandId) getBrandData();
-  // }, [brandId]);
-
-  console.log("brandDescription", brandDescription);
-
   const handleProductClick = (clickedProduct) => {
+    // const category_id = localStorage
+    console.log("brands page clicked product", clickedProduct);
     try {
       const encodedData = encodeURIComponent(JSON.stringify(clickedProduct));
       router.push(`/buynew/product?data=${encodedData}`);
@@ -150,18 +128,17 @@ const Page = () => {
     }
   };
 
-  // const handleFilterChange = (newFilter) => {
-  //   console.log("new filter data", newFilter)
-  //   // getBrandData(newFilter)
-  //   try {
+  const handlePagination = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
 
-  //   } catch (error) {
-  //     console.log("Error in Apply Filter", error)
-  //   }
-  // }
+  useEffect(() => {
+    if (brandId) {
+      getBrandData(filterData);
+    }
+  }, [filterData, brandId, page]);
 
   console.log("productData", productData);
-  console.log("priceRange", priceRange);
 
   return (
     <div className="px-10">
@@ -172,12 +149,7 @@ const Page = () => {
             category={filterCategoryData}
             pagination={pagination}
             priceSlider={priceRange}
-            onFilterChange={filterHandler} 
-
-            // onFilterChange={handleFilterChange}
-            // onFilterChange={(data) => {
-            //   console.log("Filters Changed:", data);
-            // }}
+            onFilterChange={filterHandler}
           />
         </aside>
 
@@ -193,11 +165,31 @@ const Page = () => {
           />
 
           {/* Product Card */}
-          <ProductCard
+          {/* <ProductCard
             onProductClick={handleProductClick}
             productData={productData}
             style={"grid-cols-2 lg:grid-cols-3"}
-          />
+          /> */}
+
+          <div>
+            {productData && productData.length > 0 ? (
+              <ProductCard
+                onProductClick={handleProductClick}
+                productData={productData}
+                style={"grid-cols-2 lg:grid-cols-3"}
+              />
+            ) : (
+              <div className="flex items-center justify-center h-40 bg-orange-50 rounded-lg border border-orange-300 text-orange-600 text-lg font-medium">
+                No Products. Please try to remove filter.
+              </div>
+            )}
+          </div>
+
+          <div className="flex justify-end">
+            {page < pagination.lastPage && (
+              <ViewMoreButton onClick={handlePagination} />
+            )}
+          </div>
 
           {/* <section className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-orange-500">
           <h2 className="text-lg font-semibold text-gray-800 mb-3">
