@@ -183,33 +183,10 @@ const ProductInfo = () => {
               </span>
 
               {/* Key Specification */}
-              <div className="text-lg font-semibold">
+              {/* <div className="text-lg font-semibold">
                 <div className="mb-1 text-gray-800">Key Specification</div>
 
                 <div className="flex flex-wrap bg-white rounded-xl shadow-sm border border-gray-200 p-1 ">
-                  {/* {data?.brand_name && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
-                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
-                        Brand:
-                      </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
-                        {data.brand_name}
-                      </span>
-                    </div>
-                  )}
-
-                  {data?.model_name && (
-                    <div className="w-1/2 pl-2 group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
-                      <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
-                      <span className="text-xs font-semibold text-gray-700 leading-snug group-hover:text-orange-500">
-                        Model:
-                      </span>
-                      <span className="pl-1 text-xs font-normal text-gray-600 leading-snug group-hover:text-orange-500">
-                        {data.model_name}
-                      </span>
-                    </div>
-                  )} */}
 
                   {data?.operating_weight && (
                     <div className="w-1/2 pl-2 p-1 leading-[1] group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
@@ -403,7 +380,7 @@ const ProductInfo = () => {
                     </div>
                   )}
                 </div>
-              </div>
+              </div> */}
 
               {/* Description */}
               <div className="block md:hidden">
@@ -499,7 +476,13 @@ const ProductInfo = () => {
 
       {/* Rating and Review */}
       <div className="my-5">
-        <Reviews relatedRatings={relatedRatings} />
+        {relatedRating && relatedRating.length === 0 ? (
+          ""
+        ) : (
+          <div>
+            <Reviews relatedRatings={relatedRating} />
+          </div>
+        )}
       </div>
 
       {/* Related Product */}

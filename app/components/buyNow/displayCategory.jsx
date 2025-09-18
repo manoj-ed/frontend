@@ -21,7 +21,9 @@ const DisplayCategory = () => {
   const paramsData = JSON.parse(searchParams.get("data"));
   // console.log("searchParams", paramsData?.sub_category_id);
   //GET categoryName from local storage
-  const categoryName = localStorage.getItem("categoryName");
+  // const categoryName = localStorage.getItem("categoryName");
+  const [categoryName, setCategoryName] = useState("");
+
   console.log("category Name", categoryName);
 
   const tabs = [
@@ -107,6 +109,13 @@ const DisplayCategory = () => {
   };
 
   const combinedTabs = faqs ? [faqs, ...tabs] : tabs;
+
+  useEffect(() => {
+    const storedCategory = localStorage.getItem("categoryName");
+    if (storedCategory) {
+      setCategoryName(storedCategory);
+    }
+  }, []);
 
   useEffect(() => {
     fetchFaqs();

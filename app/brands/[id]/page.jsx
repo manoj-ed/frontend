@@ -165,12 +165,6 @@ const Page = () => {
           />
 
           {/* Product Card */}
-          {/* <ProductCard
-            onProductClick={handleProductClick}
-            productData={productData}
-            style={"grid-cols-2 lg:grid-cols-3"}
-          /> */}
-
           <div>
             {productData && productData.length > 0 ? (
               <ProductCard

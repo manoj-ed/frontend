@@ -13,6 +13,7 @@ import {
   RefreshCw,
   Users,
 } from "lucide-react";
+import FinanceCalculator from "../components/common/FinanceCalculator";
 
 export default function EquipmentFinancePage() {
   // Process steps
@@ -90,30 +91,11 @@ export default function EquipmentFinancePage() {
     { src: "/sbi.png", alt: "SBI Bank" },
   ];
 
-  const [price, setPrice] = useState("");
-  const [downPayment, setDownPayment] = useState("");
-  const [tenure, setTenure] = useState("");
-  const [emi, setEmi] = useState(null);
 
-  const calculateEMI = () => {
-    const principal = price - (price * downPayment) / 100;
-    const interestRate = 0.12; // 12% annual interest
-    const monthlyRate = interestRate / 12;
 
-    if (!principal || !tenure) {
-      setEmi(null);
-      return;
-    }
-
-    const calculatedEMI =
-      (principal * monthlyRate * Math.pow(1 + monthlyRate, tenure)) /
-      (Math.pow(1 + monthlyRate, tenure) - 1);
-
-    setEmi(Math.round(calculatedEMI));
-  };
-
+ 
   return (
-    <div className="">
+    <div className="pt-1">
       {/* 🔹 Hero Section */}
       <section className="relative w-full h-[450px] flex items-center justify-between overflow-hidden">
         <Image
@@ -382,121 +364,7 @@ export default function EquipmentFinancePage() {
       </section>
 
       {/* 🔹 Finance Calculator */}
-      <section className="w-full py-10 bg-white">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left: Calculator */}
-          <div>
-            <h2 className="text-3xl font-bold text-[#1A1A1A] mb-2">
-              Finance Calculator
-            </h2>
-            <p className="text-[#4A4A4A] mb-8">
-              Estimate your monthly EMI by entering equipment cost, down
-              payment, and tenure.
-            </p>
-
-            <div className="bg-[#FAFAFA] p-8 rounded-2xl shadow-md border border-[#F1F1F1]">
-              <form className="grid gap-6">
-                <div className="flex flex-col text-left">
-                  <label className="font-medium mb-2">
-                    Equipment Price (₹)
-                  </label>
-                  <input
-                    type="number"
-                    placeholder="Enter price"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    className="p-3 rounded-xl border border-[#E5E5E5] focus:ring-2 focus:ring-[#FF6B00] outline-none"
-                  />
-                </div>
-
-                <div className="flex flex-col text-left">
-                  <label className="font-medium mb-2">Down Payment (%)</label>
-                  <input
-                    type="number"
-                    placeholder="Enter %"
-                    value={downPayment}
-                    onChange={(e) => setDownPayment(e.target.value)}
-                    className="p-3 rounded-xl border border-[#E5E5E5] focus:ring-2 focus:ring-[#FF6B00] outline-none"
-                  />
-                </div>
-
-                <div className="flex flex-col text-left">
-                  <label className="font-medium mb-2">Tenure (Months)</label>
-                  <input
-                    type="number"
-                    placeholder="e.g. 36"
-                    value={tenure}
-                    onChange={(e) => setTenure(e.target.value)}
-                    className="p-3 rounded-xl border border-[#E5E5E5] focus:ring-2 focus:ring-[#FF6B00] outline-none"
-                  />
-                </div>
-
-                <button
-                  type="button"
-                  onClick={calculateEMI}
-                  className="bg-gradient-to-r from-[#FF6B00] to-[#E85A00] text-white font-semibold py-3 rounded-xl shadow-lg hover:scale-105 transition-transform duration-300"
-                >
-                  Calculate EMI
-                </button>
-              </form>
-
-              {emi !== null && (
-                <div className="mt-6 p-4 bg-white border border-[#F1F1F1] rounded-xl shadow-sm">
-                  <p className="text-lg font-bold text-[#FF6B00]">
-                    Estimated EMI: ₹{emi}/month
-                  </p>
-                </div>
-              )}
-
-              <p className="mt-6 text-sm text-[#4A4A4A]">
-                Like what you see?{" "}
-                <span className="text-[#FF6B00] font-semibold cursor-pointer">
-                  Apply Now →
-                </span>
-              </p>
-            </div>
-          </div>
-
-          {/* Right: Info / Benefits + Image */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-[#1A1A1A]">
-              Why Use Our Finance Calculator?
-            </h3>
-            <p className="text-[#4A4A4A]">
-              Get an instant estimate of your monthly EMI and plan your finances
-              better. Our calculator helps you make informed decisions before
-              applying for equipment finance.
-            </p>
-
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <span className="text-[#FF6B00] font-bold text-xl">✓</span>
-                <span>Quick and easy EMI calculation</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-[#FF6B00] font-bold text-xl">✓</span>
-                <span>
-                  Adjust tenure and down payment as per your convenience
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-[#FF6B00] font-bold text-xl">✓</span>
-                <span>Compare EMI options from multiple finance partners</span>
-              </li>
-            </ul>
-
-            <div className="mt-6">
-              <Image
-                src="/calculator-illustration.png"
-                alt="Calculator Illustration"
-                width={500}
-                height={300}
-                className="w-full rounded-xl shadow-lg"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <FinanceCalculator />
 
       <section className="py-5 bg-[#FAFAFA]">
         <div className="max-w-6xl mx-auto text-center px-4">
