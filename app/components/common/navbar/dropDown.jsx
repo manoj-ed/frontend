@@ -17,7 +17,7 @@ const DropDown = ({ categories }) => {
 
   return (
     <div>
-      <div className="w-full">
+      <div className="w-full z-50">
         {/* <ProductDetails /> */}
         <div className="relative group inline-block">
           {/* Button */}
@@ -35,17 +35,17 @@ const DropDown = ({ categories }) => {
           </button>
 
           {/* Dropdown Menu */}
-          <div className="absolute left-0 mt-1 w-60 bg-white shadow-lg rounded-xl opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300 z-10">
-            <div className="block w-full">
+          <div className="absolute left-0 mt-1 min-w-lg bg-white shadow-lg rounded-xl opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300 z-10">
+            <div className="grid grid-rows-5 grid-cols-2 p-2 w-full border-[0.5] border-orange-300 rounded-md">
               {categories.map((category, index) => (
                 <div
                   onClick={() => {
                     categorieHandleClick(category.id, category.category_name);
                   }}
                   key={index}
-                  className="block px-4 py-2 cursor-pointer hover:bg-orange-50 transition-all duration-300 group/item"
+                  className="block px-4 border-r-[0.5] border-orange-300 py-2 cursor-pointer hover:bg-orange-50 transition-all duration-300 group/item"
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center  justify-between">
                     <span className="text-gray-700 group-hover/item:text-orange-600 transition-colors duration-300">
                       {category.category_name}
                     </span>

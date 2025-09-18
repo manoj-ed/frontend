@@ -11,6 +11,7 @@ import ProductCard from "@/app/components/common/productCard";
 import YouTube from "react-youtube";
 import SignUp from "@/app/components/common/auth/signUp";
 import BlogCards from "@/app/components/common/blogCard";
+import KeySpecifications from "@/app/components/buyNow/KeySpecifications";
 
 const ProductInfo = () => {
   const router = useRouter();
@@ -77,25 +78,29 @@ const ProductInfo = () => {
   console.log("page info data", data);
 
   const handleButton = () => {
-    console.log("Quote button clicked");
-    // setClickedProduct(product);
     setModalVisible(true);
   };
 
   const modal = () => {
-    console.log("Got data from child:");
     setModalVisible(false);
   };
 
-  console.log("relatedRatings", relatedRatings);
-
   return (
-    <div className="flex flex-col w-full h-full px-5 md:px-0 2xl:px-5">
+    <div className="flex flex-col w-full h-full px-5 md:px-5 2xl:px-5">
       <div className="text-sm text-orange font-normal pt-6 pb-1">
-        Home /{" "}
+        <span className="cursor-pointer" onClick={() => router.push(`/`)}>
+          Home
+        </span>
+        {" / "}
+        <span className="cursor-pointer" onClick={() => router.push(`/buynew`)}>
+          Buy Now
+        </span>
+        {" / "}
         <span
           className="text-orange cursor-pointer"
-          onClick={() => router.push(`/buynew/${data?.category_id}`)}
+          onClick={() =>
+            router.push(`/buynew/subcategorydisplay/${data?.category_id}`)
+          }
         >
           {data?.category_name}
         </span>
@@ -103,9 +108,7 @@ const ProductInfo = () => {
         <span
           className="text-orange cursor-pointer"
           onClick={() =>
-            router.push(
-              `/buynew/${data?.category_name}/${data?.sub_category_name}`
-            )
+            router.push(`/buynew/subcategorydisplay/${data?.category_id}`)
           }
         >
           {data?.sub_category_name}
@@ -187,7 +190,6 @@ const ProductInfo = () => {
                 <div className="mb-1 text-gray-800">Key Specification</div>
 
                 <div className="flex flex-wrap bg-white rounded-xl shadow-sm border border-gray-200 p-1 ">
-
                   {data?.operating_weight && (
                     <div className="w-1/2 pl-2 p-1 leading-[1] group relative overflow-hidden transition-colors duration-200 hover:bg-gray-100 rounded-sm">
                       <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-orange transition-all duration-300 group-hover:w-full"></span>
@@ -381,6 +383,8 @@ const ProductInfo = () => {
                   )}
                 </div>
               </div> */}
+
+              <KeySpecifications data={data} />
 
               {/* Description */}
               <div className="block md:hidden">

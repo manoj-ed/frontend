@@ -13,7 +13,6 @@ import "./styles.css"; // optional custom CSS
 import { Scrollbar, Autoplay } from "swiper/modules";
 
 export default function App({ image }) {
-  console.log("images", image);
 
     const validImages = image?.filter((img) => img && img !== "-") || [];
 

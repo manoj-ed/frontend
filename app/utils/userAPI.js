@@ -63,9 +63,9 @@ export async function getSubCategoryData(categoryData, opt) {
 // Get Details of a specific Product
 export async function getProductDetails(productData) {
   const { equipment_id, category_id, sub_category_id } = productData || {};
-  console.log("equipment_id", equipment_id);
-  console.log("category_id", category_id);
-  console.log("sub_category_id", sub_category_id);
+  // console.log("equipment_id", equipment_id);
+  // console.log("category_id", category_id);
+  // console.log("sub_category_id", sub_category_id);
 
   try {
     // if (!equipment_id || !category_id || !sub_category_id) {
@@ -81,8 +81,6 @@ export async function getProductDetails(productData) {
         sub_category_id,
       },
     });
-
-    console.log("Product Details Response", response);
 
     if (!response || !response.data) {
       throw new Error("No data received from the server");
@@ -128,7 +126,6 @@ export async function getRelatedEquipments(data) {
       },
     });
 
-    console.log("Related Equipments Response", response);
 
     if (!response || !response.data) {
       throw new Error("No data received from the server");

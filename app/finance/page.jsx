@@ -95,7 +95,7 @@ export default function EquipmentFinancePage() {
 
  
   return (
-    <div className="pt-1">
+    <div className="pt-1 z-10">
       {/* 🔹 Hero Section */}
       <section className="relative w-full h-[450px] flex items-center justify-between overflow-hidden">
         <Image
