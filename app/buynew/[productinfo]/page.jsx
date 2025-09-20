@@ -26,6 +26,7 @@ const ProductInfo = () => {
   const [pulse, setPulse] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  
 
   // Custom hook call
   const { productData, relatedProducts, relatedRatings, loading } =
@@ -87,6 +88,8 @@ const ProductInfo = () => {
 
   return (
     <div className="flex flex-col w-full h-full px-5 md:px-5 2xl:px-5">
+
+      {/* Routes */}
       <div className="text-sm text-orange font-normal pt-6 pb-1">
         <span className="cursor-pointer" onClick={() => router.push(`/`)}>
           Home
@@ -143,8 +146,9 @@ const ProductInfo = () => {
             </div>
           </div>
         </div>
-        {/* line */}
 
+
+        {/* line */}
         <div className="broder-[0.5] bg-orange w-[0.5px] h-[290px] hidden md:block"></div>
 
         {/* Right Side content */}
@@ -155,8 +159,8 @@ const ProductInfo = () => {
               {/* Heading */}
               <div className="flex justify-between items-start">
                 {/* Brand name and Model Name */}
-                <div className="flex gap-2">
-                  <span className="text-2xl tracking-tight font-semibold">
+                <div className="flex flex-col md:flex-row content-start gap-1">
+                  <span className="text-2xl tracking-tight md:text-nowrap font-semibold">
                     {data?.brand_name}
                   </span>
                   <span className="text-2xl tracking-tight font-semibold">

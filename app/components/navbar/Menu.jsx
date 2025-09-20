@@ -28,16 +28,16 @@ const Menu = () => {
         {/* Buy New */}
         <div className="relative group cursor-pointer">
           <Link
-            href="/buynew"
+            href="/buyequipments"
             className={`transition-colors duration-300 ${
-              isActive("/buynew") ? "text-orange-600" : ""
+              isActive("/buyequipments") ? "text-orange-600" : ""
             }`}
           >
             Buy New
           </Link>
           <span
             className={`absolute bottom-[-4px] left-1/2 -translate-x-1/2 h-[2px] bg-orange transition-all duration-300 ${
-              isActive("/buynew") ? "w-4/5" : "group-hover:w-4/5 w-0"
+              isActive("/buyequipments") ? "w-4/5" : "group-hover:w-4/5 w-0"
             }`}
           ></span>
         </div>

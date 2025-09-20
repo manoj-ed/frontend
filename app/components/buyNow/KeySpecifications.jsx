@@ -60,6 +60,18 @@ const KeySpecifications = ({ data }) => {
     manufacturing_method: "Manufacturing Method",
     product_type: "Product Type",
     reinforcement_type: "Rreinforcement Type",
+    lift_height : "Lift Height",
+    lifting_capacity : "Lifting Capacity",
+    mast_type : "Mast Type",
+    tire_type : "Tire Type",
+    boom_lift_type : "Boom Lift Type",
+    lift_capacity : "Lift Capacity",
+    mobility_type : "Mobility Type",
+    platform_height : "Platform Height",
+    mounting_type : "Mounting Type",
+    speed_control : "Speed Control",
+    platform_type : "Platform Type",
+    
   };
 
   return (
